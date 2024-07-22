@@ -1,0 +1,158 @@
+.selectorContainer {
+  display: flex;
+  flex-direction: columns;
+  align-items: center;
+
+  width:75%;
+  height:50%;
+}
+
+.selectorContainer2 {
+  position:relative;
+
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+
+  width:100%;
+  height:100%;
+}
+
+.selectorContainer2top{
+  position:relative;
+
+  width:50%;
+  height:60%;
+}
+
+.selectorContainer2bot{
+  position:relative;
+
+  display: flex;
+  flex-direction: row;
+
+  width:100%;
+  height:40%;
+}
+
+.arrow {
+  position:relative;
+
+  cursor: pointer;
+  margin: 0;
+
+  height:100%;
+  width:auto;
+}
+
+.arrow2 {
+  position:relative;
+
+  cursor: pointer;
+  margin: 0;
+
+  width:20%;
+  height:auto;
+}
+
+#left-arrow {
+  content:url('resources/images/selector_left.png');
+}
+
+#right-arrow {
+  content:url('resources/images/selector_right.png');
+}
+
+.visual-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.visual {
+  position:relative;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+
+  height:100%;
+  width:50%;
+}
+
+.set-wrapper {
+  height:100%;
+}
+
+.set-wrapper img {
+  width: 100%;
+  height: auto;
+  padding:0;
+  margin:0;
+  object-fit: cover;
+}
+
+.set {
+  position:relative;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+
+  height:100%;
+  width:100%;
+}
+
+.swatch-wrapper img {
+  width: 30%;
+  height: auto;
+  padding:0;
+  margin:0;
+  object-fit: cover;
+}
+
+#swatchC {
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+#swatchOverlayC {
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+/* .swatchVisual {
+  position:relative;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+
+  height:20%;
+  width:20%;
+} */
+
+.fade-out-l {
+  transform: scale(0.9);
+  /* transform: translate(20px, 0); */
+  opacity: 0;
+}
+
+.fade-in-l {
+  transform: scale(1);
+  /* transform: translate(20px, 0); */
+  opacity: 1;
+}
+
+.fade-out-r {
+  transform: scale(0.9);
+  /* transform: translate(20px, 0); */
+  opacity: 0;
+}
+
+.fade-in-r {
+  transform: scale(1);
+  /* transform: translate(20px, 0); */
+  opacity: 1;
+}
+
+/* .selectorContainer { border: 1px solid red;}
+.arrow { border: 1px solid green;}
+.visual { border: 1px solid blue;}
+.swatch { border: 1px solid pink;}
+
+.selectorContainer2top { border: 1px solid green;}
+.selectorContainer2bot { border: 1px solid blue;}
+
+.set-wrapper { border: 1px solid red;} */

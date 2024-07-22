@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>d.Logo</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <script src="https://unpkg.com/p5.js-svg@1.5.1"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="sketch_logo.js" type="text/javascript"></script>
+    <script src="update.js" type="text/javascript"></script>
+
+    <script src="galleryScript.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="galleryStyle.css">
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
+    <div class="fullSet">
+      <div class="topRow">
+        <div class="topUnit">         <!--       SPECS     -->
+          <div class="tlUnit">
+            <div class="tlSubUnit">
+              <h1>d.Logo Generator</h1>
+            </div>
+            <div class="tlSubUnit">
+              <p>Welcome to the logo generator.<br>Let's make a logo!</p>
+            </div>
+
+          </div>
+          <div class="tlUnit">
+            <div class="tlSubUnit">
+              <div class="tlSubSubUnit">
+                <div class="tlSubSubHeadline">
+                  <h3>Vibe:</h3>
+                </div>
+
+                <div class="presetRadioSub">
+                  <input type="radio" id="radioVibe0" onclick="setRadioVibe(0)" name="radioVibes" checked>
+                    <label for="radioVibe0">Black Tie</label>
+                  <input type="radio" id="radioVibe1" onclick="setRadioVibe(1)" name="radioVibes">
+                    <label for="radioVibe1">Disco</label>
+                </div>
+              </div>
+
+            </div>
+            <div class="tlSubUnit">
+              <div class="tlSubSubUnit">
+                <div class="tlSubSubHeadline">
+                  <h3>Mode:</h3>
+                </div>
+
+                <div class="presetRadioSub">
+                  <input type="radio" id="radioMode0" onclick="setRadioMode(0)" name="radioModes" checked>
+                    <label for="radioMode0">Light</label>
+                  <input type="radio" id="radioMode1" onclick="setRadioMode(1)" name="radioModes">
+                    <label for="radioMode1">Dark</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="tlUnit">
+            <div class="centerButton">
+              <button type="button" onclick="runRandomCombo()">Generate New Logo/<br>Random Combination</button>
+            </div>
+          </div>
+        </div>
+        <div class="topUnit">         <!--       CANVAS     -->
+          <div id="logoGen"></div>
+        </div>
+
+        <div class="topUnit">         <!--       DOT SIZE/EXPORT     -->
+          <div class="trSubUnit">
+            <div class="trSubSubUnit">
+              <div class="centerButton">
+                <div class="presetRadioSub2">
+                  <input type="radio" id="radioDotSize0" onclick="setDotSizeMode(0)" name="radioDotSize" checked>
+                    <label for="radioDotSize0">Large</label>
+                  <input type="radio" id="radioDotSize1" onclick="setDotSizeMode(1)" name="radioDotSize">
+                    <label for="radioDotSize1">Small</label>
+                </div>
+              </div>
+            </div>
+            <div class="trSubSubUnit">
+              <div class="centerButton">
+                <div class="presetRadioSub2">
+                  <input type="radio" id="radioOverlay0" onclick="setOverlayToggle(0)" name="radioOverlays">
+                    <label for="radioOverlay0">Overlay</label>
+                  <input type="radio" id="radioOverlay1" onclick="setOverlayToggle(1)" name="radioOverlays" checked>
+                    <label for="radioOverlay1">No Overlay</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="trSubUnit">
+            <div class="trSubSubUnit">
+              <div class="centerButton">
+                <div class="presetRadioSub2">
+                  <input type="radio" id="radioSaveMode0" onclick="setSaveToggle(0)" name="radioSaveModes" checked>
+                    <label for="radioSaveMode0">SVG</label>
+                  <input type="radio" id="radioSaveMode1" onclick="setSaveToggle(1)" name="radioSaveModes">
+                    <label for="radioSaveMode1">PNG</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="trSubSubUnit">
+              <div class="centerButton">
+                <button type="button" onclick="runLogoSave()">Save File</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  
+      <div class="botRow">
+        <div class="botUnit">         <!--       BASE     -->
+          <div class="unitHeadline">
+            <div class="centerButton">
+              <h2>Base</h2>
+            </div>
+          </div>
+
+          <div class="unitSelector" id="baseSelector">         <!--       BASE SELECTOR     -->
+            <div class="centerButton">
+              <div class="selectorContainer">
+                <div class="centerButton">
+                  <div class="arrow" onclick="selectBase(-1)" id="left-arrow"></div>
+                    <div class="visual-wrapper">
+                      <img class="visual" id = "baseCenter" src="resources/images/base_1.png">
+                    </div>
+                  <div class="arrow" onclick="selectBase(1)" id="right-arrow"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="unitToggle">
+            <div class="centerButton">
+              <div class="presetRadioSub2">
+                <input type="radio" id="radioBaseToggle0" onclick="setBaseToggle(0)" name="radioBaseToggles" checked>
+                  <label for="radioBaseToggle0">On</label>
+                <input type="radio" id="radioBaseToggle1" onclick="setBaseToggle(1)" name="radioBaseToggles">
+                  <label for="radioBaseToggle1">Off</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="botUnit">         <!--       INLINE     -->
+          <div class="unitHeadline">
+            <div class="centerButton">
+              <h2>Inline</h2>
+            </div>
+          </div>
+
+          <div class="unitSelector" id="inlineSelector">         <!--       INLINE SELECTOR    -->
+            <div class="centerButton">
+              <div class="selectorContainer">
+                <div class="centerButton">
+                  <div class="arrow" onclick="selectInline(-1)" id="left-arrow"></div>
+                    <div class="visual-wrapper">
+                      <img class="visual" id = "inlineCenter" src="resources/images/inline_1.png">
+                    </div>
+                  <div class="arrow" onclick="selectInline(1)" id="right-arrow"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="unitToggle">
+            <div class="centerButton">
+              <div class="presetRadioSub2">
+                <input type="radio" id="radioInlineToggle0" onclick="setInlineToggle(0)" name="radioInlineToggles" checked>
+                  <label for="radioInlineToggle0">On</label>
+                <input type="radio" id="radioInlineToggle1" onclick="setInlineToggle(1)" name="radioInlineToggles">
+                  <label for="radioInlineToggle1">Off</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="botUnit">         <!--       DOT COLOR     -->
+          <div class="unitHeadline">
+            <div class="centerButton">
+              <h2>Dot Color</h2>
+            </div>
+          </div>
+
+          <div class="unitSelector" id="dotColorSelector">         <!--       DOT COLOR SELECTOR    -->
+              
+            <div class="selectorContainer2" id="overlayActive">    <!--       OVERLAY    -->
+                
+              <div class="centerButton" id ="blackDotOverlaySet">
+                <div class="selectorContainer2top">
+                  <div class="set-wrapper">
+                    <img class="set" id = "swatchOverSet" src="resources/images/setOver_1.png">
+                  </div>
+                </div>
+              </div>
+
+              <div class="centerButton" id ="whiteDotOverlaySet">
+                <div class="selectorContainer2top">
+                  <div class="set-wrapper">
+                    <img class="set" id = "swatchOverWSet" src="resources/images/setOverW_1.png">
+                  </div>
+                </div>
+              </div>
+
+              <div class="selectorContainer2bot">
+                <div class="centerButton">
+                  <div class="arrow2" onclick="selectOverlayColor(-1)" id="left-arrow"></div>
+                  <div class="swatch-wrapper">
+                    <img class="swatch" id = "swatchOverlayL" src="resources/images/colorOver_0.png">
+                    <img class="swatch" id = "swatchOverlayC" src="resources/images/colorOver_1.png">
+                    <img class="swatch" id = "swatchOverlayR" src="resources/images/colorOver_2.png">
+                  </div>
+                  <div class="arrow2" onclick="selectOverlayColor(1)" id="right-arrow"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="selectorContainer2" id="noOverlayActive">    <!--       NoOverlay    -->
+                
+              <div class="centerButton">
+                <div class="selectorContainer2top">
+                  <div class="set-wrapper">
+                    <img class="set" id = "swatchSet" src="resources/images/set_0.png">
+                  </div>
+                </div>
+              </div>
+
+              <div class="selectorContainer2bot">
+                <div class="centerButton">
+                  <div class="arrow2" onclick="selectColor(-1)" id="left-arrow"></div>
+                  <div class="swatch-wrapper">
+                    <img class="swatch" id = "swatchL" src="resources/images/color_7.png">
+                    <img class="swatch" id = "swatchC" src="resources/images/color_0.png">
+                    <img class="swatch" id = "swatchR" src="resources/images/color_1.png">
+                  </div>
+                  <div class="arrow2" onclick="selectColor(1)" id="right-arrow"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
+          <div class="unitToggle">
+            <div class="centerButton">
+              <div class="presetRadioSub2">
+                <input type="radio" id="radioDotColorToggle0" onclick="setDotColorToggle(0)" name="radioDotColorToggles" checked>
+                  <label for="radioDotColorToggle0">Color</label>
+                <input type="radio" id="radioDotColorToggle1" onclick="setDotColorToggle(1)" name="radioDotColorToggles">
+                  <label for="radioDotColorToggle1">B&W</label>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="botUnit">         <!--       LOCKUP     -->
+          <div class="unitHeadline">
+            <div class="centerButton">
+              <h2>Name Lockup</h2>
+            </div>
+          </div>
+
+          <div class="unitSelector2" id="wordMarkSelector">         <!--       WORDMARK SELECTOR    -->
+            <div class="centerButton">
+              <div class="selectorContainer2">
+                <div class="centerButton">
+                  <div class="arrow2" onclick="selectWordMark(-1)" id="left-arrow"></div>
+                    <div class="visual-wrapper">
+                      <img class="visual" id = "wordMarkCenter" src="resources/images/wordMark_1.png">
+                    </div>
+                  <div class="arrow2" onclick="selectWordMark(1)" id="right-arrow"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="unitToggle2">
+            <div class="centerButton">
+              <div class="presetRadioSub2">
+                <input type="radio" id="radioNameOn0" onclick="setNameOnToggle(0)" name="radioNameOnToggles">
+                  <label for="radioNameOn0">On</label>
+                <input type="radio" id="radioNameOn1" onclick="setNameOnToggle(1)" name="radioNameOnToggles" checked>
+                  <label for="radioNameOn1">Off</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="unitToggle2">
+            <div class="centerButton">
+              <div class="presetRadioSub2">
+                <input type="radio" id="radioNameColor0" onclick="setNameColorToggle(0)" name="radioNameColorToggles" checked>
+                  <label for="radioNameColor0">Color</label>
+                <input type="radio" id="radioNameColor1" onclick="setNameColorToggle(1)" name="radioNameColorToggles">
+                  <label for="radioNameColor1">B&W</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <script>
+      let baseIndex = 0;
+      const baseVisuals = [
+        'resources/images/base_1.png',
+        'resources/images/base_2.png',
+        'resources/images/base_3.png',
+        'resources/images/base_4.png',
+        'resources/images/base_5.png',
+        'resources/images/base_6.png'   
+      ]
+
+      let inlineIndex = 0;
+      const inlineVisuals = [
+        'resources/images/inline_1.png',
+        'resources/images/inline_2.png'
+      ]
+
+      let swatchOverlayIndex = 1;
+      var colorOverVisuals = [];
+      var setOverVisuals = [];
+      var setOverVisualsW = [];
+      for(var m = 0; m < 30; m++){
+        colorOverVisuals[m] = 'resources/images/colorOver_' + m + '.png';
+        setOverVisuals[m] = 'resources/images/setOver_' + m + '.png';
+        setOverVisualsW[m] = 'resources/images/setOverW_' + m + '.png';
+      }
+
+      let swatchIndex = 0;
+      var colorVisuals = [];
+      var setVisuals = [];
+      for(var m = 0; m < 8; m++){
+        colorVisuals[m] = 'resources/images/color_' + m + '.png';
+        setVisuals[m] = 'resources/images/set_' + m + '.png';
+      }
+
+      let wordMarkIndex = 0;
+      const lockupVisuals = [
+        'resources/images/wordMark_1.png',
+        'resources/images/wordMark_2.png'
+      ]
+      function showBaseVisual(direct, index) { 
+        const visualElement = document.getElementById('baseCenter');
+        
+        visualElement.src = baseVisuals[index%baseVisuals.length];
+
+      }
+
+      function showInlineVisual(direct, index) {    
+        const visualElement = document.getElementById('inlineCenter');
+
+        visualElement.src = inlineVisuals[index%inlineVisuals.length];
+
+      }
+
+      function showOverlayColorVisual(direct, indexL, indexC, indexR) {    
+        const swatchOverlayLelement = document.getElementById('swatchOverlayL');
+        const swatchOverlayCelement = document.getElementById('swatchOverlayC');
+        const swatchOverlayRLelement = document.getElementById('swatchOverlayR');
+
+        swatchOverlayLelement.src = colorOverVisuals[indexL%colorOverVisuals.length];
+        swatchOverlayCelement.src = colorOverVisuals[indexC%colorOverVisuals.length];
+        swatchOverlayRLelement.src = colorOverVisuals[indexR%colorOverVisuals.length];
+      
+        const swatchSetelement = document.getElementById('swatchOverSet');
+        const swatchSetelementW = document.getElementById('swatchOverWSet');
+        swatchSetelement.src = setOverVisuals[indexC%setOverVisuals.length];
+        swatchSetelementW.src = setOverVisualsW[indexC%setOverVisualsW.length];
+
+        swatchSetelement.src = setOverVisuals[indexC%setOverVisuals.length];
+        swatchSetelementW.src = setOverVisualsW[indexC%setOverVisualsW.length];
+
+      }
+      
+      function showColorVisual(direct, indexL, indexC, indexR) {    
+        const swatchLelement = document.getElementById('swatchL');
+        const swatchCelement = document.getElementById('swatchC');
+        const swatchRLelement = document.getElementById('swatchR');
+
+        swatchLelement.src = colorVisuals[indexL%colorVisuals.length];
+        swatchCelement.src = colorVisuals[indexC%colorVisuals.length];
+        swatchRLelement.src = colorVisuals[indexR%colorVisuals.length];
+      
+        const swatchSetelement = document.getElementById('swatchSet');
+        swatchSetelement.src = setVisuals[indexC%setVisuals.length];
+
+        swatchSetelement.src = setVisuals[indexC%setVisuals.length];
+
+      }
+
+      function showWordMarkVisual(direct, index) {    
+        const visualElement = document.getElementById('wordMarkCenter');
+
+        visualElement.src = lockupVisuals[index%lockupVisuals.length];
+
+      }
+    </script>
+  </body>
+</html>
