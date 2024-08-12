@@ -81,6 +81,10 @@
   height:100%;
 }
 
+.overlayWrapper {
+  scale:75%;
+}
+
 .set-wrapper img {
   width: 100%;
   height: auto;

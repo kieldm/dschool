@@ -1,5 +1,7 @@
 var modeToggle = true;
 
+var vibeToggle = true;
+
 var baseDcount = 6;
 var baseToggle = true;
 var baseDB = [];
@@ -14,7 +16,7 @@ var overlayToggle = false;
 
 var dotColorToggle = true;
 
-var swatchCount = 8;
+var swatchCount = 28;
 var swatch = [];
 
 var swatchOverCount = 30;
@@ -24,19 +26,28 @@ var dotSolidBlack, dotSolidWhite;
 var dotSolidBlack_Overlay, dotSolidWhite_Overlay;
 
 var saveToggle = 0;
+var saveDiscoToggle = 0;
 
 var nameBump;
 var nameOnToggle = false;
 
-var wordMarkCount = 2;
+/// 0 = Standford
+/// 1 = Hazzo
 var wordMarkB = [];
 var wordMarkW = [];
 
 var coreS;
 
+/////// DISCO TOGGLES
+var puncToggle = true;
+var discoOverlay = false;
+var discoOffset = false;
+
+var discoCol = [];
+
 function preload(){
   for(var m = 0; m < baseDcount; m++){
-    var thisOne = m + 1;
+    var thisOne = m;
     baseDB[m] = loadSVG('resources/svgs/baseB_' + thisOne + '.svg');
     baseDW[m] = loadSVG('resources/svgs/baseW_' + thisOne + '.svg');
   }
@@ -50,6 +61,13 @@ function preload(){
   for(var m = 0; m < swatchCount; m++){
     var thisOne = m;
     swatch[m] = loadSVG('resources/svgs/color_' + thisOne + '.svg');
+
+    wordMarkB[m] = [];
+    wordMarkW[m] = [];
+    wordMarkB[m][0] = loadSVG('resources/svgs/wordMarkBstan_' + thisOne + '.svg');
+    wordMarkW[m][0] = loadSVG('resources/svgs/wordMarkWstan_' + thisOne + '.svg');
+    wordMarkB[m][1] = loadSVG('resources/svgs/wordMarkBhasso_' + thisOne + '.svg');
+    wordMarkW[m][1] = loadSVG('resources/svgs/wordMarkWhasso_' + thisOne + '.svg');
   }
 
   dotSolidWhite = loadSVG('resources/svgs/dotSolid_white.svg');
@@ -63,17 +81,14 @@ function preload(){
     swatchOverAlt[m] = loadSVG('resources/svgs/colorOverAlt_' + thisOne + '.svg');
   }
 
-  for(var m = 0; m < wordMarkCount; m++){
-    var thisOne = m + 1;
-    wordMarkB[m] = loadSVG('resources/svgs/wordMarkB_' + thisOne + '.svg');
-    wordMarkW[m] = loadSVG('resources/svgs/wordMarkW_' + thisOne + '.svg');
-  }
+  drawDiscoColors();
 }
 
 function setup(){
   canvasDiv = document.getElementById("logoGen");
   
-  canvas = createCanvas(canvasDiv.offsetWidth, canvasDiv.offsetHeight, SVG);
+  // canvas = createCanvas(canvasDiv.offsetWidth, canvasDiv.offsetHeight, SVG);
+  canvas = createCanvas(canvasDiv.offsetWidth, canvasDiv.offsetWidth, SVG);
   canvas.parent("logoGen");
 
   coreS = canvasDiv.offsetWidth;
@@ -88,19 +103,35 @@ function draw(){
   // stroke(0);
   // line(0,0,width,height);
 
+  // textSize(15);
+  // text("SwatchIndex: " + swatchIndex, 30, 30);
+  // text("swatchOverlayIndex: " + swatchOverlayIndex, 30, 60);
+
+  // DEBUG SIZE
+  // stroke(0,0,255);
+  // rect(0, height/2 - coreS/2, coreS, coreS);
+
+  if(vibeToggle){     // BLACK TIE MODE ACTIVE
+    blackTie();
+
+  } else {            // DISCO MODE ACTIVE
+    disco();
+  
+  }
+
+  noLoop();
+}
+
+function blackTie(){
   push();
     translate(width/2, height/2);
-
-    // DEBUG SIZE
-    // stroke(0,0,255);
-    // line(-coreS/2, -coreS/2, coreS/2, coreS/2);
 
     // WORD MARK
     if(nameOnToggle){
       if(modeToggle){   //// WHITE BACKGROUND
-        image(wordMarkB[wordMarkIndex], -coreS/2, -coreS/2, coreS, coreS);
-      } else {
-        image(wordMarkW[wordMarkIndex], -coreS/2, -coreS/2, coreS, coreS);
+        image(wordMarkB[swatchIndex][wordMarkIndex], -coreS/2, -coreS/2, coreS, coreS);
+      } else {          //// BLACK BACKGROUND
+        image(wordMarkW[swatchIndex][wordMarkIndex], -coreS/2, -coreS/2, coreS, coreS);
       }
 
       translate(0, nameBump);
@@ -161,6 +192,86 @@ function draw(){
         }
       }
     }
+
+  pop();
+}
+
+function disco(){
+  var sizer = width/591.107;
+
+  push();
+    translate(0, height/2 - coreS/2);
+    
+    if(puncToggle && puncIndex == 9){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND
+      var ampBump = -coreS * 92.8499/591.107;
+      translate(ampBump, 0);
+    }
+    
+    scale(sizer);
+    
+    if(discoOverlay == false){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND
+      if(puncToggle){
+        noStroke();
+        fill(discoCol[discoColIndex][1]);
+  
+        if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+
+        drawPunc();
+      }
+    }
+
+    if(outlineToggle){
+      noFill();
+      stroke(discoCol[discoColIndex][0]);
+
+      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+
+      if(outlineIndex == 0){              ////// THICK OUTLINE AND FILL
+        strokeWeight(coreS * 40/591.107);
+        fill(discoCol[discoColIndex][0]);
+        drawBase(false); 
+      } else if(outlineIndex == 1){      ////// THIN OUTLINE
+        if(baseToggle == false){
+          strokeWeight(coreS * (15/591.107)/2);
+        } else {
+          strokeWeight(coreS * 15/591.107);
+        }
+        drawBase(true);
+      } else if(outlineIndex == 2){      ////// THICK OUTLINE
+        if(baseToggle == false){
+          strokeWeight(coreS * (40/591.107)/2);
+        } else {
+          strokeWeight(coreS * 40/591.107);
+        }
+        drawBase(true);
+      }
+    }
+
+    if(baseToggle){
+      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+
+      fill(discoCol[discoColIndex][2]);
+      noStroke();
+      drawBase(true);
+    }
+
+    if(inlineToggle){
+      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+
+      noStroke();
+      fill(discoCol[discoColIndex][1]);
+
+      drawInline();
+    }
+    if(discoOverlay && puncToggle){
+      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+
+      noStroke();
+      fill(discoCol[discoColIndex][1]);
+
+      drawPunc();
+    }
+
   pop();
 
   noLoop();
@@ -172,7 +283,4 @@ function windowResized(){
 
   resizeCanvas(canvasDiv.offsetWidth, canvasDiv.offsetHeight);
 }
-
-
-
 

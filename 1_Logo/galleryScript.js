@@ -7,7 +7,7 @@ function selectBase(val){
     baseIndex = baseIndex%baseVisuals.length;
   }
 
-  showBaseVisual(val, baseIndex);
+  showBaseVisual(baseIndex);
 
   loop();
 }
@@ -21,92 +21,171 @@ function selectInline(val){
     inlineIndex = inlineIndex%inlineVisuals.length;
   }
 
-  showInlineVisual(val, inlineIndex);
+  showInlineVisual(inlineIndex);
 
   loop();
 }
 
 function selectOverlayColor(val){
   swatchOverlayIndex += val;
+  swatchOverlayIndex = swatchOverlayIndex%colorOverVisuals.length;
 
-  print("CURRENT SWATCH Overlay INDEX: " + swatchOverlayIndex);
-
-  var sL, sC, sR;
-  if(swatchOverlayIndex == 0){
-    sL = colorOverVisuals.length - 1;
-    sC = swatchOverlayIndex;
-    sR = swatchOverlayIndex + 1;
-  } else if(swatchOverlayIndex == colorOverVisuals.length - 1){
-    sL = swatchOverlayIndex - 1;
-    sC = swatchOverlayIndex;
-    sR = 0;
-  } else if(swatchOverlayIndex < 0){
-    swatchOverlayIndex = colorOverVisuals.length - 1;
-    sL = swatchOverlayIndex - 1;
-    sC = swatchOverlayIndex;
-    sR = 0;
-  } else {
-    sL = swatchOverlayIndex - 1;
-    sC = swatchOverlayIndex;
-    sR = swatchOverlayIndex + 1;
+  var addToSwatch = true;
+  if(val == 1){
+    if(swatchOverlayIndex == 7 || swatchOverlayIndex == 9 || swatchOverlayIndex == 10 ){ addToSwatch = false; }
+  } else if(val == -1){
+    if(swatchOverlayIndex == 9 || swatchOverlayIndex == 8 || swatchOverlayIndex == 6){ addToSwatch = false; }
   }
 
-  print("SL: " + sL + ", SC: " + sC + ", SR: " + sR);
+  // DOUBLE SKIP
+  if(val == 1 && swatchOverlayIndex == 25){ val *= 2; }
+  if(val == -1 && swatchOverlayIndex == 25){ val *= 2; }
 
-  showOverlayColorVisual(val, sL, sC, sR);
+  if(addToSwatch){
+    swatchIndex += val;
+    swatchIndex = swatchIndex%colorVisuals.length;
 
-  loop();
+    if(swatchIndex < 0){
+      swatchIndex = colorVisuals.length - 1;
+    }  
+  }
+
+  switchSwatch();
 }
 
 function selectColor(val){
   swatchIndex += val;
+  swatchIndex = swatchIndex%colorVisuals.length;
 
-  console.log("CURRENT SWATCH INDEX: " + swatchIndex);
+  // DOUBLE, TRIPLE SKIP
+  if(val == 1 && swatchOverlayIndex == 6){ val *= 2; }
+  if(val == 1 && swatchOverlayIndex == 8){ val *= 3; }
 
-  var sL, sC, sR;
-  if(swatchIndex == 0){
-    sL = colorVisuals.length - 1;
-    sC = swatchIndex;
-    sR = swatchIndex + 1;
-  } else if(swatchIndex == colorVisuals.length - 1){
-    sL = swatchIndex - 1;
-    sC = swatchIndex;
-    sR = 0;
-  } else if(swatchIndex < 0){
-    swatchIndex = colorVisuals.length - 1;
-    sL = swatchIndex - 1;
-    sC = swatchIndex;
-    sR = 0;
-  } else {
-    sL = swatchIndex - 1;
-    sC = swatchIndex;
-    sR = swatchIndex + 1;
+  if(val == -1 && swatchOverlayIndex == 11){ console.log("SECOND JUMP"); val *= 3; }
+  if(val == -1 && swatchOverlayIndex == 8){ console.log("FIRST JUMP"); val *= 2; }
+
+  var addToOverlay = true;
+  if(val == 1){
+    if(swatchIndex == 23){ console.log("LAUNCHED FORWARD"); addToOverlay = false; }
+  } else if(val == -1){
+    if(swatchIndex == 22){ console.log("LAUNCHED"); addToOverlay = false; }
   }
 
-  showColorVisual(val, sL, sC, sR);
+  if(addToOverlay){
+    swatchOverlayIndex += val;
+    swatchOverlayIndex = swatchOverlayIndex%colorOverVisuals.length;
+
+    if(swatchOverlayIndex < 0){
+      swatchOverlayIndex = colorOverVisuals.length - 1;
+    }
+  }
+
+  switchSwatch();
+}
+
+function selectDiscoColor(val){
+  discoColIndex += val;
+
+  if(discoColIndex < 0){
+    discoColIndex = discoColSetCount - 1;
+  } else {
+    discoColIndex = discoColIndex%discoColSetCount;
+  }
+
+  showDiscoColVisual(discoColIndex);
 
   loop();
 }
 
-function selectWordMark(val){
-  wordMarkIndex += val;
+function switchSwatch(){
+    /// OVERLAY
+    var sL, sC, sR;
+    if(swatchOverlayIndex == 0){
+      sL = colorOverVisuals.length - 1;
+      sC = swatchOverlayIndex;
+      sR = swatchOverlayIndex + 1;
+    } else if(swatchOverlayIndex == colorOverVisuals.length - 1){
+      sL = swatchOverlayIndex - 1;
+      sC = swatchOverlayIndex;
+      sR = 0;
+    } else if(swatchOverlayIndex < 0){
+      swatchOverlayIndex = colorOverVisuals.length - 1;
+      sL = swatchOverlayIndex - 1;
+      sC = swatchOverlayIndex;
+      sR = 0;
+    } else {
+      sL = swatchOverlayIndex - 1;
+      sC = swatchOverlayIndex;
+      sR = swatchOverlayIndex + 1;
+    }
+  
+    showOverlayColorVisual(sL, sC, sR);
 
-  if(wordMarkIndex < 0){
-    wordMarkIndex = lockupVisuals.length - 1;
+    /// NO OVERLAY
+    if(swatchIndex == 0){
+      sL = colorVisuals.length - 1;
+      sC = swatchIndex;
+      sR = swatchIndex + 1;
+    } else if(swatchIndex == colorVisuals.length - 1){
+      sL = swatchIndex - 1;
+      sC = swatchIndex;
+      sR = 0;
+    } else if(swatchIndex < 0){
+      swatchIndex = colorVisuals.length - 1;
+      sL = swatchIndex - 1;
+      sC = swatchIndex;
+      sR = 0;
+    } else {
+      sL = swatchIndex - 1;
+      sC = swatchIndex;
+      sR = swatchIndex + 1;
+    }
+  
+    showColorVisual(sL, sC, sR);
+
+    loop();
+}
+
+function selectWordMark(){
+  wordMarkIndex ++;
+  wordMarkIndex = wordMarkIndex%2;
+
+  if(wordMarkIndex == 1){
+    document.getElementById('wordMarkStan').style.display = "none";
+    document.getElementById('wordMarkHasso').style.display = "block";
+
   } else {
-    wordMarkIndex = wordMarkIndex%lockupVisuals.length;
+    document.getElementById('wordMarkStan').style.display = "block";
+    document.getElementById('wordMarkHasso').style.display = "none";
   }
-
-  console.log("wordMark INDEX: " + wordMarkIndex);
-
-  showWordMarkVisual(val, wordMarkIndex);
 
   loop();
 }
 
+function selectPunctuation(val){
+  puncIndex += val;
 
-// if(baseIndex < 0){
-//   baseIndex = baseVisuals.length - 1;
-// } else {
-//   baseIndex = baseIndex%baseVisuals.length;
-// }
+  if(puncIndex < 0){
+    puncIndex = puncVisuals.length - 1;
+  } else {
+    puncIndex = puncIndex%puncVisuals.length;
+  }
+
+  showPuncVisual(puncIndex);
+
+  loop();
+}
+
+function selectOutline(val){
+  outlineIndex += val;
+
+  if(outlineIndex < 0){
+    outlineIndex = outlineVisuals.length - 1;
+  } else {
+    outlineIndex = outlineIndex%outlineVisuals.length;
+  }
+
+  showOutlineVisual(outlineIndex);
+
+  loop();
+}
