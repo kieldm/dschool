@@ -47,6 +47,20 @@ function runLogoSave(){
   }
 }
 
+function runDiscoLogoSave(){
+  console.log("RUN LOGO SAVE");
+
+  if(discoSaveToggle == 0){
+    console.log("DISCO SAVE SVG!")
+    save('disco_dschool_logo.svg');
+
+  } else if(discoSaveToggle == 1){
+    console.log("DISCO SAVE PNG!")
+    save('disco_dschool_logo.png');
+
+  }
+}
+
 function setRadioMode(val){
   console.log("RUN SWAP COLORS");
 
@@ -68,6 +82,8 @@ function setRadioMode(val){
     document.getElementById('wordMarkCenterWstan').style.display = "none";
     document.getElementById('wordMarkCenterBhasso').style.display = "block";
     document.getElementById('wordMarkCenterWhasso').style.display = "none";
+    document.getElementById('wordMarkCenterBdesign').style.display = "block";
+    document.getElementById('wordMarkCenterWdesign').style.display = "none";
 
   } else if(val == 1){        /////////////// COLOR OFF
     modeToggle = false;
@@ -85,6 +101,8 @@ function setRadioMode(val){
     document.getElementById('wordMarkCenterWstan').style.display = "block";
     document.getElementById('wordMarkCenterBhasso').style.display = "none";
     document.getElementById('wordMarkCenterWhasso').style.display = "block";
+    document.getElementById('wordMarkCenterBdesign').style.display = "none";
+    document.getElementById('wordMarkCenterWdesign').style.display = "block";
   }
 
   if(holdToggle != modeToggle){
@@ -328,7 +346,17 @@ function setDiscoOverlayToggle(val){
 function setDiscoOffsetToggle(val){
   if(val == 0){
     discoOffset = true;
+
+    for(var m = 0; m < 5; m++){
+      discoOffsetX[m] = random(-20, 20);
+      discoOffsetY[m] = random(-20, 20);
+    }
   } else if(val == 1){
+    for(var m = 0; m < 5; m++){
+      discoOffsetX[m] = 0;
+      discoOffsetY[m] = 0;
+    }
+
     discoOffset = false;
   }
 
@@ -341,7 +369,7 @@ function setDiscoOffsetToggle(val){
 function setDiscoSaveToggle(val){
   discoSaveToggle = val;
 
-  console.log("saveToggle: " + discoSaveToggle);
+  console.log("Disco SaveToggle: " + discoSaveToggle);
 
   loop();
 }

@@ -3,7 +3,6 @@
 function drawBase(counterOn){
   if(baseIndex == 0){
     beginShape();
-      vertex(283.1,118.6);
       vertex(283.1,250.3);
       bezierVertex(272.7,245.6,257,241.8,241.3,241.8);
       bezierVertex(176.3,241.8,118.4,294.5,118.4,367.6);
@@ -25,16 +24,16 @@ function drawBase(counterOn){
           vertex(283.1,421.2);
         endContour();
       }
-    endShape();
+
+    endShape(CLOSE);
 
   } else if(baseIndex == 1){
     beginShape();
-      vertex(283.1,118.6);
       vertex(283.1,469.3);
       vertex(363.8,451.1);
       vertex(363.8,96.8);
       vertex(283.1,118.6);
-    endShape();
+    endShape(CLOSE);
     beginShape();
       vertex(197.6,339.1);
       bezierVertex(197.6,295.6,217.8,242.5,248,242.0);
@@ -48,7 +47,6 @@ function drawBase(counterOn){
 
   } else if(baseIndex == 2){
     beginShape();
-      vertex(283.1,118.6);
       vertex(283.1,250.3);
       bezierVertex(272.7,245.6,257,241.8,241.3,241.8);
       bezierVertex(176.3,241.8,118.4,294.5,118.4,367.6);
@@ -59,12 +57,10 @@ function drawBase(counterOn){
       vertex(363.8,451.2);
       vertex(363.8,96.8);
       vertex(283.1,118.6);
-    endShape();
+    endShape(CLOSE);
 
   } else if(baseIndex == 3){
     beginShape();
-      vertex(392.7,444.6);
-      vertex(283.1,469.3);
       vertex(283.1,430.7);
       vertex(278.4,430.7);
       bezierVertex(263.7,450.6,239.0,469.6,206.7,469.6);
@@ -76,6 +72,7 @@ function drawBase(counterOn){
       vertex(363.8,96.8);
       vertex(363.8,411.8);
       vertex(392.7,444.6);
+      vertex(283.1,469.3);
 
       if(counterOn){
         beginContour();
@@ -87,7 +84,7 @@ function drawBase(counterOn){
           vertex(283.1,289.7);
         endContour();
         }
-    endShape();
+    endShape(CLOSE);
     
   } else if(baseIndex == 4){
     beginShape();
@@ -101,18 +98,16 @@ function drawBase(counterOn){
       bezierVertex(228.5,432.4,197.6,395.1,197.6,339.1);
     endShape();
     beginShape();
-      vertex(392.7,444.6);
       vertex(363.8,411.9);
       vertex(363.8,96.8);
       vertex(244.1,129.1);
       vertex(283.1,168);
       vertex(283.1,469.3);
       vertex(392.7,444.6);
-    endShape();
+    endShape(CLOSE);
     
   } else if(baseIndex == 5){
     beginShape();
-      vertex(392.7,444.6);
       vertex(283.1,469.3);
       vertex(283.1,430.7);
       vertex(278.4,430.7);
@@ -125,7 +120,7 @@ function drawBase(counterOn){
       vertex(363.8,96.8);
       vertex(363.8,411.8);
       vertex(392.7,444.6);
-    endShape();
+    endShape(CLOSE);
 
   }
 }

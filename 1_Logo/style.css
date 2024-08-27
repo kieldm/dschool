@@ -319,6 +319,10 @@ button {
 #wordMarkCenterBhasso { display:block; }
 #wordMarkCenterWhasso { display:none; }
 
+#wordMarkDesign { display:none; }
+#wordMarkCenterBdesign { display:block; }
+#wordMarkCenterWdesign { display:none; }
+
 #wordMarkSelector {
   opacity:25%;
   pointer-events: none;

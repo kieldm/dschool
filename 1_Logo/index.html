@@ -219,7 +219,7 @@
 
             <div class="trSubSubUnit">
               <div class="centerButton">
-                <button type="button" onclick="runLogoSave()">Download</button>
+                <button type="button" onclick="runDiscoLogoSave()">Download</button>
               </div>
             </div>
 
@@ -420,7 +420,7 @@
             <div class="centerButton">
               <div class="selectorContainer2">
                 <div class="centerButton">
-                  <div class="arrow2" onclick="selectWordMark()" id="left-arrow"></div>
+                  <div class="arrow2" onclick="selectWordMark(-1)" id="left-arrow"></div>
 
                     <div class="visual-wrapper" id="wordMarkStan">
                       <img class="visual" id = "wordMarkCenterBstan" src="resources/images/wordMarkBstan_1.png">
@@ -432,7 +432,12 @@
                       <img class="visual" id = "wordMarkCenterWhasso" src="resources/images/wordMarkWhasso_1.png">
                     </div>
 
-                  <div class="arrow2" onclick="selectWordMark()" id="right-arrow"></div>
+                    <div class="visual-wrapper" id="wordMarkDesign">
+                      <img class="visual" id = "wordMarkCenterBdesign" src="resources/images/wordMarkBdesign_1.png">
+                      <img class="visual" id = "wordMarkCenterWdesign" src="resources/images/wordMarkWdesign_1.png">
+                    </div>
+
+                  <div class="arrow2" onclick="selectWordMark(1)" id="right-arrow"></div>
                 </div>
               </div>
             </div>
@@ -529,6 +534,8 @@
       var wordMarkVisualsBstan = [];
       var wordMarkVisualsWhasso = [];
       var wordMarkVisualsBhasso = [];
+      var wordMarkVisualsWdesign = [];
+      var wordMarkVisualsBdesign = [];
       for(var m = 0; m < 28; m++){
         colorVisuals[m] = 'resources/images/color_' + m + '.png';
         setVisuals[m] = 'resources/images/set_' + m + '.png';
@@ -536,6 +543,8 @@
         wordMarkVisualsBstan[m] = 'resources/images/wordMarkBstan_' + m + '.png';
         wordMarkVisualsWhasso[m] = 'resources/images/wordMarkWhasso_' + m + '.png';
         wordMarkVisualsBhasso[m] = 'resources/images/wordMarkBhasso_' + m + '.png';
+        wordMarkVisualsWdesign[m] = 'resources/images/wordMarkWdesign_' + m + '.png';
+        wordMarkVisualsBdesign[m] = 'resources/images/wordMarkBdesign_' + m + '.png';
       }
 
       let wordMarkIndex = 0;
@@ -616,10 +625,14 @@
         const wordMarkElementBhasso = document.getElementById('wordMarkCenterBhasso');
         const wordMarkElementWstan = document.getElementById('wordMarkCenterWstan');
         const wordMarkElementBstan = document.getElementById('wordMarkCenterBstan');
+        const wordMarkElementWdesign = document.getElementById('wordMarkCenterWdesign');
+        const wordMarkElementBdesign = document.getElementById('wordMarkCenterBdesign');
         wordMarkElementWhasso.src = wordMarkVisualsWhasso[indexC];
         wordMarkElementBhasso.src = wordMarkVisualsBhasso[indexC];
         wordMarkElementWstan.src = wordMarkVisualsWstan[indexC];
         wordMarkElementBstan.src = wordMarkVisualsBstan[indexC];
+        wordMarkElementWdesign.src = wordMarkVisualsWdesign[indexC];
+        wordMarkElementBdesign.src = wordMarkVisualsBdesign[indexC];
       }
 
       function showPuncVisual(index) { 

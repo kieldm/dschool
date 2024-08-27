@@ -146,17 +146,30 @@ function switchSwatch(){
     loop();
 }
 
-function selectWordMark(){
-  wordMarkIndex ++;
-  wordMarkIndex = wordMarkIndex%2;
+function selectWordMark(val){
+  wordMarkIndex += val;
 
-  if(wordMarkIndex == 1){
-    document.getElementById('wordMarkStan').style.display = "none";
-    document.getElementById('wordMarkHasso').style.display = "block";
-
+  if(wordMarkIndex < 0){
+    wordMarkIndex = 2;
   } else {
+    wordMarkIndex = wordMarkIndex%3;
+  }
+
+  if(wordMarkIndex == 0){
     document.getElementById('wordMarkStan').style.display = "block";
     document.getElementById('wordMarkHasso').style.display = "none";
+    document.getElementById('wordMarkDesign').style.display = "none";
+
+  } else if(wordMarkIndex == 1){
+    document.getElementById('wordMarkStan').style.display = "none";
+    document.getElementById('wordMarkHasso').style.display = "block";
+    document.getElementById('wordMarkDesign').style.display = "none";
+
+  } else {
+    document.getElementById('wordMarkStan').style.display = "none";
+    document.getElementById('wordMarkHasso').style.display = "none";
+    document.getElementById('wordMarkDesign').style.display = "block";
+
   }
 
   loop();

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>d.Logo</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <script src="https://unpkg.com/p5.js-svg@1.5.1"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="sketch_pattern.js" type="text/javascript"></script>
+    <script src="update.js" type="text/javascript"></script>
+    <script src="functionsDraw.js" type="text/javascript"></script>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+
+  <body>
+    <div class="fullSet">
+      <div class="lCol">            <!-- LEFT SIDE  -->
+        <div class="lTopRow">        <!-- TOP ROW: HEADLINE, SWITCHES -->
+          <div class="ltUnit">        <!-- HEADLINE  -->
+            <div class="centerButton">
+              <h1>d. Pattern Generator</h1>
+            </div>
+          </div>
+
+          <div class="ltUnit">        <!-- MODES  -->
+  
+            <div class="centerButton">
+
+              <div class="ltSubUnit">        <!-- DARK/LIGHT MODE  -->
+                <div class="presetRadioSub">
+                  <input type="radio" id="radioMode0" onclick="setRadioMode(0)" name="radioModes">
+                    <label for="radioMode0">Light Mode</label>
+                  <input type="radio" id="radioMode1" onclick="setRadioMode(1)" name="radioModes" checked>
+                    <label for="radioMode1">Dark Mode</label>
+                </div>
+              </div> 
+      
+              <!-- SVG/PNG MODE  -->
+              <!-- <div class="ltSubUnit">
+                <div class="presetRadioSub">
+                  <input type="radio" id="radioSaveMode0" onclick="setRadioSaveMode(0)" name="radioSaveModes" checked>
+                    <label for="radioSaveMode0">SVG</label>
+                  <input type="radio" id="radioSaveMode1" onclick="setRadioSaveMode(1)" name="radioSaveModes">
+                    <label for="radioSaveMode1">PNG</label>
+                </div>
+              </div> -->
+            </div>
+
+          </div>
+
+          <div class="ltUnit">        <!-- PRESETS  -->
+            <div class="centerButton">
+
+              <div class="ltSubUnit2">        <!-- PRESETS  -->
+
+                <div class="presetGrouping">
+                  <div class="presetCol">
+                    <p><span class="underline">Preset</span></p>
+                    <p class="presetP" onclick="setPatternPreset(1)">Pattern 1</p>
+                    <p class="presetP" onclick="setPatternPreset(2)">Pattern 2</p>
+                  </div>
+                  
+                  <div class="presetCol">
+                    <p><br></p>
+                    <p class="presetP" onclick="setPatternPreset(3)">Pattern 3</p>
+                    <p class="presetP" onclick="setPatternPreset(4)">Pattern 4</p>
+                  </div>
+                  
+                  <!-- <div class="presetCol">
+                    <p><br></p>
+                    <p class="presetP" onclick="setPatternPreset(5)">Pattern 5</p>
+                    <p class="presetP" onclick="setPatternPreset(6)">Pattern 6</p>
+                  </div> -->
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="lBotRow" id="patternGen">            <!-- BOT ROW: GENERATOR  -->
+        </div>
+      </div>
+
+      <div class="rCol">            <!-- RIGHT SIDE  -->
+
+        <div class="centerButton">
+      
+          <div class="patternSettings">
+            <div class="rUnitBig">
+              <div class="rUnitBig_selectSet">
+                <p class="rUnitBig_label">Select Your d's</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_0.png" id="d0" onclick="setBaseIndex(0)"></div>
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_1.png" id="d1" onclick="setBaseIndex(1)"></div>
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_2.png" id="d2" onclick="setBaseIndex(2)"></div>
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_3.png" id="d3" onclick="setBaseIndex(3)"></div>
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_4.png" id="d4" onclick="setBaseIndex(4)"></div>
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_5.png" id="d5" onclick="setBaseIndex(5)"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rUnitBig">
+
+              <div class="rUnitBig_selectSetHalf">
+                <p class="rUnitBig_label">Inline</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/inline_0.png" id="i0" onclick="setInlineIndex(0)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/inline_1.png" id="i1" onclick="setInlineIndex(1)"></div>
+                </div>
+              </div>
+
+              <!-- <div class="rUnitBig_selectSetHalf">
+                <p class="rUnit_label">Outline</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_0.png" id="o0" onclick="setOutlineMode(0)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_1.png" id="o1" onclick="setOutlineMode(1)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_2.png" id="o2" onclick="setOutlineMode(2)"></div>
+                </div>
+              </div> -->
+
+            </div>
+
+            <div class="rUnitBig">
+              <div class="rUnitBig_selectSet">
+                <p class="rUnitBig_label">Punctuation</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_0.png" id="p0" onclick="setPuncIndex(0)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_10.png" id="p10" onclick="setPuncIndex(10)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_1.png" id="p1" onclick="setPuncIndex(1)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_2.png" id="p2" onclick="setPuncIndex(2)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_3.png" id="p3" onclick="setPuncIndex(3)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_4.png" id="p4" onclick="setPuncIndex(4)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_5.png" id="p5" onclick="setPuncIndex(5)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_6.png" id="p6" onclick="setPuncIndex(6)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_7.png" id="p7" onclick="setPuncIndex(7)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_8.png" id="p8" onclick="setPuncIndex(8)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_9.png" id="p9" onclick="setPuncIndex(9)"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rUnit">
+              <div class="rUnit_sliderSet">
+                <div class="rUnit_slider">
+                  <p class="rUnit_label">Horizontal Spacing</p>
+                  <input type="range" class="ranger" id="horzSpace" min="0" max="100" value="33" oninput="setHorzSpace(this.value)">
+                </div>
+
+                <div class="rUnit_slider">
+                  <p class="rUnit_label">Vertical Spacing</p>
+                  <input type="range" class="ranger" id="vertSpace" min="0" max="100" value="33" oninput="setVertSpace(this.value)">                  
+                </div>
+
+              </div>
+            </div>
+  
+            
+            <div class="rUnit">
+              <div class="rUnit_sliderSet">
+                <div class="rUnit_slider">
+                  <p class="rUnit_label">Unit Size</p>
+                  <input type="range" class="ranger" id="markScale" min="0" max="100" value="25" oninput="setMarkScale(this.value)">
+                </div>
+
+                <div class="rUnit_slider">
+                  <p class="rUnit_label">Unit Rotation</p>
+                  <input type="range" class="ranger" id="unitRot" min="0" max="100" value="50" oninput="setUnitRot(this.value)">
+                </div>
+                
+              </div>
+            </div>
+  
+            <div class="rUnit">
+              <div class="rUnit_sliderSet">
+                <div class="rUnit_slider">
+                  <p class="rUnit_label">Grid Offset</p>
+                  <input type="range" class="ranger" id="gridAng" min="0" max="100" value="50" oninput="setGridAng(this.value)">
+                </div>
+                
+                <div class="rUnit_slider">
+                  <p class="rUnit_label">Grid Angle</p>
+                  <input type="range" class="ranger" id="coreAng" min="0" max="100" value="50" oninput="setCoreAng(this.value)">
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="rUnit">
+              <div class="rUnit_buttonSet">
+
+                <div class="rUnit_buttons">
+                  <input type="radio" id="radioOffset0" onclick="setRadioOffset(0)" name="radioOffsets" checked>
+                    <label for="radioOffset0">Offset</label>
+                  <input type="radio" id="radioOffset1" onclick="setRadioOffset(1)" name="radioOffsets">
+                    <label for="radioOffset1">Align</label>
+                </div>
+
+                <div class="rUnit_buttons">
+                  <input type="radio" id="radioFlip0" onclick="setRadioFlip(0)" name="radioFlips" checked>
+                    <label for="radioFlip0">Straight</label>
+                  <input type="radio" id="radioFlip1" onclick="setRadioFlip(1)" name="radioFlips">
+                    <label for="radioFlip1">Flip</label>
+                </div>
+
+              </div> 
+            </div>
+  
+            
+            <div class="rUnitBig">
+
+              <div class="rUnitBig_selectSetHalf">
+                <p class="rUnitBig_label">Background Color</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_selectHalf_gallery_unit"> <img src="resources/images/highlight.png" id="bkgd0" class="imgHighlight"> <img src="resources/images/bkgdSwatch_0.png" onclick="setBkgdColor(0)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"> <img src="resources/images/highlight.png" id="bkgd1" class="imgHighlight"> <img src="resources/images/bkgdSwatch_1.png" onclick="setBkgdColor(1)"></div>
+                </div>
+              </div>
+
+              <!-- <div class="rUnitBig_selectSetHalf">
+                <p class="rUnit_label">Fill Colors</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/bkgdSwatch_0.png" onclick="setBkgdColor(0)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/bkgdSwatch_1.png" onclick="setBkgdColor(1)"></div>
+                </div>
+              </div> -->
+
+              <!-- <div class="rUnitBig_selectSetHalf">
+                <p class="rUnit_label">Outline</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_0.png" id="o0" onclick="setOutlineMode(0)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_1.png" id="o1" onclick="setOutlineMode(1)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_2.png" id="o2" onclick="setOutlineMode(2)"></div>
+                </div>
+              </div> -->
+
+            </div>
+
+            <div class="rUnit">
+              <div class="rUnit_buttonSet">
+
+                <div class="rUnit_buttons">
+                  <input type="radio" id="radioSaveMode0" onclick="setSaveToggle(0)" name="radioSaveModes">
+                    <label for="radioSaveMode0">SVG</label>
+                  <input type="radio" id="radioSaveMode1" onclick="setSaveToggle(1)" name="radioSaveModes" checked>
+                    <label for="radioSaveMode1">PNG</label>
+                </div>
+
+                <div class="rUnit_buttons">
+                  <button type="button" onclick="runPatternSave()">Download</button>
+                </div>
+
+              </div> 
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </body>
+</html>

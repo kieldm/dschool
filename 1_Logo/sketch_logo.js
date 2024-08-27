@@ -26,13 +26,17 @@ var dotSolidBlack, dotSolidWhite;
 var dotSolidBlack_Overlay, dotSolidWhite_Overlay;
 
 var saveToggle = 0;
-var saveDiscoToggle = 0;
+var discoSaveToggle = 0;
+
+var discoOffsetX = [];
+var discoOffsetY = [];
 
 var nameBump;
 var nameOnToggle = false;
 
 /// 0 = Standford
 /// 1 = Hazzo
+/// 2 = Design
 var wordMarkB = [];
 var wordMarkW = [];
 
@@ -68,6 +72,8 @@ function preload(){
     wordMarkW[m][0] = loadSVG('resources/svgs/wordMarkWstan_' + thisOne + '.svg');
     wordMarkB[m][1] = loadSVG('resources/svgs/wordMarkBhasso_' + thisOne + '.svg');
     wordMarkW[m][1] = loadSVG('resources/svgs/wordMarkWhasso_' + thisOne + '.svg');
+    wordMarkB[m][2] = loadSVG('resources/svgs/wordMarkBdesign_' + thisOne + '.svg');
+    wordMarkW[m][2] = loadSVG('resources/svgs/wordMarkWdesign_' + thisOne + '.svg');
   }
 
   dotSolidWhite = loadSVG('resources/svgs/dotSolid_white.svg');
@@ -118,7 +124,6 @@ function draw(){
     disco();
   
   }
-
   noLoop();
 }
 
@@ -214,7 +219,7 @@ function disco(){
         noStroke();
         fill(discoCol[discoColIndex][1]);
   
-        if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+        if(discoOffset){ translate(discoOffsetX[0], discoOffsetY[0])};                  ////// RANDOM OFFSET
 
         drawPunc();
       }
@@ -224,7 +229,7 @@ function disco(){
       noFill();
       stroke(discoCol[discoColIndex][0]);
 
-      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+      if(discoOffset){ translate(discoOffsetX[1], discoOffsetY[1])};                  ////// RANDOM OFFSET
 
       if(outlineIndex == 0){              ////// THICK OUTLINE AND FILL
         strokeWeight(coreS * 40/591.107);
@@ -248,7 +253,7 @@ function disco(){
     }
 
     if(baseToggle){
-      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+      if(discoOffset){ translate(discoOffsetX[2], discoOffsetY[2])};                  ////// RANDOM OFFSET
 
       fill(discoCol[discoColIndex][2]);
       noStroke();
@@ -256,7 +261,7 @@ function disco(){
     }
 
     if(inlineToggle){
-      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+      if(discoOffset){ translate(discoOffsetX[3], discoOffsetY[3])};                  ////// RANDOM OFFSET
 
       noStroke();
       fill(discoCol[discoColIndex][1]);
@@ -264,7 +269,7 @@ function disco(){
       drawInline();
     }
     if(discoOverlay && puncToggle){
-      if(discoOffset){ translate(random(-20, 20), random(-20, 20))};                  ////// RANDOM OFFSET
+      if(discoOffset){ translate(discoOffsetX[4], discoOffsetY[4])};                  ////// RANDOM OFFSET
 
       noStroke();
       fill(discoCol[discoColIndex][1]);
