@@ -29,18 +29,14 @@ function setRadioVibe(val){
   console.log("Vibe set: " + val);
 }
 
-function runRandomCombo(){
-  console.log("Random Combo");
-}
-
 function runLogoSave(){
   console.log("RUN LOGO SAVE");
 
-  if(saveToggle == 0){
+  if(saveToggle == 0 || saveToggle == 2){
     console.log("SAVE SVG!")
     save('dschool_logo.svg');
 
-  } else if(saveToggle == 1){
+  } else if(saveToggle == 1 || saveToggle == 3){
     console.log("SAVE PNG!")
     save('dschool_logo.png');
 
@@ -50,11 +46,11 @@ function runLogoSave(){
 function runDiscoLogoSave(){
   console.log("RUN LOGO SAVE");
 
-  if(discoSaveToggle == 0){
+  if(discoSaveToggle == 0 || saveToggle == 2){
     console.log("DISCO SAVE SVG!")
     save('disco_dschool_logo.svg');
 
-  } else if(discoSaveToggle == 1){
+  } else if(discoSaveToggle == 1 || saveToggle == 3){
     console.log("DISCO SAVE PNG!")
     save('disco_dschool_logo.png');
 
@@ -67,6 +63,8 @@ function setRadioMode(val){
   var holdToggle = modeToggle;
 
   if(val == 0){              /////////////// COLOR ON
+    bkgdColor = color('#FFFFFF');
+
     modeToggle = true;
     document.getElementById('baseCenter').style.filter = "invert(0)";
     document.getElementById('inlineCenter').style.filter = "invert(0)";
@@ -86,6 +84,8 @@ function setRadioMode(val){
     document.getElementById('wordMarkCenterWdesign').style.display = "none";
 
   } else if(val == 1){        /////////////// COLOR OFF
+    bkgdColor = color('#000000');
+
     modeToggle = false;
     document.getElementById('baseCenter').style.filter = "invert(100)";
     document.getElementById('inlineCenter').style.filter = "invert(100)";
@@ -328,7 +328,13 @@ function setNameOnToggle(val){
 function setSaveToggle(val){
   saveToggle = val;
 
-  console.log("saveToggle: " + saveToggle);
+  if(val == 2 || val == 3){
+    alphaToggle = true;
+  } else {
+    alphaToggle = false;
+  }
+
+  console.log("saveToggle: " + saveToggle + " and alphaToggle is: " + alphaToggle);
 
   loop();
 }
@@ -347,10 +353,48 @@ function setDiscoOffsetToggle(val){
   if(val == 0){
     discoOffset = true;
 
-    for(var m = 0; m < 5; m++){
-      discoOffsetX[m] = random(-20, 20);
-      discoOffsetY[m] = random(-20, 20);
-    }
+    var rs0 = random(60);
+    var unit = random(5, 20);
+
+    discoOffsetX[4] = random(-15, 15); discoOffsetY[4] = random(-15, 15); 
+    discoOffsetX[0] = random(-15, 15); discoOffsetY[0] = random(-15, 15); 
+
+    if(rs0 < 10){
+      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
+      discoOffsetX[2] = unit; discoOffsetY[2] = unit; 
+      discoOffsetX[3] = unit; discoOffsetY[3] = unit;
+
+    } else if(rs0 < 20){
+      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
+      discoOffsetX[2] = -unit; discoOffsetY[2] = -unit; 
+      discoOffsetX[3] = -unit; discoOffsetY[3] = -unit; 
+
+    } else if(rs0 < 30){
+      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
+      discoOffsetX[2] = 0; discoOffsetY[2] = -unit; 
+      discoOffsetX[3] = 0; discoOffsetY[3] = -unit; 
+
+    } else if(rs0 < 40){
+      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
+      discoOffsetX[2] = 0; discoOffsetY[2] = unit; 
+      discoOffsetX[3] = 0; discoOffsetY[3] = unit; 
+
+    } else if(rs0 < 50){
+      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
+      discoOffsetX[2] = unit; discoOffsetY[2] = 0; 
+      discoOffsetX[3] = unit; discoOffsetY[3] = 0; 
+
+    }  else if(rs0 < 60){
+      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
+      discoOffsetX[2] = -unit; discoOffsetY[2] = 0; 
+      discoOffsetX[3] = -unit; discoOffsetY[3] = 0; 
+
+    } 
+
+    // for(var m = 0; m < 5; m++){
+    //   discoOffsetX[m] = random(-20, 20);
+    //   discoOffsetY[m] = random(-20, 20);
+    // }
   } else if(val == 1){
     for(var m = 0; m < 5; m++){
       discoOffsetX[m] = 0;
@@ -369,7 +413,13 @@ function setDiscoOffsetToggle(val){
 function setDiscoSaveToggle(val){
   discoSaveToggle = val;
 
-  console.log("Disco SaveToggle: " + discoSaveToggle);
+  if(val == 2 || val == 3){
+    alphaToggle = true;
+  } else {
+    alphaToggle = false;
+  }
+
+  console.log("Disco SaveToggle: " + discoSaveToggle + " and alphaToggle is: " + alphaToggle);
 
   loop();
 }

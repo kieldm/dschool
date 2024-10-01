@@ -20,6 +20,7 @@
 
     <script src="functionsDisco.js" type="text/javascript"></script>
 
+    <script src="randomScript.js" type="text/javascript"></script>
     <script src="galleryScript.js" type="text/javascript"></script>
     <link rel="stylesheet" href="galleryStyle.css">
 
@@ -33,12 +34,12 @@
         <div class="topUnit">         <!--       SPECS     -->
           <div class="tlUnit">
             <div class="tlSubUnit">
-              <h1>d.Logo Generator</h1>
+              <h1>d. Logo Generator</h1>
             </div>
             <div class="tlSubUnit">
-              <div class="tlSubSubUnit">
-                <p>Welcome to the d.school's logo generator, let's make a new logo!</p>
-              </div>
+              <!-- <div class="tlSubSubUnit"> -->
+                <p>Welcome to the d.school's logo generator,<br> let's make a new logo!</p>
+              <!-- </div> -->
             </div>
 
           </div>
@@ -129,13 +130,22 @@
             </div>
 
             <div class="trSubSubUnit">
-              <div class="centerButton">
+              <div class="centerButtonCol">
+                
                 <div class="presetRadioSub2">
                   <input type="radio" id="radioSaveMode0" onclick="setSaveToggle(0)" name="radioSaveModes" checked>
                     <label for="radioSaveMode0">SVG</label>
                   <input type="radio" id="radioSaveMode1" onclick="setSaveToggle(1)" name="radioSaveModes">
                     <label for="radioSaveMode1">PNG</label>
                 </div>
+                
+                <div class="presetRadioSub2">
+                  <input type="radio" id="radioSaveMode2" onclick="setSaveToggle(2)" name="radioSaveModes">
+                    <label for="radioSaveMode2">Transparent SVG</label>
+                  <input type="radio" id="radioSaveMode3" onclick="setSaveToggle(3)" name="radioSaveModes">
+                    <label for="radioSaveMode3">Transparent PNG</label>
+                </div>
+
               </div>
             </div>
 
@@ -159,14 +169,15 @@
             </div>
 
             <div class="selectorContainer2bot">
-              <div class="centerButton">
-                <div class="arrow2" onclick="selectDiscoColor(-1)" id="left-arrow"></div>
-                <div class="swatch-wrapper">
-                  <img class="swatch" id = "discoSwatch0" src="resources/images/discoCol_0_0.png">
-                  <img class="swatch" id = "discoSwatch1" src="resources/images/discoCol_0_1.png">
-                  <img class="swatch" id = "discoSwatch2" src="resources/images/discoCol_0_2.png">
+              <div class="selectorContainer2botSub">
+                <div class="centerButton">
+
+                    <div class="arrow" onclick="selectDiscoColor(-1)" id="left-arrow"></div>
+                    <img class="swatch" id = "discoSwatch0" src="resources/images/discoCol_0_0.png">
+                    <img class="swatch" id = "discoSwatch1" src="resources/images/discoCol_0_1.png">
+                    <img class="swatch" id = "discoSwatch2" src="resources/images/discoCol_0_2.png">
+                    <div class="arrow" onclick="selectDiscoColor(1)" id="right-arrow"></div>
                 </div>
-                <div class="arrow2" onclick="selectDiscoColor(1)" id="right-arrow"></div>
               </div>
             </div>
 
@@ -207,13 +218,22 @@
           <div class="trSubUnit2">
 
             <div class="unitToggle3">
-              <div class="centerButton">
+              <div class="centerButtonCol">
+
                 <div class="presetRadioSub2">
                   <input type="radio" id="radioDiscoSaveMode0" onclick="setDiscoSaveToggle(0)" name="radioDiscoSaveModes" checked>
                     <label for="radioDiscoSaveMode0">SVG</label>
                   <input type="radio" id="radioDiscoSaveMode1" onclick="setDiscoSaveToggle(1)" name="radioDiscoSaveModes">
                     <label for="radioDiscoSaveMode1">PNG</label>
                 </div>
+
+                <div class="presetRadioSub2">
+                  <input type="radio" id="radioDiscoSaveMode2" onclick="setDiscoSaveToggle(2)" name="radioDiscoSaveModes">
+                    <label for="radioDiscoSaveMode2">Transparent SVG</label>
+                  <input type="radio" id="radioDiscoSaveMode3" onclick="setDiscoSaveToggle(3)" name="radioDiscoSaveModes">
+                    <label for="radioDiscoSaveMode3">Transparent PNG</label>
+                </div>
+
               </div>
             </div>
 
@@ -240,11 +260,13 @@
             <div class="centerButton">
               <div class="selectorContainer">
                 <div class="centerButton">
+
                   <div class="arrow" onclick="selectBase(-1)" id="left-arrow"></div>
-                    <div class="visual-wrapper">
+                    <!-- <div class="visual-wrapper"> -->
                       <img class="visual" id = "baseCenter" src="resources/images/base_0.png">
-                    </div>
+                    <!-- </div> -->
                   <div class="arrow" onclick="selectBase(1)" id="right-arrow"></div>
+                
                 </div>
               </div>
             </div>
@@ -274,11 +296,11 @@
             <div class="centerButton">
               <div class="selectorContainer">
                 <div class="centerButton">
+
                   <div class="arrow" onclick="selectInline(-1)" id="left-arrow"></div>
-                    <div class="visual-wrapper">
-                      <img class="visual" id = "inlineCenter" src="resources/images/inline_1.png">
-                    </div>
+                    <img class="visual" id = "inlineCenter" src="resources/images/inline_1.png">
                   <div class="arrow" onclick="selectInline(1)" id="right-arrow"></div>
+                  
                 </div>
               </div>
             </div>
@@ -308,56 +330,70 @@
               
             <div class="selectorContainer2" id="overlayActive">    <!--       OVERLAY    -->
                 
-              <div class="centerButton" id ="blackDotOverlaySet">
-                <div class="selectorContainer2top">
-                  <div class="set-wrapper">
-                    <img class="set" id = "swatchOverSet" src="resources/images/setOver_1.png">
+              <div class="selectorContainer2top" id ="blackDotOverlaySet">
+                <div class="selectorContainer2topSub">
+                  <div class="centerButton">
+                    <!-- <div class="set-wrapper"> -->
+                      <img class="swatch2" id = "swatchOverSet" src="resources/images/setOver_1.png">
+                    <!-- </div> -->
                   </div>
                 </div>
               </div>
 
-              <div class="centerButton" id ="whiteDotOverlaySet">
-                <div class="selectorContainer2top">
-                  <div class="set-wrapper">
-                    <img class="set" id = "swatchOverWSet" src="resources/images/setOverW_1.png">
+              <div class="selectorContainer2top" id ="whiteDotOverlaySet">
+                <div class="selectorContainer2topSub">
+                  <div class="centerButton">
+                    <!-- <div class="set-wrapper"> -->
+                      <img class="swatch2" id = "swatchOverWSet" src="resources/images/setOverW_1.png">
+                    <!-- </div> -->
                   </div>
                 </div>
               </div>
 
               <div class="selectorContainer2bot">
-                <div class="centerButton">
-                  <div class="arrow2" onclick="selectOverlayColor(-1)" id="left-arrow"></div>
-                  <div class="swatch-wrapper">
-                    <img class="swatch" id = "swatchOverlayL" src="resources/images/colorOver_0.png">
-                    <img class="swatch" id = "swatchOverlayC" src="resources/images/colorOver_1.png">
-                    <img class="swatch" id = "swatchOverlayR" src="resources/images/colorOver_2.png">
+                <div class="selectorContainer2botSub">
+                  <div class="centerButton">
+
+                    <!-- <div class="swatch-wrapper"> -->
+                      <div class="arrow" onclick="selectOverlayColor(-1)" id="left-arrow"></div>
+                      <img class="swatch" id = "swatchOverlayL" src="resources/images/colorOver_0.png">
+                      <img class="swatch" id = "swatchOverlayC" src="resources/images/colorOver_1.png">
+                      <img class="swatch" id = "swatchOverlayR" src="resources/images/colorOver_2.png">
+                      <div class="arrow" onclick="selectOverlayColor(1)" id="right-arrow"></div>
+                    <!-- </div> -->
                   </div>
-                  <div class="arrow2" onclick="selectOverlayColor(1)" id="right-arrow"></div>
                 </div>
               </div>
+
             </div>
 
             <div class="selectorContainer2" id="noOverlayActive">    <!--       NoOverlay    -->
                 
-              <div class="centerButton">
-                <div class="selectorContainer2top">
-                  <div class="set-wrapper">
-                    <img class="set" id = "swatchSet" src="resources/images/set_1.png">
+              <div class="selectorContainer2top">
+                <div class="selectorContainer2topSub">
+                  <div class="centerButton">
+                    <!-- <div class="set-wrapper"> -->
+                      <img class="swatch2" id = "swatchSet" src="resources/images/set_1.png">
+                    <!-- </div> -->
                   </div>
                 </div>
               </div>
 
               <div class="selectorContainer2bot">
-                <div class="centerButton">
-                  <div class="arrow2" onclick="selectColor(-1)" id="left-arrow"></div>
-                  <div class="swatch-wrapper">
-                    <img class="swatch" id = "swatchL" src="resources/images/color_0.png">
-                    <img class="swatch" id = "swatchC" src="resources/images/color_1.png">
-                    <img class="swatch" id = "swatchR" src="resources/images/color_2.png">
+                <div class="selectorContainer2botSub">
+                  <div class="centerButton">
+
+                    <!-- <div class="swatch-wrapper"> -->
+                      <div class="arrow" onclick="selectColor(-1)" id="left-arrow"></div>
+                      <img class="swatch" id = "swatchL" src="resources/images/color_0.png">
+                      <img class="swatch" id = "swatchC" src="resources/images/color_1.png">
+                      <img class="swatch" id = "swatchR" src="resources/images/color_2.png">
+                      <div class="arrow" onclick="selectColor(1)" id="right-arrow"></div>
+                    <!-- </div> -->
                   </div>
-                  <div class="arrow2" onclick="selectColor(1)" id="right-arrow"></div>
                 </div>
               </div>
+
             </div>
 
           </div>
@@ -382,14 +418,13 @@
             </div>
           </div>
 
-          <div class="unitSelector" id="punctuationSelector">         <!--       INLINE SELECTOR    -->
+          <div class="unitSelector" id="punctuationSelector">         <!--       PUNCTUATION SELECTOR    -->
             <div class="centerButton">
               <div class="selectorContainer">
                 <div class="centerButton">
+
                   <div class="arrow" onclick="selectPunctuation(-1)" id="left-arrow"></div>
-                    <div class="visual-wrapper">
-                      <img class="visual" id = "punctuationCenter" src="resources/images/punc_1.png">
-                    </div>
+                  <img class="visual" id = "punctuationCenter" src="resources/images/punc_1.png">
                   <div class="arrow" onclick="selectPunctuation(1)" id="right-arrow"></div>
                 </div>
               </div>
@@ -416,30 +451,36 @@
             </div>
           </div>
 
-          <div class="unitSelector2" id="wordMarkSelector">         <!--       WORDMARK SELECTOR    -->
+          <div class="unitSelector" id="wordMarkSelector">         <!--       WORDMARK SELECTOR    -->
             <div class="centerButton">
-              <div class="selectorContainer2">
+
+              <div class="selectorContainer" id="wordMarkStan">
                 <div class="centerButton">
-                  <div class="arrow2" onclick="selectWordMark(-1)" id="left-arrow"></div>
-
-                    <div class="visual-wrapper" id="wordMarkStan">
-                      <img class="visual" id = "wordMarkCenterBstan" src="resources/images/wordMarkBstan_1.png">
-                      <img class="visual" id = "wordMarkCenterWstan" src="resources/images/wordMarkWstan_1.png">
-                    </div>
-
-                    <div class="visual-wrapper" id="wordMarkHasso">
-                      <img class="visual" id = "wordMarkCenterBhasso" src="resources/images/wordMarkBhasso_1.png">
-                      <img class="visual" id = "wordMarkCenterWhasso" src="resources/images/wordMarkWhasso_1.png">
-                    </div>
-
-                    <div class="visual-wrapper" id="wordMarkDesign">
-                      <img class="visual" id = "wordMarkCenterBdesign" src="resources/images/wordMarkBdesign_1.png">
-                      <img class="visual" id = "wordMarkCenterWdesign" src="resources/images/wordMarkWdesign_1.png">
-                    </div>
-
-                  <div class="arrow2" onclick="selectWordMark(1)" id="right-arrow"></div>
+                  <div class="arrow" onclick="selectWordMark(-1)" id="left-arrow"></div>
+                    <img class="visual" id = "wordMarkCenterBstan" src="resources/images/wordMarkBstan_1.png">
+                    <img class="visual" id = "wordMarkCenterWstan" src="resources/images/wordMarkWstan_1.png">
+                  <div class="arrow" onclick="selectWordMark(1)" id="right-arrow"></div>
                 </div>
               </div>
+
+              <div class="selectorContainer" id="wordMarkHasso">
+                <div class="centerButton">
+                  <div class="arrow" onclick="selectWordMark(-1)" id="left-arrow"></div>
+                    <img class="visual" id = "wordMarkCenterBhasso" src="resources/images/wordMarkBhasso_1.png">
+                    <img class="visual" id = "wordMarkCenterWhasso" src="resources/images/wordMarkWhasso_1.png">
+                  <div class="arrow" onclick="selectWordMark(1)" id="right-arrow"></div>
+                </div>
+              </div>
+
+              <div class="selectorContainer" id="wordMarkDesign">
+                <div class="centerButton">
+                  <div class="arrow" onclick="selectWordMark(-1)" id="left-arrow"></div>
+                  <img class="visual" id = "wordMarkCenterBdesign" src="resources/images/wordMarkBdesign_1.png">
+                  <img class="visual" id = "wordMarkCenterWdesign" src="resources/images/wordMarkWdesign_1.png">
+                  <div class="arrow" onclick="selectWordMark(1)" id="right-arrow"></div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -477,11 +518,11 @@
             <div class="centerButton">
               <div class="selectorContainer">
                 <div class="centerButton">
+
                   <div class="arrow" onclick="selectOutline(-1)" id="left-arrow"></div>
-                    <div class="visual-wrapper">
-                      <img class="visual" id = "outlineCenter" src="resources/images/outline_2.png">
-                    </div>
+                    <img class="visual" id = "outlineCenter" src="resources/images/outline_2.png">
                   <div class="arrow" onclick="selectOutline(1)" id="right-arrow"></div>
+
                 </div>
               </div>
             </div>
@@ -548,14 +589,14 @@
       }
 
       let wordMarkIndex = 0;
-      const lockupVisuals = [
-        'resources/images/wordMark_1.png',
-        'resources/images/wordMark_2.png'
-      ]
+      // const lockupVisuals = [
+      //   'resources/images/wordMark_1.png',
+      //   'resources/images/wordMark_2.png'
+      // ]
 
       let puncIndex = 1;
       var puncVisuals = [];
-      for(var m = 0; m < 10; m++){
+      for(var m = 0; m < 11; m++){
         puncVisuals[m] = 'resources/images/punc_' + m + '.png'
       }
 

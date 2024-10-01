@@ -86,6 +86,12 @@ function selectColor(val){
 function selectDiscoColor(val){
   discoColIndex += val;
 
+  setDiscoColor(discoColIndex);
+}
+
+function setDiscoColor(val){
+  discoColIndex = val;
+
   if(discoColIndex < 0){
     discoColIndex = discoColSetCount - 1;
   } else {
@@ -148,6 +154,12 @@ function switchSwatch(){
 
 function selectWordMark(val){
   wordMarkIndex += val;
+
+  setWordMark(wordMarkIndex);
+}
+
+function setWordMark(val){
+  wordMarkIndex = val;
 
   if(wordMarkIndex < 0){
     wordMarkIndex = 2;

@@ -47,7 +47,10 @@ var puncToggle = true;
 var discoOverlay = false;
 var discoOffset = false;
 
+var alphaToggle = false;
 var discoCol = [];
+
+var bkgdColor;
 
 function preload(){
   for(var m = 0; m < baseDcount; m++){
@@ -99,10 +102,18 @@ function setup(){
 
   coreS = canvasDiv.offsetWidth;
   nameBump = -coreS * 0.1286;
+
+  bkgdColor = color('#FFFFFF');
 }
 
 function draw(){
   clear();
+  
+  if(alphaToggle == false){
+    fill(bkgdColor);
+    noStroke();
+    rect(0, 0, width, height);
+  }
 
   // DEBUG CANVAS
   // noFill();
@@ -129,7 +140,12 @@ function draw(){
 
 function blackTie(){
   push();
+
     translate(width/2, height/2);
+
+    if(nameOnToggle){
+      scale(0.85);
+    }
 
     // WORD MARK
     if(nameOnToggle){
@@ -207,8 +223,14 @@ function disco(){
   push();
     translate(0, height/2 - coreS/2);
     
-    if(puncToggle && puncIndex == 9){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND
-      var ampBump = -coreS * 92.8499/591.107;
+    if(puncToggle && puncIndex == 9){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND      
+      translate(width/2, height/2);
+      scale(0.85);
+      translate(-width/2, -height/2);
+      
+      // var ampBump = -coreS * 92.8499/591.107;
+      var ampBump = -coreS * 80/591.107;
+
       translate(ampBump, 0);
     }
     

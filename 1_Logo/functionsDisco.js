@@ -376,7 +376,16 @@ function drawPunc(){
       endContour();
     endShape();
     
-  } 
+  } else if(puncIndex == 10){          //////// BIG PERIOD
+    beginShape();
+      vertex(396,458.1);
+      bezierVertex(438,458.1,471.1,425,471.1,383);
+      bezierVertex(471.1,341,438,307,396,307);
+      bezierVertex(354,307,320,341,320,383);
+      bezierVertex(320,425,354,458.1,396,458.1);
+    endShape();
+
+  }
 }
 
 
