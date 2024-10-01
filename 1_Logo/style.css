@@ -381,7 +381,12 @@ button {
 }
 .topUnit { border-right:1px solid var(--secondary-color);}
 .trSubUnit { border-top: 1px solid var(--secondary-color);}
-.trSubUnit2 { border: 1px solid var(--secondary-color);}
+.trSubUnit2 {
+  /* border: 1px solid var(--secondary-color); */
+  border:none;
+  border-top: 1px solid var(--secondary-color);
+}
+/* #trSubUnit2 { border:none} */
 
 /* .topRow { border: 1px solid red;}
 .tlUnit { border: 1px solid green;}
