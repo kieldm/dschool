@@ -195,11 +195,11 @@ function drawInline(){
   pop();
 }
 
-function drawPunc(){
+function drawPunc(index){
   push();
     translate(-118, -96);;
 
-    if(puncIndex == 0){
+    if(puncIndexSet[index] == 0){
       beginShape();
         vertex(420.5,469.3);
         bezierVertex(444.5,469.3,463.5,450.4,463.5,426.3);
@@ -208,7 +208,7 @@ function drawPunc(){
         bezierVertex(377,450.4,396.4,469.3,420.5,469.3);
       endShape();
       
-    } else if(puncIndex == 1){
+    } else if(puncIndexSet[index] == 1){
       beginShape();
         vertex(471.1,351);
         bezierVertex(471.1,309.3,437.3,275.5,395.6,275.5);
@@ -219,7 +219,7 @@ function drawPunc(){
         bezierVertex(462.1,391.8,471.1,372.5,471.1,351);
       endShape();
       
-    } else if(puncIndex == 2){
+    } else if(puncIndexSet[index] == 2){
       beginShape();
         vertex(376.6,326.8);
         bezierVertex(347.6,326.8,326.3,304.5,326.3,276.9);
@@ -235,7 +235,7 @@ function drawPunc(){
         bezierVertex(427.9,430.4,407,452.7,376.6,452.7);
       endShape();
 
-    } else if(puncIndex == 3){
+    } else if(puncIndexSet[index] == 3){
       beginShape();
         vertex(361.3,451.1);
         bezierVertex(339.6,445.9,323.6,431.5,323.6,406.2);
@@ -254,7 +254,7 @@ function drawPunc(){
         bezierVertex(427.9,304.5,407,326.8,376.6,326.8);
       endShape();
       
-    } else if(puncIndex == 4){
+    } else if(puncIndexSet[index] == 4){
       beginShape();
         vertex(384,313.3);
         vertex(328,150.4);
@@ -270,7 +270,7 @@ function drawPunc(){
         bezierVertex(434.8,432.6,413.9,454.9,383.5,454.9);
       endShape();
       
-    } else if(puncIndex == 5){
+    } else if(puncIndexSet[index] == 5){
       beginShape();
         vertex(380,212.9);
         bezierVertex(355.8,212.9,333.9,193.9,333.9,172.1);
@@ -290,7 +290,7 @@ function drawPunc(){
         bezierVertex(482.1,447,461.2,469.3,430.9,469.3);
       endShape();
 
-    } else if(puncIndex == 6){
+    } else if(puncIndexSet[index] == 6){
       beginShape();
         vertex(383.8,164);
         bezierVertex(404.9,169,420.4,183.6,420.4,207.6);
@@ -312,7 +312,7 @@ function drawPunc(){
         vertex(499.2,163.9);
       endShape();
       
-    } else if(puncIndex == 7){
+    } else if(puncIndexSet[index] == 7){
       beginShape();
         vertex(399.9,174.7);
         vertex(449.5,186.9);
@@ -341,7 +341,7 @@ function drawPunc(){
         vertex(399.9,174.7);
       endShape();
       
-    } else if(puncIndex == 8){
+    } else if(puncIndexSet[index] == 8){
       beginShape();
         vertex(393.4,503.8);
         vertex(363.8,503.8);
@@ -350,7 +350,7 @@ function drawPunc(){
         vertex(393.4,503.8);
       endShape();
       
-    } else if(puncIndex == 9){          //////// AMPERSAND
+    } else if(puncIndexSet[index] == 9){          //////// AMPERSAND
       
       beginShape();
         vertex(545.8,464.7);
@@ -393,7 +393,7 @@ function drawPunc(){
         endContour();
       endShape();
       
-    } else if(puncIndex == 10){          //////// BIG PERIOD
+    } else if(puncIndexSet[index] == 10){          //////// BIG PERIOD
       beginShape();
         vertex(396,458.1);
         bezierVertex(438,458.1,471.1,425,471.1,383);
@@ -405,4 +405,132 @@ function drawPunc(){
     }
 
   pop();
+}
+
+function drawDiscoColors(){
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#00696F");
+  discoCol[discoCol.length - 1][1] = color("#D8007D");
+  discoCol[discoCol.length - 1][2] = color("#ffa89e");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#a01f93");
+  discoCol[discoCol.length - 1][1] = color("#00c3ff");
+  discoCol[discoCol.length - 1][2] = color("#ffcdff");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#008100");
+  discoCol[discoCol.length - 1][1] = color("#85e03b");
+  discoCol[discoCol.length - 1][2] = color("#e8ff7a");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#ff5e00");
+  discoCol[discoCol.length - 1][1] = color("#fbb03b");
+  discoCol[discoCol.length - 1][2] = color("#ffd600");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#820000");
+  discoCol[discoCol.length - 1][1] = color("#607cff");
+  discoCol[discoCol.length - 1][2] = color("#c4a6ff");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#bf4d00");
+  discoCol[discoCol.length - 1][1] = color("#c69c6d");
+  discoCol[discoCol.length - 1][2] = color("#ffcbc5");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#00696f");
+  discoCol[discoCol.length - 1][1] = color("#c4a6ff");
+  discoCol[discoCol.length - 1][2] = color("#ffcccc");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#b1040e");
+  discoCol[discoCol.length - 1][1] = color("#db6b85");
+  discoCol[discoCol.length - 1][2] = color("#ffcbc5");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#720087");
+  discoCol[discoCol.length - 1][1] = color("#c4a6ff");
+  discoCol[discoCol.length - 1][2] = color("#ffcccc");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#b1040e");
+  discoCol[discoCol.length - 1][1] = color("#ff5e00");
+  discoCol[discoCol.length - 1][2] = color("#ffd600");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#820000");
+  discoCol[discoCol.length - 1][1] = color("#ff0000");
+  discoCol[discoCol.length - 1][2] = color("#ffb2b2");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#720087");
+  discoCol[discoCol.length - 1][1] = color("#607cff");
+  discoCol[discoCol.length - 1][2] = color("#c7b299");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#bf4d00");
+  discoCol[discoCol.length - 1][1] = color("#fbb03b");
+  discoCol[discoCol.length - 1][2] = color("#ffcbc5");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#8500b9");
+  discoCol[discoCol.length - 1][1] = color("#d700ff");
+  discoCol[discoCol.length - 1][2] = color("#ff85c2");
+    
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#001cad");
+  discoCol[discoCol.length - 1][1] = color("#8da1ff");
+  discoCol[discoCol.length - 1][2] = color("#e1d2ff");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#001cad");
+  discoCol[discoCol.length - 1][1] = color("#c14cff");
+  discoCol[discoCol.length - 1][2] = color("#ffa89e");
+    
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#b1040e");
+  discoCol[discoCol.length - 1][1] = color("#ff5e00");
+  discoCol[discoCol.length - 1][2] = color("#ff9dff");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#00696f");
+  discoCol[discoCol.length - 1][1] = color("#00bf9d");
+  discoCol[discoCol.length - 1][2] = color("#ffcccc");
+
+  discoCol[discoCol.length] = []
+  discoCol[discoCol.length - 1][0] = color("#754c24");
+  discoCol[discoCol.length - 1][1] = color("#a67c52");
+  discoCol[discoCol.length - 1][2] = color("#ffcbc5");
+}
+
+function drawSwatchColors(){
+  swatchCol[swatchCol.length] = color("#820000");
+  swatchCol[swatchCol.length] = color("#ff0000");
+  swatchCol[swatchCol.length] = color("#ff5e00");
+  swatchCol[swatchCol.length] = color("#f99200");
+  swatchCol[swatchCol.length] = color("#fbb03b");
+  swatchCol[swatchCol.length] = color("#ffd600");
+  swatchCol[swatchCol.length] = color("#d8a300");
+  swatchCol[swatchCol.length] = color("#ffa89e");
+  swatchCol[swatchCol.length] = color("#ff85c2");
+  swatchCol[swatchCol.length] = color("#ff3399");
+  swatchCol[swatchCol.length] = color("#c14cff");
+  swatchCol[swatchCol.length] = color("#d700ff");
+  swatchCol[swatchCol.length] = color("#e766ff");
+  swatchCol[swatchCol.length] = color("#ff9dff");
+  swatchCol[swatchCol.length] = color("#9c6bff");
+  swatchCol[swatchCol.length] = color("#607cff");
+  swatchCol[swatchCol.length] = color("#8da1ff");
+  swatchCol[swatchCol.length] = color("#00c3ff");
+  swatchCol[swatchCol.length] = color("#66dbff");
+  swatchCol[swatchCol.length] = color("#00ffff");
+  swatchCol[swatchCol.length] = color("#00bf9d");
+  swatchCol[swatchCol.length] = color("#00b642");
+  swatchCol[swatchCol.length] = color("#6ab300");
+  swatchCol[swatchCol.length] = color("#85e03b");
+  swatchCol[swatchCol.length] = color("#00ff5c");
+  swatchCol[swatchCol.length] = color("#d8ff21");
+  swatchCol[swatchCol.length] = color("#d5d5d4");
+  swatchCol[swatchCol.length] = color("#ababa9");
 }
