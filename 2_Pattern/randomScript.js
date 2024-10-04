@@ -168,6 +168,11 @@ function resetEverything(){
 
   setCoreAng(50);
   document.getElementById("coreAng").value = 50;
+
+  document.getElementById("radioColMode0").checked = true;
+  document.getElementById("radioColMode1").checked = false;
+  setColMode(0);
+
 }
 
 function setPatternPreset(val){
