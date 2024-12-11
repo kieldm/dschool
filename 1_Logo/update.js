@@ -14,6 +14,12 @@ function setRadioVibe(val){
   } else {                /////// DISCO
     vibeToggle = false;
 
+    setInlineToggle(0);
+    document.getElementById('inlineToggle').style.opacity = "100%";
+    document.getElementById('inlineToggle').style.pointerEvents = "auto";
+    document.getElementById('radioInlineToggle0').checked = true;
+    document.getElementById('radioInlineToggle1').checked = false;
+
     document.getElementById('trBlackTieSet').style.display = "none";
     document.getElementById('trDiscoSet').style.display = "block";
 
