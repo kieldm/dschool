@@ -8,11 +8,11 @@ var baseDB = [];
 var baseDW = [];
 
 var inlineCount = 2;
-var inlineToggle = true;
+var inlineToggle = false;
 var inlineB = [];
 var inlineW = [];
 
-var overlayToggle = false;
+var overlayToggle = true;
 
 var dotColorToggle = true;
 
@@ -223,7 +223,7 @@ function disco(){
   push();
     translate(0, height/2 - coreS/2);
     
-    if(puncToggle && puncIndex == 9){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND      
+    if(puncToggle && puncIndex == 7){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND      
       translate(width/2, height/2);
       scale(0.85);
       translate(-width/2, -height/2);

@@ -187,10 +187,10 @@ canvas{
 
 /* Overlay */
 #overlayActive {
-  display:none;
+  display:flex;
 }
 #noOverlayActive {
-  display:flex;
+  display:none;
 }
 
 /* HEADLINES */
@@ -323,6 +323,7 @@ button {
   background-color:var(--secondary-color);
 }
 
+
 #blackDotOverlaySet { display:flex; }
 #blackDotOverlaySet2 { display:flex; }
 #whiteDotOverlaySet { display:none; }
@@ -344,11 +345,11 @@ button {
   opacity:25%;
   pointer-events: none;
 }
-#inlineSelector {
-  opacity:100%;
-}
+#inlineCenter { opacity:25%; }
+#inlineSelector { opacity:100%; }
 #inlineToggle {
-  opacity:100%;
+  opacity:25%;
+  pointer-events:none;
 }
 #baseCenter {
   filter:invert(0);

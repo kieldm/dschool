@@ -183,78 +183,25 @@ function drawInline(){
 
 function drawPunc(){
   if(puncIndex == 0){
-    beginShape();
+    beginShape();     // BIG DOT
+      vertex(396,458.1);
+      bezierVertex(438,458.1,471.1,425,471.1,383);
+      bezierVertex(471.1,341,438,307,396,307);
+      bezierVertex(354,307,320,341,320,383);
+      bezierVertex(320,425,354,458.1,396,458.1);
+    endShape();
+    
+  } else if(puncIndex == 1){
+    beginShape();        // PERIOD
       vertex(420.5,469.3);
       bezierVertex(444.5,469.3,463.5,450.4,463.5,426.3);
       bezierVertex(463.5,402.3,444.6,382.8,420.5,382.8);
       bezierVertex(396.5,382.8,377,402.2,377,426.3);
       bezierVertex(377,450.4,396.4,469.3,420.5,469.3);
     endShape();
-    
-  } else if(puncIndex == 1){
-    beginShape();
-      vertex(471.1,351);
-      bezierVertex(471.1,309.3,437.3,275.5,395.6,275.5);
-      bezierVertex(353.9,275.5,320.1,309.3,320.1,351);
-      bezierVertex(320.1,372.5,329.1,391.9,343.5,405.6);
-      vertex(395.7,458.1);
-      vertex(447.9,405.6);
-      bezierVertex(462.1,391.8,471.1,372.5,471.1,351);
-    endShape();
-    
+        
   } else if(puncIndex == 2){
-    beginShape();
-      vertex(376.6,326.8);
-      bezierVertex(347.6,326.8,326.3,304.5,326.3,276.9);
-      bezierVertex(326.3,248.9,347.7,225.1,376.6,225.1);
-      bezierVertex(407,225.1,427.9,248.8,427.9,276.9);
-      bezierVertex(427.9,304.5,407,326.8,376.6,326.8);
-    endShape()
-    beginShape();
-      vertex(376.6,452.7);
-      bezierVertex(347.6,452.7,326.3,430.4,326.3,402.8);
-      bezierVertex(326.3,374.8,347.7,351,376.6,351);
-      bezierVertex(407,351,427.9,374.7,427.9,402.8);
-      bezierVertex(427.9,430.4,407,452.7,376.6,452.7);
-    endShape();
-
-  } else if(puncIndex == 3){
-    beginShape();
-      vertex(361.3,451.1);
-      bezierVertex(339.6,445.9,323.6,431.5,323.6,406.2);
-      bezierVertex(323.6,378.3,345.3,359.7,373.2,359.7);
-      bezierVertex(406.8,359.7,427.9,386.0,427.9,421.6);
-      bezierVertex(427.9,476.3,377.3,513.5,320,516.1);
-      vertex(320,512);
-      bezierVertex(355.1,506.3,379.4,479.5,381.9,451.1);
-      vertex(361.3,451.1);
-    endShape();
-    beginShape();
-      vertex(376.6,326.8);
-      bezierVertex(347.6,326.8,326.3,304.5,326.3,276.9);
-      bezierVertex(326.3,248.9,347.7,225.1,376.6,225.1);
-      bezierVertex(407,225.1,427.9,248.8,427.9,276.9);
-      bezierVertex(427.9,304.5,407,326.8,376.6,326.8);
-    endShape();
-    
-  } else if(puncIndex == 4){
-    beginShape();
-      vertex(384,313.3);
-      vertex(328,150.4);
-      bezierVertex(328,116.2,354.6,92.9,384,92.9);
-      bezierVertex(413.4,92.9,440,116.2,440,150.4);
-      vertex(384,313.3);
-    endShape();
-    beginShape();
-      vertex(383.5,454.9);
-      bezierVertex(354.5,454.9,333.2,432.6,333.2,405);
-      bezierVertex(333.2,377,354.6,353.2,383.5,353.2);
-      bezierVertex(413.9,353.2,434.8,376.9,434.8,405);
-      bezierVertex(434.8,432.6,413.9,454.9,383.5,454.9);
-    endShape();
-    
-  } else if(puncIndex == 5){
-    beginShape();
+    beginShape();     // QUESTION MARK
       vertex(380,212.9);
       bezierVertex(355.8,212.9,333.9,193.9,333.9,172.1);
       bezierVertex(333.9,143.1,367.1,121.8,415.6,121.8);
@@ -273,30 +220,24 @@ function drawPunc(){
       bezierVertex(482.1,447,461.2,469.3,430.9,469.3);
     endShape();
 
-  } else if(puncIndex == 6){
-    beginShape();
-      vertex(383.8,164);
-      bezierVertex(404.9,169,420.4,183.6,420.4,207.6);
-      bezierVertex(420.4,234.7,399.3,252.7,372.3,252.7);
-      bezierVertex(339.7,252.7,319.1,227.6,319.1,192.5);
-      bezierVertex(319.1,139.8,368.8,104.2,423.9,102.2);
-      vertex(423.9,106.2);
-      bezierVertex(390.8,111.7,366.2,136.3,363.7,163.9);
-      vertex(383.8,163.9);
+  } else if(puncIndex == 3){
+    beginShape();     // EXCLAMATION POINT
+      vertex(384,313.3);
+      vertex(328,150.4);
+      bezierVertex(328,116.2,354.6,92.9,384,92.9);
+      bezierVertex(413.4,92.9,440,116.2,440,150.4);
+      vertex(384,313.3);
     endShape();
     beginShape();
-      vertex(499.2,164);
-      bezierVertex(520.3,169,535.8,183.6,535.8,207.6);
-      bezierVertex(535.8,234.7,514.7,252.7,487.7,252.7);
-      bezierVertex(455.1,252.7,434.5,227.6,434.5,192.5);
-      bezierVertex(434.5,139.8,484.2,104.2,539.3,102.2);
-      vertex(539.3,106.2);
-      bezierVertex(506.2,111.7,481.6,136.3,479.1,163.9);
-      vertex(499.2,163.9);
+      vertex(383.5,454.9);
+      bezierVertex(354.5,454.9,333.2,432.6,333.2,405);
+      bezierVertex(333.2,377,354.6,353.2,383.5,353.2);
+      bezierVertex(413.9,353.2,434.8,376.9,434.8,405);
+      bezierVertex(434.8,432.6,413.9,454.9,383.5,454.9);
     endShape();
     
-  } else if(puncIndex == 7){
-    beginShape();
+  } else if(puncIndex == 4){
+    beginShape();     // ASTRIX
       vertex(399.9,174.7);
       vertex(449.5,186.9);
       bezierVertex(465.8,191.0,471.4,202.8,465.1,213.9);
@@ -324,8 +265,30 @@ function drawPunc(){
       vertex(399.9,174.7);
     endShape();
     
-  } else if(puncIndex == 8){
+  } else if(puncIndex == 5){
+    beginShape();     // QUOTES
+      vertex(383.8,164);
+      bezierVertex(404.9,169,420.4,183.6,420.4,207.6);
+      bezierVertex(420.4,234.7,399.3,252.7,372.3,252.7);
+      bezierVertex(339.7,252.7,319.1,227.6,319.1,192.5);
+      bezierVertex(319.1,139.8,368.8,104.2,423.9,102.2);
+      vertex(423.9,106.2);
+      bezierVertex(390.8,111.7,366.2,136.3,363.7,163.9);
+      vertex(383.8,163.9);
+    endShape();
     beginShape();
+      vertex(499.2,164);
+      bezierVertex(520.3,169,535.8,183.6,535.8,207.6);
+      bezierVertex(535.8,234.7,514.7,252.7,487.7,252.7);
+      bezierVertex(455.1,252.7,434.5,227.6,434.5,192.5);
+      bezierVertex(434.5,139.8,484.2,104.2,539.3,102.2);
+      vertex(539.3,106.2);
+      bezierVertex(506.2,111.7,481.6,136.3,479.1,163.9);
+      vertex(499.2,163.9);
+    endShape();
+
+  } else if(puncIndex == 6){
+    beginShape();     // CURSOR LINE
       vertex(393.4,503.8);
       vertex(363.8,503.8);
       vertex(363.8,59.2);
@@ -333,9 +296,8 @@ function drawPunc(){
       vertex(393.4,503.8);
     endShape();
     
-  } else if(puncIndex == 9){          //////// AMPERSAND
-    
-    beginShape();
+  } else if(puncIndex == 7){
+    beginShape();     // AMPERSAND
       vertex(545.8,464.7);
       vertex(513.8,422.9);
       bezierVertex(484.6,452.1,452.5,469.5,418.9,469.5);
@@ -376,15 +338,41 @@ function drawPunc(){
       endContour();
     endShape();
     
-  } else if(puncIndex == 10){          //////// BIG PERIOD
+  } else if(puncIndex == 8){
+    beginShape();     // COLON
+      vertex(376.6,326.8);
+      bezierVertex(347.6,326.8,326.3,304.5,326.3,276.9);
+      bezierVertex(326.3,248.9,347.7,225.1,376.6,225.1);
+      bezierVertex(407,225.1,427.9,248.8,427.9,276.9);
+      bezierVertex(427.9,304.5,407,326.8,376.6,326.8);
+    endShape()
     beginShape();
-      vertex(396,458.1);
-      bezierVertex(438,458.1,471.1,425,471.1,383);
-      bezierVertex(471.1,341,438,307,396,307);
-      bezierVertex(354,307,320,341,320,383);
-      bezierVertex(320,425,354,458.1,396,458.1);
+      vertex(376.6,452.7);
+      bezierVertex(347.6,452.7,326.3,430.4,326.3,402.8);
+      bezierVertex(326.3,374.8,347.7,351,376.6,351);
+      bezierVertex(407,351,427.9,374.7,427.9,402.8);
+      bezierVertex(427.9,430.4,407,452.7,376.6,452.7);
     endShape();
-
+    
+  } else if(puncIndex == 9){
+    beginShape();     // SEMICOLON
+      vertex(361.3,451.1);
+      bezierVertex(339.6,445.9,323.6,431.5,323.6,406.2);
+      bezierVertex(323.6,378.3,345.3,359.7,373.2,359.7);
+      bezierVertex(406.8,359.7,427.9,386.0,427.9,421.6);
+      bezierVertex(427.9,476.3,377.3,513.5,320,516.1);
+      vertex(320,512);
+      bezierVertex(355.1,506.3,379.4,479.5,381.9,451.1);
+      vertex(361.3,451.1);
+    endShape();
+    beginShape();
+      vertex(376.6,326.8);
+      bezierVertex(347.6,326.8,326.3,304.5,326.3,276.9);
+      bezierVertex(326.3,248.9,347.7,225.1,376.6,225.1);
+      bezierVertex(407,225.1,427.9,248.8,427.9,276.9);
+      bezierVertex(427.9,304.5,407,326.8,376.6,326.8);
+    endShape();
+    
   }
 }
 

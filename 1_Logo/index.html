@@ -106,7 +106,7 @@
                   <div class="overlayWrapper" id="whiteDotOverlaySet2">
                     <img class="set" id = "swatchOverWSet2" src="resources/images/setOverW_1.png">
                   </div>
-                  <input type="radio" id="radioOverlay0" onclick="setOverlayToggle(0)" name="radioOverlays">
+                  <input type="radio" id="radioOverlay0" onclick="setOverlayToggle(0)" name="radioOverlays" checked>
                     <label for="radioOverlay0">Overlay</label>
                 </div>
 
@@ -114,7 +114,7 @@
                   <div class="overlayWrapper">
                     <img class="set" id = "swatchSet2" src="resources/images/set_1.png">
                   </div>
-                  <input type="radio" id="radioOverlay1" onclick="setOverlayToggle(1)" name="radioOverlays" checked>
+                  <input type="radio" id="radioOverlay1" onclick="setOverlayToggle(1)" name="radioOverlays">
                     <label for="radioOverlay1">No Overlay</label>
                 </div>
 
@@ -173,9 +173,9 @@
                 <div class="centerButton">
 
                     <div class="arrow" onclick="selectDiscoColor(-1)" id="left-arrow"></div>
-                    <img class="swatch" id = "discoSwatch0" src="resources/images/discoCol_0_0.png">
-                    <img class="swatch" id = "discoSwatch1" src="resources/images/discoCol_0_1.png">
-                    <img class="swatch" id = "discoSwatch2" src="resources/images/discoCol_0_2.png">
+                    <img class="swatch" id = "discoSwatch0" src="resources/images/discoCol_7_0.png">
+                    <img class="swatch" id = "discoSwatch1" src="resources/images/discoCol_7_1.png">
+                    <img class="swatch" id = "discoSwatch2" src="resources/images/discoCol_7_2.png">
                     <div class="arrow" onclick="selectDiscoColor(1)" id="right-arrow"></div>
                 </div>
               </div>
@@ -309,9 +309,9 @@
           <div class="unitToggle" id="inlineToggle">
             <div class="centerButton">
               <div class="presetRadioSub2">
-                <input type="radio" id="radioInlineToggle0" onclick="setInlineToggle(0)" name="radioInlineToggles" checked>
+                <input type="radio" id="radioInlineToggle0" onclick="setInlineToggle(0)" name="radioInlineToggles">
                   <label for="radioInlineToggle0">On</label>
-                <input type="radio" id="radioInlineToggle1" onclick="setInlineToggle(1)" name="radioInlineToggles">
+                <input type="radio" id="radioInlineToggle1" onclick="setInlineToggle(1)" name="radioInlineToggles" checked>
                   <label for="radioInlineToggle1">Off</label>
               </div>
             </div>
@@ -424,7 +424,7 @@
                 <div class="centerButton">
 
                   <div class="arrow" onclick="selectPunctuation(-1)" id="left-arrow"></div>
-                  <img class="visual" id = "punctuationCenter" src="resources/images/punc_1.png">
+                  <img class="visual" id = "punctuationCenter" src="resources/images/punc_0.png">
                   <div class="arrow" onclick="selectPunctuation(1)" id="right-arrow"></div>
                 </div>
               </div>
@@ -594,9 +594,9 @@
       //   'resources/images/wordMark_2.png'
       // ]
 
-      let puncIndex = 1;
+      let puncIndex = 0;
       var puncVisuals = [];
-      for(var m = 0; m < 11; m++){
+      for(var m = 0; m < 10; m++){
         puncVisuals[m] = 'resources/images/punc_' + m + '.png'
       }
 
@@ -606,7 +606,7 @@
         outlineVisuals[m] = 'resources/images/outline_' + m + '.png'
       }
 
-      var discoColIndex = 0;
+      var discoColIndex = 7;
       var discoColVisual = [];
       var discoColSetCount = 19;
       for(var m = 0; m < discoColSetCount; m++){
