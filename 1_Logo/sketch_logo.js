@@ -1,313 +1,485 @@
-var modeToggle = true;
+var invertToggle = false;
+var bkgdColor, foreColor;
+var discoColor = [];
+var coreScaler = 1;
 
-var vibeToggle = true;
+var invertToggleIndex = 0;
 
+var baseDindex = 0;
 var baseDcount = 6;
-var baseToggle = true;
-var baseDB = [];
-var baseDW = [];
+var baseDtoggle = true;
 
-var inlineCount = 2;
-var inlineToggle = false;
-var inlineB = [];
-var inlineW = [];
+var discoDindex = 0;
+var discoDcount = 11;
+var discoDtoggle = true;
 
-var overlayToggle = true;
+var inlineToggle = true;
+var inlineDindex = 0;
+var inlineDcount = 2;
 
-var dotColorToggle = true;
+var dotColorIndex = 0;
+var dotColor = [];
+var overlapColor = [];
 
-var swatchCount = 28;
-var swatch = [];
-
-var swatchOverCount = 30;
-var swatchOver = [];
-var swatchOverAlt = [];
-var dotSolidBlack, dotSolidWhite;
-var dotSolidBlack_Overlay, dotSolidWhite_Overlay;
-
-var saveToggle = 0;
-var discoSaveToggle = 0;
-
-var discoOffsetX = [];
-var discoOffsetY = [];
-
-var nameBump;
-var nameOnToggle = false;
-
-/// 0 = Standford
-/// 1 = Hazzo
-/// 2 = Design
-var wordMarkB = [];
-var wordMarkW = [];
-
-var coreS;
-
-/////// DISCO TOGGLES
+var puncIndex = 0;
+var puncCount = 10;
 var puncToggle = true;
-var discoOverlay = false;
-var discoOffset = false;
 
-var alphaToggle = false;
-var discoCol = [];
+var outlineIndex = 3;
+var outlineMode = 0;
+var outlineCount = 4;
+var outlineToggle = true;
 
-var bkgdColor;
+var lockupToggle = true;
+var lockupChromeToggle = true;
+var lockupIndex = 0;
+var lockupCount = 3;
 
-function preload(){
-  for(var m = 0; m < baseDcount; m++){
-    var thisOne = m;
-    baseDB[m] = loadSVG('resources/svgs/baseB_' + thisOne + '.svg');
-    baseDW[m] = loadSVG('resources/svgs/baseW_' + thisOne + '.svg');
-  }
+var discoColorIndex = 0;
+var discoColorCount = 11;
 
-  for(var m = 0; m < inlineCount; m++){
-    var thisOne = m + 1;
-    inlineB[m] = loadSVG('resources/svgs/inlineB_' + thisOne + '.svg');
-    inlineW[m] = loadSVG('resources/svgs/inlineW_' + thisOne + '.svg');
-  }  
+var discoAlignToggle = true;
+var discoAlignRan = 0;
+var monochromeToggle = false;
 
-  for(var m = 0; m < swatchCount; m++){
-    var thisOne = m;
-    swatch[m] = loadSVG('resources/svgs/color_' + thisOne + '.svg');
+var saveMode = 0;
+var alphaOn = false;
 
-    wordMarkB[m] = [];
-    wordMarkW[m] = [];
-    wordMarkB[m][0] = loadSVG('resources/svgs/wordMarkBstan_' + thisOne + '.svg');
-    wordMarkW[m][0] = loadSVG('resources/svgs/wordMarkWstan_' + thisOne + '.svg');
-    wordMarkB[m][1] = loadSVG('resources/svgs/wordMarkBhasso_' + thisOne + '.svg');
-    wordMarkW[m][1] = loadSVG('resources/svgs/wordMarkWhasso_' + thisOne + '.svg');
-    wordMarkB[m][2] = loadSVG('resources/svgs/wordMarkBdesign_' + thisOne + '.svg');
-    wordMarkW[m][2] = loadSVG('resources/svgs/wordMarkWdesign_' + thisOne + '.svg');
-  }
+var overlayToggle = false;
 
-  dotSolidWhite = loadSVG('resources/svgs/dotSolid_white.svg');
-  dotSolidBlack = loadSVG('resources/svgs/dotSolid_black.svg');
-  dotSolidWhite_Overlay = loadSVG('resources/svgs/dotSolidOverlay_white.svg');
-  dotSolidBlack_Overlay = loadSVG('resources/svgs/dotSolidOverlay_black.svg');
-
-  for(var m = 0; m < swatchOverCount; m++){
-    var thisOne = m;
-    swatchOver[m] = loadSVG('resources/svgs/colorOver_' + thisOne + '.svg');
-    swatchOverAlt[m] = loadSVG('resources/svgs/colorOverAlt_' + thisOne + '.svg');
-  }
-
-  drawDiscoColors();
-}
+var radioVibe = 0;
 
 function setup(){
-  canvasDiv = document.getElementById("logoGen");
-  
-  // canvas = createCanvas(canvasDiv.offsetWidth, canvasDiv.offsetHeight, SVG);
-  canvas = createCanvas(canvasDiv.offsetWidth, canvasDiv.offsetWidth, SVG);
+  var container = document.getElementById("logoGen");
+  let canvas = createCanvas(container.offsetHeight, container.offsetHeight, SVG);
   canvas.parent("logoGen");
+  windowResized();
 
-  coreS = canvasDiv.offsetWidth;
-  nameBump = -coreS * 0.1286;
+  bkgdColor = color('#ffffff');
+  foreColor = color('#000000');
+  
+  setColors();
 
-  bkgdColor = color('#FFFFFF');
 }
 
 function draw(){
   clear();
-  
-  if(alphaToggle == false){
-    fill(bkgdColor);
-    noStroke();
-    rect(0, 0, width, height);
+
+  if(radioVibe == 0){
+    drawBlackTie();
+  } else if(radioVibe == 1){
+    drawDisco();
   }
 
-  // DEBUG CANVAS
-  // noFill();
-  // stroke(0);
-  // line(0,0,width,height);
-
-  // textSize(15);
-  // text("SwatchIndex: " + swatchIndex, 30, 30);
-  // text("swatchOverlayIndex: " + swatchOverlayIndex, 30, 60);
-
-  // DEBUG SIZE
-  // stroke(0,0,255);
-  // rect(0, height/2 - coreS/2, coreS, coreS);
-
-  if(vibeToggle){     // BLACK TIE MODE ACTIVE
-    blackTie();
-
-  } else {            // DISCO MODE ACTIVE
-    disco();
-  
-  }
   noLoop();
 }
 
-function blackTie(){
-  push();
+function drawBlackTie(){     ////////////////////////////////////////////////////////////  BLACK TIE
+  if(lockupToggle){                /////////////// LOCK UP INFO, CIRCLE
+    if(lockupIndex == 0){
+      if(alphaOn == false){
+        background(foreColor);
+      }
 
+      noStroke();
+      fill(bkgdColor);
+      ellipse(width/2, height/2, width, height);
+    }
+  } else {
+    if(alphaOn == false){
+      background(bkgdColor);    
+    }
+  }
+
+  scale(coreScaler);
+
+  if(lockupToggle && lockupIndex > 0){    /////////////// LOCK UP INFO, TEXT
     translate(width/2, height/2);
+    scale(882/1000);
+    translate(-width/2, -height/2);
 
-    if(nameOnToggle){
-      scale(0.85);
+    if(lockupIndex == 1){
+      drawLockupStanford();
+    } else {
+      drawLockupHasso();
     }
 
-    // WORD MARK
-    if(nameOnToggle){
-      if(modeToggle){   //// WHITE BACKGROUND
-        image(wordMarkB[swatchIndex][wordMarkIndex], -coreS/2, -coreS/2, coreS, coreS);
-      } else {          //// BLACK BACKGROUND
-        image(wordMarkW[swatchIndex][wordMarkIndex], -coreS/2, -coreS/2, coreS, coreS);
-      }
+    translate(0, -80);
+  }
 
-      translate(0, nameBump);
-    }
+  noStroke();                     /////////////// DOT
+  fill(dotColor[dotColorIndex]);
+  drawDot();
 
-    // SWATCH UNDER
-    if(!overlayToggle){
-      if(dotColorToggle){       /////////// USE A COLOR SWATCH
-        image(swatch[swatchIndex], -coreS/2, -coreS/2, coreS, coreS);
-      } else {                   /////////// USE A BW SWATCH
-        if(modeToggle){   //// WHITE BACKGROUND
-          image(dotSolidBlack, -coreS/2, -coreS/2, coreS, coreS);
-        } else {          //// BLACK BACKGROUND
-          image(dotSolidWhite, -coreS/2, -coreS/2, coreS, coreS);
-        }
-      }
-    }
+  noStroke();                     /////////////// BASE D
+  if(monochromeToggle){
+    fill(dotColor[dotColorIndex]);
+  } else {
+    fill(foreColor);
+  }
+  drawBaseD(baseDindex);
 
-    // BASE D
-    if(baseToggle){
-      if(modeToggle){
-        image(baseDB[baseIndex], -coreS/2, -coreS/2, coreS, coreS);
-      } else {
-        image(baseDW[baseIndex], -coreS/2, -coreS/2, coreS, coreS);
-      }
-    }
+  if(monochromeToggle){           /////////////// OVERLAP INFO
+    fill(bkgdColor);
+    drawOverlaySlice();
+  } else if(overlayToggle){
+    fill(overlapColor[dotColorIndex]);
+    drawOverlaySlice();
+  }
 
-    // INLINE
-    if(inlineToggle){
-      if(modeToggle){
-        if(baseToggle){
-          image(inlineW[inlineIndex], -coreS/2, -coreS/2, coreS, coreS);      
-        } else {
-          image(inlineB[inlineIndex], -coreS/2, -coreS/2, coreS, coreS);      
-        }
-      } else {
-        if(baseToggle){
-          image(inlineB[inlineIndex], -coreS/2, -coreS/2, coreS, coreS);      
-        } else {
-          image(inlineW[inlineIndex], -coreS/2, -coreS/2, coreS, coreS);
-        }
-      }
-    }
-
-    // SWATCH OVER
-    if(overlayToggle){        /////// OVERLAY
-      if(dotColorToggle){       /////////// USE A COLOR SWATCH
-        if(baseIndex < 3){
-          image(swatchOver[swatchOverlayIndex], -coreS/2, -coreS/2, coreS, coreS);
-        } else {
-          image(swatchOverAlt[swatchOverlayIndex], -coreS/2, -coreS/2, coreS, coreS);
-        }
-      } else {
-        if(modeToggle){   //// WHITE BACKGROUND
-          image(dotSolidBlack_Overlay, -coreS/2, -coreS/2, coreS, coreS);
-        } else {          //// BLACK BACKGROUND
-          image(dotSolidWhite_Overlay, -coreS/2, -coreS/2, coreS, coreS);
-        }
-      }
-    }
-
-  pop();
+  if(inlineToggle){               /////////////// INLINE D
+    fill(bkgdColor);
+    drawInlineD(inlineDindex);
+  }
 }
 
-function disco(){
-  var sizer = width/591.107;
+function drawDisco(){     ////////////////////////////////////////////////////////////  DISCO
+  if(alphaOn == false){
+    background(bkgdColor);
+  }
 
-  push();
-    translate(0, height/2 - coreS/2);
-    
-    if(puncToggle && puncIndex == 7){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND      
-      translate(width/2, height/2);
-      scale(0.85);
-      translate(-width/2, -height/2);
-      
-      // var ampBump = -coreS * 92.8499/591.107;
-      var ampBump = -coreS * 80/591.107;
+  scale(coreScaler);
 
-      translate(ampBump, 0);
-    }
-    
-    scale(sizer);
-    
-    if(discoOverlay == false){     ///// IF PUNCTUATION IS ON AND THE AMPERSAND
-      if(puncToggle){
-        noStroke();
-        fill(discoCol[discoColIndex][1]);
-  
-        if(discoOffset){ translate(discoOffsetX[0], discoOffsetY[0])};                  ////// RANDOM OFFSET
+  if(discoAlignToggle == false){
+    if(discoAlignRan == 0){ // TL
+      translate(-15,-15);
+    } else if(discoAlignRan == 1){  // TR
+      translate(15,-15);
+    } else if(discoAlignRan == 2){  // BR
+      translate(15,15);
+    } else if(discoAlignRan == 3){  // BL
+      translate(-15,15);
+    } 
+  }
 
-        drawPunc();
+  if(puncToggle && overlayToggle == false){
+    push();
+      if(outlineToggle){
+        translate(0, 11.344);
       }
-    }
-
-    if(outlineToggle){
-      noFill();
-      stroke(discoCol[discoColIndex][0]);
-
-      if(discoOffset){ translate(discoOffsetX[1], discoOffsetY[1])};                  ////// RANDOM OFFSET
-
-      if(outlineIndex == 0){              ////// THICK OUTLINE AND FILL
-        strokeWeight(coreS * 40/591.107);
-        fill(discoCol[discoColIndex][0]);
-        drawBase(false); 
-      } else if(outlineIndex == 1){      ////// THIN OUTLINE
-        if(baseToggle == false){
-          strokeWeight(coreS * (15/591.107)/2);
-        } else {
-          strokeWeight(coreS * 15/591.107);
-        }
-        drawBase(true);
-      } else if(outlineIndex == 2){      ////// THICK OUTLINE
-        if(baseToggle == false){
-          strokeWeight(coreS * (40/591.107)/2);
-        } else {
-          strokeWeight(coreS * 40/591.107);
-        }
-        drawBase(true);
+      if(outlineMode == 1){
+        translate(12.6109, -9.1826);
       }
-    }
+      noStroke();                            /////////////// PUNCTUATION
+      fill(discoColor[discoColorIndex][invertToggleIndex][2]);
+      drawPunc(puncIndex);
+    pop();
+  }
 
-    if(baseToggle){
-      if(discoOffset){ translate(discoOffsetX[2], discoOffsetY[2])};                  ////// RANDOM OFFSET
+  if(puncToggle && puncIndex == 7){
+    translate(-89.03493, 0);
+  }
 
-      fill(discoCol[discoColIndex][2]);
-      noStroke();
-      drawBase(true);
-    }
+  if(outlineToggle){   /////////////// OUTLINE BOT
+    fill(discoColor[discoColorIndex][invertToggleIndex][3]);
+    drawOutlineD(outlineMode, outlineIndex);
+  }
 
-    if(inlineToggle){
-      if(discoOffset){ translate(discoOffsetX[3], discoOffsetY[3])};                  ////// RANDOM OFFSET
+  if(discoAlignToggle == false){
+    if(discoAlignRan == 0){ // TL
+      translate(30,30);
+    } else if(discoAlignRan == 1){  // TR
+      translate(-30,30);
+    } else if(discoAlignRan == 2){  // BR
+      translate(-30,-30);
+    } else if(discoAlignRan == 3){  // BL
+      translate(30,-30);
+    } 
+  }
 
-      noStroke();
-      fill(discoCol[discoColIndex][1]);
+  if(baseDtoggle){                          /////////////// BASE D
+    fill(discoColor[discoColorIndex][invertToggleIndex][0]);
+    drawDiscoD(discoDindex);
+  }
 
-      drawInline();
-    }
-    if(discoOverlay && puncToggle){
-      if(discoOffset){ translate(discoOffsetX[4], discoOffsetY[4])};                  ////// RANDOM OFFSET
+  // if(outlineToggle && outlineIndex != 3){   /////////////// OUTLINE TOP
+  //   fill(discoColor[discoColorIndex][invertToggleIndex][3]);
+  //   drawOutlineD(outlineMode, outlineIndex);
+  // }
 
-      noStroke();
-      fill(discoCol[discoColIndex][1]);
+  if(inlineToggle){                           /////////////// INLINE D
+    fill(discoColor[discoColorIndex][invertToggleIndex][1]);
+    drawInlineD(inlineDindex);
+  }
 
-      drawPunc();
-    }
+  if(puncToggle && overlayToggle){
+    push();
+      if(outlineToggle){
+        translate(0, 11.344);
+      }
+      if(outlineMode == 1){
+        translate(12.6109, -9.1826);
+      }
+      push();
+        if(puncToggle && puncIndex == 7){
+          translate(89.03493, 0);
+        }
+        noStroke();                            /////////////// PUNCTUATION
+        fill(discoColor[discoColorIndex][invertToggleIndex][2]);
+        drawPunc(puncIndex);
+      pop();
 
-  pop();
-
-  noLoop();
+      if(inlineToggle == false &&
+        outlineToggle == false &&
+        baseDtoggle ) {
+        if(discoDindex == 0 || discoDindex == 1 || discoDindex == 2){
+          if(discoColor[discoColorIndex][invertToggleIndex][2] == "#ee272a"){
+            fill("#b1040e");
+            drawPuncOverlay(puncIndex);
+          } else if(discoColor[discoColorIndex][invertToggleIndex][2] == "#ffffff" && discoColor[discoColorIndex][invertToggleIndex][0] == "#ffffff"){
+            fill(0);
+            drawPuncOverlay(puncIndex);
+          } else if(discoColor[discoColorIndex][invertToggleIndex][2] == "#000000" && discoColor[discoColorIndex][invertToggleIndex][0] == "#000000"){
+            fill(255);
+            drawPuncOverlay(puncIndex);
+          }
+        }
+      }
+    pop();
+  }
 }
 
 function windowResized(){
-  canvasDiv = document.getElementById("logoGen");
-  coreS = canvasDiv.offsetWidth;
+  let container = document.getElementById("logoGen");
+  var coreS = container.offsetHeight;
+  resizeCanvas(coreS, coreS, SVG);
 
-  resizeCanvas(canvasDiv.offsetWidth, canvasDiv.offsetHeight);
+  coreScaler = width/600;
+
+  console.log("Width: " + width + " and Height: " + height + " and coreScaler is: " + coreScaler);
+
+  loop();
 }
 
+function resizeForSave(){
+  let container = document.getElementById("logoGen");
+  resizeCanvas(1500, 1500, SVG);
+
+  coreScaler = width/600;
+
+  console.log("FOR SAVE! Width: " + width + " and Height: " + height + " and coreScaler is: " + coreScaler);
+
+  loop();
+}
+
+function setColors(){
+  dotColor = [
+    "#ee272a",  // d.School Red
+    "#000000",  //
+    "#ababa9",  // dark gray
+    "#8c1515",  // cardinal red
+    "#ff5e00",  // orange
+    "#f99200",  //
+    "#fbb03b",  //
+    "#ffd600",  //
+    "#d8a300",  // gold
+    "#ffa89e",  // light pink
+    "#ff85c2",  //
+    "#ff3399",  //
+    "#c14cff",  //
+    "#d700ff",  //
+    "#e766ff",  //
+    "#ff9dff",  //
+    "#9c6bff",  //
+    "#607cff",  // blue
+    "#8da1ff",  //
+    "#00c3ff",  //
+    "#66dbff",  //
+    "#00ffff",  //
+    "#00bf9d",  // green
+    "#00b642",  //
+    "#6ab300",  //
+    "#85e03b",  //
+    "#00ff5c",  //
+    "#d8ff21",  //
+    "#d5d5d4"   // light gray
+  ]
+
+  overlapColor = [
+    "#b1040e", // "#ee272a",  // d.School Red
+    "#ababa9", // "#000000",  //  ????
+    "#767674", // "#ababa9",  // dark gray
+    "#3d0000", // "#8c1515",  // cardinal red // ????
+    "#b1040e", // "#ff5e00",  // orange
+    "#bf4d00", // "#f99200",  //
+    "#ff5e00", // "#fbb03b",  //
+    "#f99200", // "#ffd600",  //
+    "#8c6239", // "#d8a300",  // gold
+    "#db6b85", // "#ffa89e",  // light pink
+    "#d8007d", // "#ff85c2",  //
+    "#b1040e", // "#ff3399",  //
+    "#8500b9", // "#c14cff",  //
+    "#8500b9", // "#d700ff",  //
+    "#a100bf", // "#e766ff",  //
+    "#d700ff", // "#ff9dff",  //
+    "#6027c9", // "#9c6bff",  //
+    "#0050ff", // "#607cff",  // blue
+    "#364ac5", // "#8da1ff",  //
+    "#0050ff", // "#00c3ff",  //
+    "#607cff", // "#66dbff",  //
+    "#005f97", // "#00ffff",  //
+    "#00696f", // "#00bf9d",  // green
+    "#008100", // "#00b642",  //
+    "#85e03b", // "#6ab300",  //
+    "#6ab300", // "#85e03b",  //
+    "#00b642", // "#00ff5c",  //
+    "#8cc63f", // "#d8ff21",  //
+    "#979694"  // "#d5d5d4"   // light gray
+  ]
+
+
+  //// DISCO COLOR [PALETTE #][INVERT][COLORS]
+  discoColor[0] = [];       // COLOR SET 1
+  discoColor[0][0] = [
+    '#000000',
+    '#000000',
+    "#ee272a",
+    '#000000'
+  ];
+  discoColor[0][1] = [  // Invert
+    '#ffffff',
+    '#ffffff',
+    "#ee272a",
+    '#ffffff'
+  ]
+
+  discoColor[1] = [];       // COLOR SET 2
+  discoColor[1][0] = [
+    '#000000',
+    '#000000',
+    "#000000",
+    '#000000'
+  ];
+  discoColor[1][1] = [  // Invert
+    '#ffffff',
+    '#ffffff',
+    "#ffffff",
+    '#ffffff'
+  ]
+
+  discoColor[2] = [];       // COLOR SET 3
+  discoColor[2][0] = [
+    '#ee272a',
+    '#ffffff',    // outline
+    "#000000",
+    '#000000'
+  ];
+  discoColor[2][1] = [  // Invert
+    '#ee272a',
+    '#000000',    // outline
+    "#ffffff",
+    '#ffffff'
+  ]
+
+  discoColor[3] = [];       // COLOR SET 4
+  discoColor[3][0] = [
+    '#fdc9c3',
+    '#a47c52',
+    "#a47c52",
+    '#7c4a1a'
+  ];
+  discoColor[3][1] = [  // Invert
+    '#7c4a1a',
+    '#a47c52',
+    "#a47c52",
+    '#fdc9c3'
+  ]
+
+  discoColor[4] = [];       // COLOR SET 5
+  discoColor[4][0] = [
+    '#79d0de',
+    '#ffffff',    // outline
+    "#a4e183",
+    '#565b39'
+  ];
+  discoColor[4][1] = [  // Invert
+    '#565b39',
+    '#ffffff',
+    "#a4e183",
+    '#79d0de'
+  ]
+
+  discoColor[5] = [];       // COLOR SET 6
+  discoColor[5][0] = [
+    '#fdc9c3',
+    '#07bd9b',
+    "#07bd9b",
+    '#006b70'
+  ];
+  discoColor[5][1] = [  // Invert
+    '#006b70',
+    '#07bd9b',
+    "#07bd9b",
+    '#fdc9c3'
+  ]
+
+  discoColor[6] = [];       // COLOR SET 7
+  discoColor[6][0] = [
+    '#fdc9c3',
+    '#c2a4fd',
+    "#c2a4fd",
+    '#006b70'
+  ];
+  discoColor[6][1] = [  // Invert
+    '#006b70',
+    '#c2a4fd',
+    "#c2a4fd",
+    '#fdc9c3'
+  ]
+
+  discoColor[7] = [];       // COLOR SET 8
+  discoColor[7][0] = [
+    '#ded1fd',
+    '#8b9ffd',
+    "#8b9ffd",
+    '#001db2'
+  ];
+  discoColor[7][1] = [  // Invert
+    '#001db2',
+    '#8b9ffd',
+    "#8b9ffd",
+    '#ded1fd'
+  ]
+
+  discoColor[8] = [];       // COLOR SET 9
+  discoColor[8][0] = [
+    '#fdcaca',
+    '#c2a4fd',
+    "#c2a4fd",
+    '#7d008a'
+  ];
+  discoColor[8][1] = [  // Invert
+    '#7d008a',
+    '#c2a4fd',
+    "#c2a4fd",
+    '#fdcaca'
+  ]
+
+  discoColor[9] = [];       // COLOR SET 10
+  discoColor[9][0] = [
+    '#fdcaca',
+    '#bf4dfd',
+    "#bf4dfd",
+    '#001db2'
+  ];
+  discoColor[9][1] = [  // Invert
+    '#001db2',
+    '#bf4dfd',
+    "#bf4dfd",
+    '#fdcaca'
+  ]
+
+  discoColor[10] = [];       // COLOR SET 11
+  discoColor[10][0] = [
+    '#f3aa37',
+    '#efcfac',
+    "#ee272a",
+    '#0b9ca8'
+  ];
+  discoColor[10][1] = [  // Invert
+    '#0b9ca8',
+    '#efcfac',
+    "#ee272a",
+    '#f3aa37'
+  ]
+}

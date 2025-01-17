@@ -16,13 +16,6 @@ function runRandomSettings(){
     noBaseToggles = false;
   }
 
-  var rs0 = random(9);
-  if(rs0 < 3){
-    setInlineIndex(0);
-  } else if(rs0 < 6){
-    setInlineIndex(1);
-  }
-
   for(var m = 0; m < outlineCount; m++){
     if(random(10)<3){
       setOutlineIndex(m);
@@ -79,46 +72,38 @@ function runRandomSettings(){
 
   if(random(10) < 5){         /////////////////////////// FLIP
     document.getElementById("radioFlip0").checked = true;
-    document.getElementById("radioFlip1").checked = false;
     setRadioFlip(0);
 
   } else {
-    document.getElementById("radioFlip0").checked = false;
     document.getElementById("radioFlip1").checked = true;
     setRadioFlip(1);
 
   }
 
   if(random(10) < 7.5){         /////////////////////////// COLOR MODE
-    document.getElementById("radioColMode0").checked = true;
-    document.getElementById("radioColMode1").checked = false;
+    document.getElementById("colorMode0").checked = true;
     setColMode(0);
 
   } else {
-    document.getElementById("radioColMode0").checked = false;
-    document.getElementById("radioColMode1").checked = true;
+    document.getElementById("colorMode1").checked = true;
     setColMode(1);
 
   }
 
   if(random(10) < 5){         /////////////////////////// BKGD COLOR
-    document.getElementById("bkgd0").style.display = "block";
-    document.getElementById("bkgd1").style.display = "none";
     setBkgdColor(0);
 
   } else {
-    document.getElementById("bkgd0").style.display = "none";
-    document.getElementById("bkgd1").style.display = "block";
     setBkgdColor(1);
 
   }
 
   swatchIndex = int(random(swatchCount));
-  showColorVisual(swatchIndex);
+  setSwatchIndex(0);
 
   if(baseIndexSet.length > 1){
     discoColIndex = int(random(discoColSetCount));
-    showDiscoColVisual(discoColIndex);
+    setDiscoColIndex(0);
   }
 }
 
@@ -169,9 +154,17 @@ function resetEverything(){
   setCoreAng(50);
   document.getElementById("coreAng").value = 50;
 
-  document.getElementById("radioColMode0").checked = true;
-  document.getElementById("radioColMode1").checked = false;
+  document.getElementById("colorMode0").checked = true;
   setColMode(0);
+
+  setOverlayToggle(false);
+  document.getElementById("overlayToggle1").checked = true;
+
+  swatchIndex = 0;
+  setSwatchIndex(0);
+
+  console.log("PUNC INDEX");
+  console.log(puncIndexSet);
 
 }
 
@@ -180,14 +173,12 @@ function setPatternPreset(val){
 
   if(val == 1){                           //////////// PRESET 1
     setBaseIndex(0);
-    setPuncIndex(0);
+    setPuncIndex(1);
     setInlineIndex(0);
 
-    document.getElementById("radioOffset0").checked = false;
     document.getElementById("radioOffset1").checked = true;
     setRadioOffset(1);
     
-    document.getElementById("radioFlip0").checked = false;
     document.getElementById("radioFlip1").checked = true;
     setRadioFlip(1);
 
@@ -199,10 +190,8 @@ function setPatternPreset(val){
     setBaseIndex(2);
 
     document.getElementById("radioOffset0").checked = true;
-    document.getElementById("radioOffset1").checked = false;
     setRadioOffset(0);
 
-    document.getElementById("radioFlip0").checked = false;
     document.getElementById("radioFlip1").checked = true;
     setRadioFlip(1);
 
@@ -218,17 +207,16 @@ function setPatternPreset(val){
     setCoreAng(thisVal);
     document.getElementById("coreAng").value = thisVal;
 
-    document.getElementById("bkgd0").style.display = "block";
-    document.getElementById("bkgd1").style.display = "none";
+    bkgdIndex = 0;
     setBkgdColor(0);
+
   } else if(val == 3){                    //////////// PRESET 3
     setBaseIndex(0);
     setBaseIndex(2);
-    setPuncIndex(10);
-    setPuncIndex(7);
+    setPuncIndex(0);
+    setPuncIndex(2);
 
     document.getElementById("radioFlip0").checked = true;
-    document.getElementById("radioFlip1").checked = false;
     setRadioFlip(0);
 
     var thisVal = 38;
@@ -243,21 +231,27 @@ function setPatternPreset(val){
     setMarkScale(thisVal);
     document.getElementById("markScale").value = thisVal;
 
-    var thisVal = 100;
-    setGridAng(thisVal);
-    document.getElementById("gridAng").value = thisVal;
+    setOverlayToggle(true);
+    document.getElementById("overlayToggle0").checked = true;
 
-    swatchIndex = 8;
-    showColorVisual(swatchIndex);
+    var thisVal = 82;
+    setCoreAng(thisVal);
+    document.getElementById("coreAng").value = thisVal;
 
-    document.getElementById("bkgd0").style.display = "block";
-    document.getElementById("bkgd1").style.display = "none";
+    swatchIndex = 10;
+    setSwatchIndex(0);
+
+    bkgdIndex = 1;
     setBkgdColor(0);
+
   } else if(val == 4){                    //////////// PRESET 4
     setBaseIndex(0);
     setBaseIndex(5);
 
     setInlineIndex(1);
+
+    document.getElementById("colorMode1").checked = true;
+    setColMode(1);
 
     var thisVal = 0;
     setVertSpace(thisVal);
@@ -267,9 +261,11 @@ function setPatternPreset(val){
     setMarkScale(thisVal);
     document.getElementById("markScale").value = thisVal;
 
-    document.getElementById("radioFlip0").checked = false;
     document.getElementById("radioFlip1").checked = true;
     setRadioFlip(1);
+
+    discoColIndex = 10;
+    setDiscoColIndex(0);
 
   } else if(val == 5){                    //////////// PRESET 5
     setBaseIndex(1);
@@ -277,8 +273,8 @@ function setPatternPreset(val){
     setBaseIndex(4);
     setBaseIndex(5);
 
+    setPuncIndex(3)
     setPuncIndex(7)
-    setPuncIndex(9)
 
     var thisVal = 60;
     setHorzSpace(thisVal);
@@ -296,21 +292,22 @@ function setPatternPreset(val){
     setUnitRot(thisVal);
     document.getElementById("unitRot").value = thisVal;
 
-    document.getElementById("radioFlip0").checked = false;
+    document.getElementById("radioOffset0").checked = true;
+    setRadioOffset(0);
+
     document.getElementById("radioFlip1").checked = true;
     setRadioFlip(1);
 
-    swatchIndex = 24;
-    showColorVisual(swatchIndex);
+    swatchIndex = 6;
+    setSwatchIndex(0);
+    
   } else if(val == 6){                    //////////// PRESET 6
     setBaseIndex(0);
     setInlineIndex(1);
     setOutlineIndex(0);
-    setOutlineIndex(1);
-    setOutlineIndex(2);
-    setPuncIndex(0);
-    setPuncIndex(4);
-    setPuncIndex(5);
+    setPuncIndex(1);
+    // setPuncIndex(9);
+    setPuncIndex(3);
 
     var thisVal = 60;
     setHorzSpace(thisVal);

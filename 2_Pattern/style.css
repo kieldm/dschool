@@ -149,7 +149,7 @@ canvas{
 
 .rUnit {
   width: 100%;
-  height: 8%;
+  height: 5%;
 }
 
 .rUnitSmall {
@@ -194,8 +194,14 @@ canvas{
 }
 
 .rUnit_contentSet {
-  
+  position:absolute;
+
+  bottom:0;
+  display:flex;
+  height:auto;
 }
+
+
 .rUnit_label {
   /* padding-bottom:10px; */
 }
@@ -222,6 +228,106 @@ canvas{
   font-size:12px;
   padding:5px 15px 5px 15px;
   height:20px;
+}
+
+.rUnitHuge input[type=radio] + label {
+  font-size:12px;
+  padding:5px 15px 5px 15px;
+  height:20px;
+}
+
+.rUnitHuge {
+  width: 100%;
+  height: 20%;
+
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.rUnitHuge_label {
+  display:flex; 
+  height:10%;
+
+  margin-bottom:10px;
+}
+.rUnitHuge_column {
+  display: flex;
+  flex-direction: column;
+
+  height:100%;
+  width:100%;
+}
+
+.rUnitHuge_row {
+  display: flex;
+  flex-direction: row;
+
+  height:30%;
+  width:100%;
+}
+
+.rUnitHuge_row0 {
+  width:40%;
+}
+.rUnitHuge_row1 {
+  display:flex;
+  flex-direction: row;
+  
+  vertical-align: center;
+
+  height:100%;
+  width:60%; 
+}
+
+.rUnitHuge_row1 img {
+  object-fit: contain;
+
+  height:50%;
+  width:auto;
+
+  margin-right:5px;
+}
+
+.selector_dotColor{
+  display:flex;
+  background-color: purple; /* Circle color */
+  border-radius: 50%;
+
+  height:50%;
+  aspect-ratio: 1 / 1; /* Maintains a 1:1 ratio, ensuring it's a circle */
+
+  margin-right:5px;
+
+  border:1px solid;
+  /* border-color:var(--secondary-color); */
+}
+
+#colorSet0 {
+  background-color:#79d0de;
+  border: 1px solid var(--secondary-color);
+}
+#colorSet1 {
+  background-color:#a4e183;
+  border: 1px solid var(--secondary-color);
+}
+#colorSet2 {
+  background-color:#565b39;
+  border: 1px solid var(--secondary-color);
+}
+
+#colorSetMono {
+  background-color:#ee272a;
+  border: 1px solid var(--secondary-color);
+}
+
+#bkgdColor {
+  background-color:white;
+  border: 1px solid var(--secondary-color);
+}
+
+#discoColorSelector {
+  opacity:25%;
+  pointer-events: none;
 }
 
 .rUnitBig {
@@ -333,9 +439,6 @@ img {
 }
 
 #defaultColMode { display:block; }
-#discoColMode { display:none; }
-#discoOutlineMode { display:none; }
-#discoButton { display:none; }
 
 #d0 {  filter: invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0); }
 #d1 {  filter: invert(1); }
@@ -343,6 +446,8 @@ img {
 #d3 {  filter: invert(1); }
 #d4 {  filter: invert(1); }
 #d5 {  filter: invert(1); }
+#d6 {  filter: invert(1); }
+#d7 {  filter: invert(1); }
 
 #i0 {  filter: invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0); }
 #i1 {  filter: invert(1); }
@@ -370,7 +475,7 @@ img {
 #p7 {  filter: invert(1); }
 #p8 {  filter: invert(1); }
 #p9 {  filter: invert(1); }
-#p10 {  filter: invert(1); }
+/* #p10 {  filter: invert(1); } */
 
 /* RANGER */
 
@@ -442,12 +547,12 @@ img {
 button {
   font-family: 'TheFutureReg', sans-serif;
   text-align:center;
-  font-size:12px;
+  font-size: clamp(0.375rem, -0.25rem + 1.25vw, 0.875rem);
   color:var(--primary-color);
 
   padding:5px 25px 5px 25px;
   height:30px;
-  width:100%;
+  /* width:100%; */
 
   border:none;
   border-radius:500px;
@@ -455,9 +560,14 @@ button {
 
   background-color:var(--secondary-color);
 }
-
+button.buttonLabel{
+  background-color:var(--primary-color);
+  color:var(--secondary-color);
+  cursor:auto;
+  padding: 5px 15px 5px 15px;
+}
 .ltUnit button {
-  font-size:16px;
+  font-size: clamp(0.375rem, -0.4063rem + 1.5625vw, 1rem);
   height:38px;
 }
 
@@ -482,7 +592,7 @@ input[type=radio] {
 input[type=radio] + label {
   font-family: 'TheFutureReg', sans-serif;
   text-align:center;
-  font-size:16px;
+  font-size: clamp(0.375rem, -0.4063rem + 1.5625vw, 1rem);
   color:var(--secondary-color);
 
   padding:5px 25px 5px 25px;
@@ -507,19 +617,33 @@ input[type=radio]:checked + label {
 /* HEADLINES */
 
 h1 {
-  font-family: 'TheFutureBold', sans-serif;
-  font-size:40px;
-
-  text-align: center;
+  font-family:'TheFutureBold';
+  font-size: clamp(0.625rem, -1.7188rem + 4.6875vw, 2.5rem);
+  padding:0;
+  margin:0;
+  padding-left: 10px;
+  line-height: clamp(0.625rem, -1.7188rem + 4.6875vw, 2.5rem);
+  /* line-height: 40px; */
 
   color:var(--secondary-color);
 }
 
 h2 {
   font-family: 'TheFutureReg', sans-serif;
-  font-size:16px;
+  font-size: clamp(0.625rem, -0.1563rem + 1.5625vw, 1.25rem);
+  padding:0;
+  margin:0;
 
   text-align: center;
+
+  color:var(--secondary-color);
+}
+
+p {
+  font-family:'TheFutureReg';
+  font-size: clamp(0.375rem, -0.25rem + 1.25vw, 0.875rem);
+  padding:0;
+  margin:0;
 
   color:var(--secondary-color);
 }
@@ -535,17 +659,6 @@ h3 {
   color:var(--secondary-color);
 }
 
-p {
-  font-family: 'TheFutureReg', sans-serif;
-  font-size:16px;
-
-  text-align: center;
-  margin:0;
-
-
-  color:var(--secondary-color);
-}
-
 .underline {
   text-decoration: underline;
 }
@@ -554,22 +667,109 @@ p {
   position:absolute;
 }
 
-#bkgd0 { display:none; }
-#bkgd1 { display:block; }
+.rounded-button {
+  font-family: "TheFutureReg"; /* Adjust font */
+  font-size: clamp(0.3125rem, -0.7031rem + 2.0313vw, 1.125rem);
+  text-align: center;
 
-/* .rUnit {border:1px solid orange; }
-.rUnitBig {border:1px solid blue; }
-.topRow { border: 1px solid red;}
-.tlUnit { border: 1px solid green;}
-.tlSubUnit { border: 1px solid pink;}
-.tlSubSubUnit { border: 1px solid purple;}
-.trSubSubUnit { border: 1px solid purple;}
-.botRow { border: 1px solid blue;}
-.unitHeadline { border:1px solid orange;}
-.unitSelector { border:1px solid green;}
-.unitToggle { border:1px solid red;}
-.presetRadioSub { border: 1px solid cyan;}
-.presetRadioSub2 { border: 1px solid blue;}
-.rUnitBig_selectSetHalf{border:1px solid orange; }
-.ltUnit {border:1px solid green; }
-.presetGrouping {border:1px solid purple;} */
+  display: inline-block;
+  padding: 5px 25px 5px 25px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color); /* var(--primary-color) text */
+  border: none; /* Remove borders */
+  border-radius: 500px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+  /* OVERLAY */
+  /* POP UP  */
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .overlay h1 {
+    color:black;
+  }
+
+  .overlay p {
+    color:black;
+  }
+
+  /* Pop-up container */
+  .popup {
+    background: white;
+    border-radius: 15px;
+    border:1px solid black;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width:640px;
+    height:410px;
+    /* width: 40%;
+    min-width:300px;
+    max-width:700px;
+    height: 50%;
+    min-height:450px;
+    max-height:600px; */
+    padding: 40px;
+  }
+  
+  .popup p {
+    font-size:24px;
+  }
+
+  .popup div{
+    margin-bottom:25px;
+  }
+
+  .popup div div{
+    margin-bottom:5px;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .button-container-sub {
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+    width:50%;
+    height:auto;
+  }
+
+  .rounded-button2 {
+    font-family: "TheFutureReg"; /* Adjust font */
+    font-size: clamp(0.3125rem, -0.7031rem + 2.0313vw, 1.125rem);
+    text-align: center;
+  
+    display: inline-flex;
+    padding: 5px 25px 5px 25px;
+    background-color: white;
+    color: black; /* var(--primary-color) text */
+    border: 1px solid black; /* Remove borders */
+    border-radius: 500px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+
+    width:auto;
+  }
+
+  .button-container-sub .rounded-button2, .rounded-button {
+    /* font-size: clamp(0.3125rem, -0.1563rem + 2.5vw, 0.9375rem); */
+    font-size:16px;
+    margin-bottom:10px;
+  }
+
+  a {
+    text-decoration: none;
+  }

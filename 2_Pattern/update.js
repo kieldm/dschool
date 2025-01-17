@@ -17,6 +17,9 @@ function setRadioMode(val){
     for(var m = 0; m < inlineCount; m++){
       document.getElementById("i"+m).style.filter = "invert(0)";
     }
+    for(var m = 0; m < outlineCount; m++){
+      document.getElementById("o"+m).style.filter = "invert(0)";
+    }
   } else {                    /////////////// WHITE BKGD
     modeToggle = true;
   
@@ -32,6 +35,9 @@ function setRadioMode(val){
     }
     for(var m = 0; m < inlineCount; m++){
       document.getElementById("i"+m).style.filter = "invert(1)";
+    }
+    for(var m = 0; m < outlineCount; m++){
+      document.getElementById("o"+m).style.filter = "invert(1)";
     }
   }
 
@@ -82,6 +88,14 @@ function setMarkScale(val){
 
   figurePattern();
   
+  loop();
+}
+
+function setOverlayToggle(val){
+  overlayToggle = val;
+
+  console.log("overlay toggle is now: " + overlayToggle);
+
   loop();
 }
 
@@ -147,17 +161,15 @@ function setColMode(val){
   colMode = val;
 
   if(colMode == 0){
-    document.getElementById("defaultColMode").style.display = "block";
-    document.getElementById("discoColMode").style.display = "none";
-    document.getElementById("discoButton").style.display = "none";
-    document.getElementById("discoOutlineMode").style.display = "none";
-    
+    document.getElementById("monochromSelector").style.opacity = "100%";
+    document.getElementById("monochromSelector").style.pointerEvents = "auto";
+    document.getElementById("discoColorSelector").style.opacity = "25%";
+    document.getElementById("discoColorSelector").style.pointerEvents = "none";
   } else {
-    document.getElementById("defaultColMode").style.display = "none";
-    document.getElementById("discoColMode").style.display = "block";
-    document.getElementById("discoButton").style.display = "block";
-    document.getElementById("discoOutlineMode").style.display = "block";
-
+    document.getElementById("discoColorSelector").style.opacity = "100%";
+    document.getElementById("discoColorSelector").style.pointerEvents = "auto";
+    document.getElementById("monochromSelector").style.opacity = "25%";
+    document.getElementById("monochromSelector").style.pointerEvents = "none";
   }
 
   loop();
@@ -167,13 +179,16 @@ function setDiscoColIndex(val){
   discoColIndex += val;
 
   if(discoColIndex < 0){
-    discoColIndex = 18;
-  } else if(discoColIndex > 18){
+    discoColIndex = discoColSetCount - 1;
+  } else if(discoColIndex > discoColSetCount - 1){
     discoColIndex = 0;
   }
 
+  document.getElementById("colorSet0").style.backgroundColor = discoCol[discoColIndex][bkgdIndex][0];
+  document.getElementById("colorSet1").style.backgroundColor = discoCol[discoColIndex][bkgdIndex][1];
+  document.getElementById("colorSet2").style.backgroundColor = discoCol[discoColIndex][bkgdIndex][2];
+
   console.log("DiscoColIndex: " + discoColIndex)
-  showDiscoColVisual(discoColIndex);
 
   loop();
 }
@@ -182,31 +197,32 @@ function setSwatchIndex(val){
   swatchIndex += val;
 
   if(swatchIndex < 0){
-    swatchIndex = 27;
-  } else if(swatchIndex > 27){
+    swatchIndex = swatchCol.length - 1;
+  } else if(swatchIndex >= swatchCol.length){
     swatchIndex = 0;
   }
 
+  document.getElementById("colorSetMono").style.backgroundColor = swatchCol[swatchIndex];
+
   console.log("swatchIndex: " + swatchIndex)
-  showColorVisual(swatchIndex);
 
   loop();
 }
 
-function runRandomColorPlace(){
-  var test0 = discoCol[discoColIndex][0];
-  var test1 = discoCol[discoColIndex][1];
+// function runRandomColorPlace(){
+//   var test0 = discoCol[discoColIndex][0];
+//   var test1 = discoCol[discoColIndex][1];
 
-  while(test0 == discoCol[discoColIndex][0] && test1 == discoCol[discoColIndex][1]){
-    for (let i = discoCol[discoColIndex].length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [discoCol[discoColIndex][i], discoCol[discoColIndex][j]] = [discoCol[discoColIndex][j], discoCol[discoColIndex][i]]; // Swap elements
-    }
-  }
-  console.log("RANDOM COLOR RUN PLACEMENT");
+//   while(test0 == discoCol[discoColIndex][0] && test1 == discoCol[discoColIndex][1]){
+//     for (let i = discoCol[discoColIndex].length - 1; i > 0; i--) {
+//       const j = Math.floor(Math.random() * (i + 1));
+//       [discoCol[discoColIndex][i], discoCol[discoColIndex][j]] = [discoCol[discoColIndex][j], discoCol[discoColIndex][i]]; // Swap elements
+//     }
+//   }
+//   console.log("RANDOM COLOR RUN PLACEMENT");
 
-  loop();
-}
+//   loop();
+// }
 
 function setBaseIndex(val){
   baseIndexToggles[val] = !baseIndexToggles[val];
@@ -331,29 +347,32 @@ function setInlineIndex(val){
 }
 
 function setBkgdColor(val){
-  if(val == bkgdMode){
-    //////// DO NOTHING
-  } else {
-    bkgdMode = val;
-    if(val == 0){
-      document.getElementById("bkgd0").style.display = "block";
-      document.getElementById("bkgd1").style.display = "none";
-      bkgdColor = color('#000000');
-      foreColor = color('#ffffff');
+  bkgdIndex += val;
 
-    } else if(val == 1){
-      document.getElementById("bkgd0").style.display = "none";
-      document.getElementById("bkgd1").style.display = "block";
-      bkgdColor = color('#ffffff');
-      foreColor = color('#000000');
-    }
+  if(bkgdIndex < 0){
+    bkgdIndex = bkgdCount - 1;
+  } else if(bkgdIndex > bkgdCount - 1){
+    bkgdIndex = 0;
   }
+
+  if(bkgdIndex == 0){
+    bkgdColor = color("#ffffff");
+    foreColor = color("#000000");
+  } else if(bkgdIndex == 1){
+    bkgdColor = color("#000000");
+    foreColor = color("#ffffff");    
+  }
+
+  document.getElementById("bkgdColor").style.backgroundColor = bkgdColor;
+  console.log("BkgdIndex is: " + bkgdIndex);
 
   loop();
 }
 
 function runPatternSave(){
   console.log("RUN PATTERN SAVE");
+
+  resizeForSave();
 
   if(saveToggle == 0){
     console.log("SAVE SVG!")
@@ -364,6 +383,10 @@ function runPatternSave(){
     save('dschool_pattern.png');
 
   }
+
+  windowResized();
+
+  loop();
 }
 
 function setSaveToggle(val){
@@ -374,219 +397,28 @@ function setSaveToggle(val){
   loop();
 }
 
-// function setPatternPreset(val){
-//   resetPattern();
-
-//   if(val == 1){                           //////////// PRESET 1
-//     ySpaceFac = 0.1;
-//     offsetToggle = false;
-//     flipToggle = true;
-
-//     document.getElementById("vertSpace").value = 10;
-//     document.getElementById("radioOffset0").checked = false;
-//     document.getElementById("radioOffset1").checked = true;
-//     document.getElementById("radioFlip0").checked = false;
-//     document.getElementById("radioFlip1").checked = true;
-
-//   } else if(val == 2){                    //////////// PRESET 2
-//     ySpaceFac = 0.1;
-//     markScale = 1.7
-//     offsetToggle = false;
-//     flipToggle = true;
-
-//     baseIndexSet[0] = 2;   
-//     baseIndexToggles[0] = false;
-//     baseIndexToggles[2] = true;
-//     document.getElementById("d2").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-
-//     inlineOn = false;
-//     puncOn = false;
-
-//     if(modeToggle){
-//       document.getElementById("d0").style.filter = "invert(1)";
-//       document.getElementById("i0").style.filter = "invert(1)";
-//       document.getElementById("p0").style.filter = "invert(1)";
-//     } else {
-//       document.getElementById("d0").style.filter = "invert(0)";
-//       document.getElementById("i0").style.filter = "invert(0)";
-//       document.getElementById("p0").style.filter = "invert(0)";
-//     }
-
-//     document.getElementById("vertSpace").value = 10;
-//     document.getElementById("markScale").value = 60;
-//     document.getElementById("radioOffset0").checked = false;
-//     document.getElementById("radioOffset1").checked = true;
-//     document.getElementById("radioFlip0").checked = false;
-//     document.getElementById("radioFlip1").checked = true;
-
-//     document.getElementById("bkgd0").style.display = "block";
-//     document.getElementById("bkgd1").style.display = "none";
-//     bkgdColor = color('#000000');
-//     foreColor = color('#ffffff');
-
-//   } else if(val == 3){                    //////////// PRESET 3
-//     ySpaceFac = 0.38;
-//     document.getElementById("vertSpace").value = 38;
-
-//     xSpaceFac = 0.21;
-//     document.getElementById("horzSpace").value = 21;
-
-//     markScale = 1.72
-//     document.getElementById("markScale").value = 61;
-
-//     gridAngFac = 1;
-//     document.getElementById("gridAng").value = 100;
-
-//     baseIndexSet[0] = 0;
-//     baseIndexSet[1] = 2;
-//     baseIndexToggles[0] = true;
-//     baseIndexToggles[2] = true;
-//     document.getElementById("d2").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-//     inlineOn = false;
-//     puncIndex = 7;
-//     document.getElementById("p7").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-
-//     if(modeToggle){
-//       document.getElementById("i0").style.filter = "invert(1)";
-//       document.getElementById("p0").style.filter = "invert(1)";
-//     } else {
-//       document.getElementById("i0").style.filter = "invert(0)";
-//       document.getElementById("p0").style.filter = "invert(0)";
-//     }
-
-//     document.getElementById("bkgd0").style.display = "block";
-//     document.getElementById("bkgd1").style.display = "none";
-//     bkgdColor = color('#000000');
-//     foreColor = color('#ffffff');
-//   } else if(val == 4){                    //////////// PRESET 4
-//     ySpaceFac = 0.0;
-//     document.getElementById("vertSpace").value = 0;
-
-//     markScale = 1.66;
-//     document.getElementById("markScale").value = 58;
-
-//     flipToggle = true;
-//     document.getElementById("radioFlip0").checked = false;
-//     document.getElementById("radioFlip1").checked = true;
-
-//     baseIndexSet[1] = 5;
-//     baseIndexToggles[5] = true;
-//     document.getElementById("d5").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-
-//     puncOn = false;
-//     if(modeToggle){
-//       document.getElementById("p0").style.filter = "invert(1)";
-//     } else {
-//       document.getElementById("p0").style.filter = "invert(0)";
-//     }
-//   } else if(val == 5){                    //////////// PRESET 5
-//     ySpaceFac = 0.0;
-//     document.getElementById("vertSpace").value = 0;
-
-//     markScale = 1.66;
-//     document.getElementById("markScale").value = 58;
-
-//     flipToggle = true;
-//     document.getElementById("radioFlip0").checked = false;
-//     document.getElementById("radioFlip1").checked = true;
-
-//     baseIndexSet[1] = 5;
-//     baseIndexToggles[5] = true;
-//     document.getElementById("d5").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-
-//     puncOn = false;
-//     if(modeToggle){
-//       document.getElementById("p0").style.filter = "invert(1)";
-//     } else {
-//       document.getElementById("p0").style.filter = "invert(0)";
-//     }
-//   }
-
-//   figurePattern();
-
-//   loop();
+// function setSaveMode(val){
+//   saveMode = val;
 // }
 
-// function resetPattern(){
-//   bkgdMode = 1;
-
-//   modeToggle = true;
-
-//   xSpaceFac = 0.33;
-//   xSpace = 165;
-//   ySpaceFac = 0.33;
-//   ySpace = 170;
-
-//   baseIndex = 0;
-//   baseIndexSet = [];
-//   baseIndexToggles = [];
-//   noBaseToggles = false;
-  
-//   inlineOn = true;
-//   inlineIndex = 0;
-  
-//   puncOn = true;
-//   puncIndex = 0;
-  
-//   outlineIndex = 4;
-  
-//   markScale = 1;
-//   offsetToggle = true;
-//   flipToggle = false;
-  
-//   unitRot = 0;
-  
-//   gridAngFac = 0;
-//   gridAng = 0;
-//   coreAng = 0;
-  
-//   saveToggle = 1;
-
-//   document.getElementById("d0").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-//   for(var m = 1; m < baseCount; m++){
-//     if(modeToggle){
-//       document.getElementById("d"+m).style.filter = "invert(1)";
-//     } else {
-//       document.getElementById("d"+m).style.filter = "invert(0)";
-//     }
+// function runExport(){
+//   if(saveMode == 1 || saveMode == 3){
+//     alphaOn = true;
 //   }
 
-//   document.getElementById("i0").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-//   for(var m = 1; m < inlineCount; m++){
-//     if(modeToggle){
-//       document.getElementById("i"+m).style.filter = "invert(1)";
-//     } else {
-//       document.getElementById("i"+m).style.filter = "invert(0)";
-//     }
+//   resizeForSave();
+
+//   if(saveMode == 0 || saveMode == 1){
+//     console.log("SAVE SVG!")
+//     save('dschool_logo.svg');
+
+//   } else if(saveMode == 2 || saveMode == 3){
+//     console.log("SAVE PNG!")
+//     save('dschool_logo.png');
 //   }
 
-//   document.getElementById("p0").style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
-//   for(var m = 1; m < puncCount; m++){
-//     if(modeToggle){
-//       document.getElementById("p"+m).style.filter = "invert(1)";
-//     } else {
-//       document.getElementById("p"+m).style.filter = "invert(0)";
-//     }
-//   }
+//   windowResized();
 
-//   baseIndexSet[0] = 0;
-//   baseIndexToggles[0] = true;
-//   for(var m = 1; m < baseIndex; m++){
-//     baseIndexToggles[m] = false;
-//   }
-
-//   document.getElementById("horzSpace").value = 33;
-//   document.getElementById("vertSpace").value = 33;
-//   document.getElementById("markScale").value = 25;
-//   document.getElementById("unitRot").value = 50;
-//   document.getElementById("gridAng").value = 50;
-//   document.getElementById("coreAng").value = 50;
-//   document.getElementById("radioOffset0").checked = true;
-//   document.getElementById("radioOffset1").checked = false;
-//   document.getElementById("radioFlip0").checked = true;
-//   document.getElementById("radioFlip1").checked = false;
-//   document.getElementById("bkgd0").style.display = "none";
-//   document.getElementById("bkgd1").style.display = "block";
-//   bkgdColor = color('#ffffff');
-//   foreColor = color('#000000');
+//   alphaOn = false;
+//   loop();
 // }

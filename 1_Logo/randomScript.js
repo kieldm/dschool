@@ -1,127 +1,89 @@
 function runRandomCombo(){
-  if(vibeToggle){           /////////////////////////////////// BLACK TIE
-    baseIndex = int(random(baseVisuals.length));
-    showBaseVisual(baseIndex);
+  console.log("RUN RANDOM?");
 
-    inlineIndex = int(random(inlineVisuals.length));
-    showInlineVisual(inlineIndex);
+  if(radioVibe == 0){           /////////////////////////////////// BLACK TIE
+    baseDindex = int(random(baseDcount));
+    setBaseDindex(0);
 
-    swatchIndex = int(random(1, colorVisuals.length - 1));
-    wordMarkIndex = int(random(3));
-    showColorVisual(swatchIndex - 1, swatchIndex, swatchIndex + 1);
-    setWordMark(wordMarkIndex);
-    swatchOverlayIndex = swatchIndex;
-    if(swatchIndex > 6){ swatchOverlayIndex += 1; }
-    if(swatchIndex > 7){ swatchOverlayIndex += 2; }
-    if(swatchIndex > 23){ swatchOverlayIndex -= 1; }
-    showOverlayColorVisual(swatchOverlayIndex - 1, swatchOverlayIndex, swatchOverlayIndex + 1);
+    inlineDindex = int(random(inlineDcount));
+    setInlineDindex(0);
+
+    dotColorIndex = int(random(1, dotColor.length));
+    setDotColorIndex(0);
     
     if(random(10) < 3){
-      setBaseToggle(1);
-      document.getElementById('radioBaseToggle0').checked = false;
-      document.getElementById('radioBaseToggle1').checked = true;
+      document.getElementById('inlineToggle1').checked = true;
+      setInlineToggle(false);
     } else {
-      setBaseToggle(0);
-      document.getElementById('radioBaseToggle0').checked = true;
-      document.getElementById('radioBaseToggle1').checked = false;
-    }
-
-    if(random(10) < 3){
-      setInlineToggle(1);
-      document.getElementById('radioInlineToggle0').checked = false;
-      document.getElementById('radioInlineToggle1').checked = true;
-    } else {
-      setInlineToggle(0);
-      document.getElementById('radioInlineToggle0').checked = true;
-      document.getElementById('radioInlineToggle1').checked = false;
-    }
-
-    if(random(10) < 3){
-      setRadioMode(1);
-      document.getElementById('radioMode0').checked = false;
-      document.getElementById('radioMode1').checked = true;
-    } else {
-      setRadioMode(0);
-      document.getElementById('radioMode0').checked = true;
-      document.getElementById('radioMode1').checked = false;
-    }
-
-    if(random(10) < 2){
-      setNameOnToggle(1);
-      document.getElementById('radioNameOn0').checked = false;
-      document.getElementById('radioNameOn1').checked = true;
-    } else {
-      setNameOnToggle(0);
-      document.getElementById('radioNameOn0').checked = true;
-      document.getElementById('radioNameOn1').checked = false;
+      document.getElementById('inlineToggle0').checked = true;
+      setInlineToggle(true);
     }
 
     if(random(10) < 5){
-      setOverlayToggle(1);
-      document.getElementById('radioOverlay0').checked = false;
-      document.getElementById('radioOverlay1').checked = true;
+      document.getElementById('overlayToggle1').checked = true;
+      setOverlayToggle(false);
     } else {
-      setOverlayToggle(0);
-      document.getElementById('radioOverlay0').checked = true;
-      document.getElementById('radioOverlay1').checked = false;
+      document.getElementById('overlayToggle0').checked = true;
+      setOverlayToggle(true);
     }
 
-  } else {                  /////////////////////////////////// DISCO
-    baseIndex = int(random(baseVisuals.length));
-    showBaseVisual(baseIndex);
-
-    inlineIndex = int(random(inlineVisuals.length));
-    showInlineVisual(inlineIndex);
-
-    puncIndex = int(random(puncVisuals.length));
-    showPuncVisual(puncIndex);
-
-    outlineIndex = int(random(outlineVisuals.length));
-    showOutlineVisual(outlineIndex);
-
-    discoColIndex = int(random(19));
-    setDiscoColor(discoColIndex);
-    runRandomColorPlace();
-    
-    if(random(10) < 3){
-      setBaseToggle(1);
-      document.getElementById('radioBaseToggle0').checked = false;
-      document.getElementById('radioBaseToggle1').checked = true;
+    if(random(10) < 5){
+      document.getElementById('monochromeToggle0').checked = true;
+      setMonochromeToggle(false);
     } else {
-      setBaseToggle(0);
-      document.getElementById('radioBaseToggle0').checked = true;
-      document.getElementById('radioBaseToggle1').checked = false;
+      document.getElementById('monochromeToggle1').checked = true;
+      setMonochromeToggle(true);
     }
 
-    if(random(10) < 3){
-      setInlineToggle(1);
-      document.getElementById('radioInlineToggle0').checked = false;
-      document.getElementById('radioInlineToggle1').checked = true;
-    } else {
-      setInlineToggle(0);
-      document.getElementById('radioInlineToggle0').checked = true;
-      document.getElementById('radioInlineToggle1').checked = false;
+    if(random(10) < 5){       //////// YES LOCKUP
+      document.getElementById('lockupToggle0').checked = true;
+      setLockupToggle(true);
+
+      lockupIndex = int(random(lockupCount));
+      setLockupIndex(0);
+
+    } else {                   //////// NO LOCKUP
+      document.getElementById('lockupToggle1').checked = true;
+      setLockupToggle(false);
+
     }
 
-    if(random(10) < 3){
-      setPunctuationToggle(1);
-      document.getElementById('radioPunctuationToggle0').checked = false;
-      document.getElementById('radioPunctuationToggle1').checked = true;
+  } else if(radioVibe == 1){                  /////////////////////////////////// DISCO
+    if(random(10) < 4){
+      document.getElementById('outlineToggle1').checked = true;
+      setOutlineToggle(false);
+
+      document.getElementById('baseDtoggle0').checked = true;
+      setBaseDtoggle(true);
+
+      discoDindex = int(random(discoDcount));
+      setBaseDindex(0);
+
+    } else if(random(10) < 8){
+      document.getElementById('outlineToggle0').checked = true;
+      setOutlineToggle(true);
+
+      document.getElementById('baseDtoggle1').checked = true;
+      setBaseDtoggle(false);
+
+      outlineIndex = int(random(outlineCount));
+      setOutlineIndex(0);
     } else {
-      setPunctuationToggle(0);
-      document.getElementById('radioPunctuationToggle0').checked = true;
-      document.getElementById('radioPunctuationToggle1').checked = false;
+      outlineIndex = 4;
+
+      discoDindex = int(random(5));
+      setBaseDindex(0);
     }
 
-    if(random(10) < 3){
-      setOutlineToggle(1);
-      document.getElementById('radioOutlineToggle0').checked = false;
-      document.getElementById('radioOutlineToggle1').checked = true;
-    } else {
-      setOutlineToggle(0);
-      document.getElementById('radioOutlineToggle0').checked = true;
-      document.getElementById('radioOutlineToggle1').checked = false;
-    }
+    puncIndex = int(random(puncCount));
+    setPuncIndex(0);
+
+    discoColorIndex = int(random(discoColorCount));
+    setDiscoColorIndex(0);
+  }
+
+  if(random(10) < 5){
+    setInvertToggle();
   }
 
   console.log("Random Combo");

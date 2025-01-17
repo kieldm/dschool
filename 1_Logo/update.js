@@ -1,246 +1,90 @@
-function setRadioVibe(val){
-  if(val == 0){           /////// BLACK TIE
-    vibeToggle = true;
+function setInvertToggle(){
+  invertToggle = !invertToggle;
 
-    document.getElementById('trBlackTieSet').style.display = "block";
-    document.getElementById('trDiscoSet').style.display = "none";
+  const root = document.documentElement;
+  const currentPrimary = getComputedStyle(root).getPropertyValue('--primary-color').trim();
+  const currentSecondary = getComputedStyle(root).getPropertyValue('--secondary-color').trim();
 
-    document.getElementById('b2BlackTieSet').style.display = "block";
-    document.getElementById('b2DiscoSet').style.display = "none";
+  // Swap the values
+  root.style.setProperty('--primary-color', currentSecondary);
+  root.style.setProperty('--secondary-color', currentPrimary);
 
-    document.getElementById('b3BlackTieSet').style.display = "block";
-    document.getElementById('b3DiscoSet').style.display = "none";
-
-  } else {                /////// DISCO
-    vibeToggle = false;
-
-    setInlineToggle(0);
-    document.getElementById('inlineToggle').style.opacity = "100%";
-    document.getElementById('inlineToggle').style.pointerEvents = "auto";
-    document.getElementById('radioInlineToggle0').checked = true;
-    document.getElementById('radioInlineToggle1').checked = false;
-
-    document.getElementById('trBlackTieSet').style.display = "none";
-    document.getElementById('trDiscoSet').style.display = "block";
-
-    document.getElementById('b2BlackTieSet').style.display = "none";
-    document.getElementById('b2DiscoSet').style.display = "block";
-
-    document.getElementById('b3BlackTieSet').style.display = "none";
-    document.getElementById('b3DiscoSet').style.display = "block";
-
-  }
-
-  loop();
-  console.log("Vibe set: " + val);
-}
-
-function runLogoSave(){
-  console.log("RUN LOGO SAVE");
-
-  if(saveToggle == 0 || saveToggle == 2){
-    console.log("SAVE SVG!")
-    save('dschool_logo.svg');
-
-  } else if(saveToggle == 1 || saveToggle == 3){
-    console.log("SAVE PNG!")
-    save('dschool_logo.png');
-
-  }
-}
-
-function runDiscoLogoSave(){
-  console.log("RUN LOGO SAVE");
-
-  if(discoSaveToggle == 0 || saveToggle == 2){
-    console.log("DISCO SAVE SVG!")
-    save('disco_dschool_logo.svg');
-
-  } else if(discoSaveToggle == 1 || saveToggle == 3){
-    console.log("DISCO SAVE PNG!")
-    save('disco_dschool_logo.png');
-
-  }
-}
-
-function setRadioMode(val){
-  console.log("RUN SWAP COLORS");
-
-  var holdToggle = modeToggle;
-
-  if(val == 0){              /////////////// COLOR ON
-    bkgdColor = color('#FFFFFF');
-
-    modeToggle = true;
-    document.getElementById('baseCenter').style.filter = "invert(0)";
-    document.getElementById('inlineCenter').style.filter = "invert(0)";
-    document.getElementById('punctuationCenter').style.filter = "invert(0)";
-    document.getElementById('outlineCenter').style.filter = "invert(0)";
-
-    document.getElementById('blackDotOverlaySet').style.display = "flex";
-    document.getElementById('blackDotOverlaySet2').style.display = "flex";
-    document.getElementById('whiteDotOverlaySet').style.display = "none";
-    document.getElementById('whiteDotOverlaySet2').style.display = "none";
-
-    document.getElementById('wordMarkCenterBstan').style.display = "block";
-    document.getElementById('wordMarkCenterWstan').style.display = "none";
-    document.getElementById('wordMarkCenterBhasso').style.display = "block";
-    document.getElementById('wordMarkCenterWhasso').style.display = "none";
-    document.getElementById('wordMarkCenterBdesign').style.display = "block";
-    document.getElementById('wordMarkCenterWdesign').style.display = "none";
-
-  } else if(val == 1){        /////////////// COLOR OFF
+  if(invertToggle){
     bkgdColor = color('#000000');
+    foreColor = color('#ffffff');
+    invertToggleIndex = 1;
+    document.getElementById('img_baseD').style.backgroundColor = "#ffffff";
+    document.getElementById('img_inlineD').style.backgroundColor = "#ffffff";
 
-    modeToggle = false;
-    document.getElementById('baseCenter').style.filter = "invert(100)";
-    document.getElementById('inlineCenter').style.filter = "invert(100)";
-    document.getElementById('punctuationCenter').style.filter = "invert(100)";
-    document.getElementById('outlineCenter').style.filter = "invert(100)";
+    document.getElementById('overlay_L').style.fill = "#ffffff";
+    document.getElementById('lockup_circle').style.filter = "invert(100)";
+    
+    document.getElementById('lockup_stanford').setAttribute('fill', 'white');
+    document.getElementById('lockup_hasso').setAttribute('fill', 'white');
 
-    document.getElementById('blackDotOverlaySet').style.display = "none";
-    document.getElementById('blackDotOverlaySet2').style.display = "none";
-    document.getElementById('whiteDotOverlaySet').style.display = "flex";
-    document.getElementById('whiteDotOverlaySet2').style.display = "flex";
+  } else {
+    bkgdColor = color('#ffffff');
+    foreColor = color('#000000');
+    invertToggleIndex = 0;
+    document.getElementById('img_baseD').style.backgroundColor = "#000000";
+    document.getElementById('img_inlineD').style.backgroundColor = "#000000";
 
-    document.getElementById('wordMarkCenterBstan').style.display = "none";
-    document.getElementById('wordMarkCenterWstan').style.display = "block";
-    document.getElementById('wordMarkCenterBhasso').style.display = "none";
-    document.getElementById('wordMarkCenterWhasso').style.display = "block";
-    document.getElementById('wordMarkCenterBdesign').style.display = "none";
-    document.getElementById('wordMarkCenterWdesign').style.display = "block";
+    document.getElementById('overlay_L').style.fill = "#000000";
+    document.getElementById('lockup_circle').style.filter = "invert(0)";
+
+    document.getElementById('lockup_stanford').setAttribute('fill', 'black');
+    document.getElementById('lockup_hasso').setAttribute('fill', 'black');
   }
 
-  if(holdToggle != modeToggle){
-    const root = document.documentElement;
-    const currentPrimary = getComputedStyle(root).getPropertyValue('--primary-color').trim();
-    const currentSecondary = getComputedStyle(root).getPropertyValue('--secondary-color').trim();
+  setLockupChromeToggle(lockupChromeToggle);
+
+  if(radioVibe == 1){
+    setDiscoColorIndex(0);
+  }
+
+  if(monochromeToggle){
+    document.getElementById('img_baseD').style.backgroundColor = dotColor[dotColorIndex];
+  }
+
+  loop();
+}
+
+function setRadioVibe(val){
+  if(val != radioVibe){
+    document.getElementById('overlay').style.display = "flex";
+  }
   
-    // Swap the values
-    root.style.setProperty('--primary-color', currentSecondary);
-    root.style.setProperty('--secondary-color', currentPrimary);
-  }
+  radioVibe = val;
 
-  loop();
-}
+  
+  if(radioVibe == 0){
+    document.getElementById('img_baseD').style.backgroundColor = foreColor;
+    document.getElementById('img_inlineD').style.backgroundColor = foreColor;
 
-function setBaseToggle(val){
-  if(val == 0){        /////////////// BASE ON
-    baseToggle = true;
-    document.getElementById('baseCenter').style.opacity = "100%";
-    document.getElementById('baseSelector').style.pointerEvents = "auto";
+    document.getElementById('baseDtoggleSet').style.display = "none";
+    document.getElementById('botRow_bot').style.display = "none";
+    document.getElementById('disco_overlap').style.display = "none";
+    document.getElementById('blackTie_overlap').style.display = "flex";
+    document.getElementById('disco_baseD').style.display = "none";
+    document.getElementById('blackTie_baseD').style.display = "flex";    
+    document.getElementById('disco_unit3').style.display = "none";
+    document.getElementById('blackTie_unit3').style.display = "flex";
+    document.getElementById('disco_unit4').style.display = "none";
+    document.getElementById('blackTie_unit4').style.display = "flex";
 
-    if(dotColorToggle == false){        // IF BW MODE
-      if(inlineToggle){           // IF INLINE TOGGLE IS ON
-        setInlineToggle(1);
-        document.getElementById('radioInlineToggle0').checked = false;
-        document.getElementById('radioInlineToggle1').checked = true;
+  } else {
+    setDiscoColorIndex(0);
 
-        setOverlayToggle(0);
-        document.getElementById('radioOverlay0').checked = true;
-        document.getElementById('radioOverlay1').checked = false;
-      }
-
-      document.getElementById('inlineToggle').style.opacity = "100%";
-      document.getElementById('inlineToggle').style.pointerEvents = "auto";
-    }
-
-  } else if(val == 1){  /////////////// BASE OFF
-    baseToggle = false;
-    document.getElementById('baseCenter').style.opacity = "25%";
-    document.getElementById('baseSelector').style.pointerEvents = "none";
-
-    if(overlayToggle){
-      console.log("OVERLAY TURNED TO OFF?");
-
-      setOverlayToggle(1);
-      document.getElementById('radioOverlay0').checked = false;
-      document.getElementById('radioOverlay1').checked = true;
-    }
-  }
-
-  console.log("baseToggle: " + baseToggle);
-
-  loop();
-}
-
-function setInlineToggle(val){
-  if(val == 0){        /////////////// INLINE ON
-    inlineToggle = true;
-    document.getElementById('inlineCenter').style.opacity = "100%";
-    document.getElementById('inlineSelector').style.pointerEvents = "auto";
-
-    if(dotColorToggle == false){        // IF BW MODE
-      if(baseToggle){           // IF BASE TOGGLE IS ON
-        setBaseToggle(1);
-        document.getElementById('radioBaseToggle0').checked = false;
-        document.getElementById('radioBaseToggle1').checked = true;
-
-        setOverlayToggle(1);
-        document.getElementById('radioOverlay0').checked = false;
-        document.getElementById('radioOverlay1').checked = true;
-      }
-
-      document.getElementById('radioInlineToggle0').checked = true;
-      document.getElementById('radioInlineToggle1').checked = false;
-    }
-
-  } else if(val == 1){  /////////////// INLINE OFF
-    inlineToggle = false;
-    document.getElementById('inlineCenter').style.opacity = "25%";
-    document.getElementById('inlineSelector').style.pointerEvents = "none";
-
-  }
-
-  loop();
-}
-
-function setDotColorToggle(val){
-  if(val == 0){             /////////////// COLOR
-    dotColorToggle = true;
-    document.getElementById('dotColorSelector').style.opacity = "100%";
-    document.getElementById('dotColorSelector').style.pointerEvents = "auto";
-
-    document.getElementById('dotColorSelector').style.opacity = "100%";
-    document.getElementById('dotColorSelector').style.pointerEvents = "auto";
-
-    document.getElementById('dotSettings').style.opacity = "100%";
-    document.getElementById('dotSettings').style.pointerEvents = "auto";
-
-  } else if(val == 1){      /////////////// B&W
-    dotColorToggle = false;
-    document.getElementById('dotColorSelector').style.opacity = "25%";
-    document.getElementById('dotColorSelector').style.pointerEvents = "none";
-
-    if(baseToggle && inlineToggle){
-      document.getElementById('radioBaseToggle0').checked = true;
-      document.getElementById('radioBaseToggle1').checked = false;
-      setBaseToggle(0);
-      document.getElementById('radioInlineToggle0').checked = false;
-      document.getElementById('radioInlineToggle1').checked = true;
-      setInlineToggle(1);
-
-      document.getElementById('radioOverlay0').checked = true;
-      document.getElementById('radioOverlay1').checked = false;
-      setOverlayToggle(0);
-
-    } else if(baseToggle){
-      document.getElementById('radioOverlay0').checked = true;
-      document.getElementById('radioOverlay1').checked = false;
-      setOverlayToggle(0);
-
-    } else if(inlineToggle){
-      document.getElementById('radioOverlay0').checked = false;
-      document.getElementById('radioOverlay1').checked = true;
-      setOverlayToggle(1);
-
-    }
-
-    document.getElementById('inlineToggle').style.opacity = "100%";
-    document.getElementById('inlineToggle').style.pointerEvents = "auto";
-
-    document.getElementById('dotSettings').style.opacity = "25%";
-    document.getElementById('dotSettings').style.pointerEvents = "none";
+    document.getElementById('baseDtoggleSet').style.display = "flex";
+    document.getElementById('botRow_bot').style.display = "flex";
+    document.getElementById('disco_overlap').style.display = "flex";
+    document.getElementById('blackTie_overlap').style.display = "none";
+    document.getElementById('disco_baseD').style.display = "flex";
+    document.getElementById('blackTie_baseD').style.display = "none";   
+    document.getElementById('disco_unit3').style.display = "flex";
+    document.getElementById('blackTie_unit3').style.display = "none";
+    document.getElementById('disco_unit4').style.display = "flex";
+    document.getElementById('blackTie_unit4').style.display = "none";
 
   }
 
@@ -248,199 +92,437 @@ function setDotColorToggle(val){
 }
 
 function setOverlayToggle(val){
-  if(val == 0){             /////////////// OVERLAY ON
-    overlayToggle = true;
-    document.getElementById('overlayActive').style.display = "flex";
-    document.getElementById('noOverlayActive').style.display = "none";
+  overlayToggle = val;
 
-      setInlineToggle(1);
-      document.getElementById('radioInlineToggle0').checked = false;
-      document.getElementById('radioInlineToggle1').checked = true;
+  if(overlayToggle){
+    document.getElementById('inlineToggle1').checked = true;
+    document.getElementById('inlineToggleSet').style.opacity = "25%";
+    document.getElementById('inlineToggleSet').style.pointerEvents = "none";    
 
-      document.getElementById('inlineToggle').style.opacity = "25%";
-      document.getElementById('inlineToggle').style.pointerEvents = "none";
-
-    if(inlineToggle == false && baseToggle == false){
-      setBaseToggle(0);
-      document.getElementById('radioBaseToggle0').checked = true;
-      document.getElementById('radioBaseToggle1').checked = false;
-    }
-
-  } else if(val == 1){       /////////////// OVERLAY OFF
-    overlayToggle = false;
-    document.getElementById('overlayActive').style.display = "none";
-    document.getElementById('noOverlayActive').style.display = "flex";
-
-    document.getElementById('radioInlineToggle0').checked = false;
-    document.getElementById('radioInlineToggle1').checked = true;
-
-    document.getElementById('inlineToggle').style.opacity = "100%";
-    document.getElementById('inlineToggle').style.pointerEvents = "auto";
-
+    setInlineToggle(false);
+  } else {
+    document.getElementById('inlineToggleSet').style.opacity = "100%";
+    document.getElementById('inlineToggleSet').style.pointerEvents = "auto";    
   }
-
-  console.log("overlayToggle: " + overlayToggle);
 
   loop();
 }
 
-function setPunctuationToggle(val){
-  if(val == 0){
-    puncToggle = true;
-    document.getElementById('punctuationSelector').style.opacity = "100%";
-    document.getElementById('punctuationSelector').style.pointerEvents = "auto";
+function setBaseDindex(val){                 //////// BASE D
+  if(radioVibe == 0){                 //////// BLACK TIE
+    baseDindex += val;
 
-  } else if(val == 1){
-    puncToggle = false;
-    document.getElementById('punctuationSelector').style.opacity = "25%";
-    document.getElementById('punctuationSelector').style.pointerEvents = "none";
+    if(baseDindex < 0){
+      baseDindex = baseDcount - 1;
+    } else if(baseDindex >= baseDcount){
+      baseDindex = 0;
+    }
+    var newURL = "resources/images/base_" + baseDindex + ".png";
+    document.getElementById('img_baseD').style.webkitMask = `url('${newURL}') no-repeat center`;
+    document.getElementById('img_baseD').style.webkitMaskSize = "contain";
+    document.getElementById('img_baseD').style.mask = `url('${newURL}') no-repeat center`;
+    document.getElementById('img_baseD').style.maskSize = "contain";
+  
+    console.log("BASEDINDEX IS NOW: " + baseDindex);
+
+  } else {                           //////// DISCO
+    discoDindex += val;
+
+    if(discoDindex < 0){
+      discoDindex = discoDcount - 1;
+    } else if(discoDindex >= discoDcount){
+      discoDindex = 0;
+    }
+
+    if(discoDindex < 5){
+      outlineMode = 0;
+    } else {
+      outlineMode = 1;
+    }
+    setOutlineIndex(0);
+
+    if(discoDindex == 3 || discoDindex == 4 || discoDindex == 8 || discoDindex == 9 || discoDindex == 10){
+      document.getElementById('inlineToggleSet').style.opacity = "25%";
+      document.getElementById('inlineToggleSet').style.pointerEvents = "none";
+      setInlineToggle(false);
+      document.getElementById('inlineToggle1').checked = "true";
+
+    } else {
+      document.getElementById('inlineToggleSet').style.opacity = "100%";
+      document.getElementById('inlineToggleSet').style.pointerEvents = "auto";
+    }
+
+    var newURL = "resources/images/disco_" + discoDindex + ".png";
+    document.getElementById('img_discoD').style.webkitMask = `url('${newURL}') no-repeat center`;
+    document.getElementById('img_discoD').style.webkitMaskSize = "contain";
+    document.getElementById('img_discoD').style.mask = `url('${newURL}') no-repeat center`;
+    document.getElementById('img_discoD').style.maskSize = "contain";
+  
+    console.log("DISCODINDEX IS NOW: " + discoDindex);
+
   }
+
+
+  loop();
+}
+
+function setDiscoAlignToggle(val){
+  discoAlignToggle = val;
+  discoAlignRan = int(random(4));
+  console.log("RANDOM NUMBER GENERATED: " + discoAlignRan);
+
+  loop();
+}
+
+function setBaseDtoggle(val){
+  baseDtoggle = val;
+
+  if(baseDtoggle){
+    document.getElementById('baseD_selector').style.opacity = "100%";
+    document.getElementById('baseD_selector').style.pointerEvents = "auto";
+  } else {
+    document.getElementById('baseD_selector').style.opacity = "25%";
+    document.getElementById('baseD_selector').style.pointerEvents = "none";
+    
+    document.getElementById('inlineToggleSet').style.opacity = "100%";
+    document.getElementById('inlineToggleSet').style.pointerEvents = "auto";
+  }
+
+  loop();
+}
+
+function setInlineToggle(val){
+  inlineToggle = val;
+
+  if(inlineToggle){
+    document.getElementById('inlineDselector').style.opacity = "100%";
+    document.getElementById('inlineDselector').style.pointerEvents = "auto";
+
+  } else {
+    document.getElementById('inlineDselector').style.opacity = "25%";
+    document.getElementById('inlineDselector').style.pointerEvents = "none";
+
+  }
+
+  console.log("INLINETOGGLE IS NOW: " + inlineToggle);
+
+  loop();
+}
+
+function setInlineDindex(val){
+  inlineDindex += val;
+
+  if(inlineDindex < 0){
+    inlineDindex = inlineDcount - 1;
+  } else if(inlineDindex >= inlineDcount){
+    inlineDindex = 0;
+  }
+
+  var newURL = "resources/images/inline_" + inlineDindex + ".png";
+  document.getElementById('img_inlineD').style.webkitMask = `url('${newURL}') no-repeat center`;
+  document.getElementById('img_inlineD').style.webkitMaskSize = "contain";
+  document.getElementById('img_inlineD').style.mask = `url('${newURL}') no-repeat center`;
+  document.getElementById('img_inlineD').style.maskSize = "contain";
+
+  // document.getElementById('img_inlineD').src = "resources/images/inline_" + inlineDindex + ".png";
+
+  console.log("INLINEDINDEX IS NOW: " + inlineDindex);
+
+  loop();
+}
+
+function setDotColorIndex(val){
+  dotColorIndex += val;
+
+  if(dotColorIndex < 0){
+    dotColorIndex = dotColor.length - 1;
+  } else if(dotColorIndex >= dotColor.length){
+    dotColorIndex = 0;
+  }
+  document.getElementById('dotColor').style.backgroundColor = dotColor[dotColorIndex];
+  document.getElementById('dotColorOverlay').style.backgroundColor = dotColor[dotColorIndex];
+
+  if(monochromeToggle){
+    document.getElementById('img_baseD').style.backgroundColor = dotColor[dotColorIndex];
+
+    document.getElementById('overlay_L').style.fill = dotColor[dotColorIndex];
+    document.getElementById('overlay_C').style.fill = bkgdColor;
+    document.getElementById('overlay_R').style.fill = dotColor[dotColorIndex];
+  } else {
+    document.getElementById('overlay_L').style.fill = foreColor;
+    document.getElementById('overlay_C').style.fill = overlapColor[dotColorIndex];
+    document.getElementById('overlay_R').style.fill = dotColor[dotColorIndex];
+  }
+
+  setLockupChromeToggle(lockupChromeToggle);
+
+  console.log("DOTCOLORINDEX IS NOW: " + dotColorIndex);
+
+  loop();
+}
+
+function setMonochromeToggle(val){
+  monochromeToggle = val;
+
+  if(monochromeToggle){
+    document.getElementById('img_baseD').style.backgroundColor = dotColor[dotColorIndex];
+
+    document.getElementById('inlineToggle1').checked = true;
+    document.getElementById('inlineToggleSet').style.opacity = "25%";
+    document.getElementById('inlineToggleSet').style.pointerEvents = "none";    
+    setInlineToggle(false);
+
+    document.getElementById('overlayToggle0').checked = true;
+    document.getElementById('overlay_right').style.opacity = "25%";
+    document.getElementById('overlay_right').style.pointerEvents = "none";    
+    setOverlayToggle(true);
+
+  } else {
+    document.getElementById('img_baseD').style.backgroundColor = "#000000";
+
+    document.getElementById('inlineToggleSet').style.opacity = "100%";
+    document.getElementById('inlineToggleSet').style.pointerEvents = "auto";    
+
+    document.getElementById('overlay_right').style.opacity = "100%";
+    document.getElementById('overlay_right').style.pointerEvents = "auto";
+  }
+
+  setDotColorIndex(dotColorIndex);
+
+  loop();
+}
+
+function setPuncIndex(val){
+  puncIndex += val;
+
+  if(puncIndex < 0){
+    puncIndex = puncCount - 1;
+  } else if(puncIndex >= puncCount){
+    puncIndex = 0;
+  }
+
+  var newURL = "resources/images/punc_" + puncIndex + ".png";
+  document.getElementById('img_punc').style.webkitMask = `url('${newURL}') no-repeat center`;
+  document.getElementById('img_punc').style.webkitMaskSize = "contain";
+  document.getElementById('img_punc').style.mask = `url('${newURL}') no-repeat center`;
+  document.getElementById('img_punc').style.maskSize = "contain";
+
+  console.log("PUNC INDEX IS NOW: " + puncIndex);
+
+  loop();
+}
+
+function setPuncToggle(val){
+  puncToggle = val;
+
+  if(puncToggle){
+    document.getElementById('punc_selector').style.opacity = "100%";
+    document.getElementById('punc_selector').style.pointerEvents = "auto";
+
+  } else {
+    document.getElementById('punc_selector').style.opacity = "25%";
+    document.getElementById('punc_selector').style.pointerEvents = "none";
+
+  }
+
+  loop();
+}
+
+function setLockupToggle(val){
+  lockupToggle = val;
+
+  if(lockupToggle){
+    document.getElementById('lockup_selector').style.opacity = "100%";
+    document.getElementById('lockup_selector').style.pointerEvents = "auto";
+
+  } else {
+    document.getElementById('lockup_selector').style.opacity = "25%";
+    document.getElementById('lockup_selector').style.pointerEvents = "none";
+
+  }
+
+  loop();
+}
+
+function setLockupIndex(val){
+  lockupIndex += val;
+
+  if(lockupIndex < 0){
+    lockupIndex = lockupCount - 1;
+  } else if(lockupIndex >= lockupCount){
+    lockupIndex = 0;
+  }
+
+  document.getElementById('lockup_circle').style.display = "none";
+  document.getElementById('lockup_stanford').style.display = "none";
+  document.getElementById('lockup_hasso').style.display = "none";
+
+  if(lockupIndex == 0){
+    document.getElementById('lockup_circle').style.display = "block";
+    document.getElementById('lockup_chrome0').style.opacity = "25%";
+    document.getElementById('lockup_chrome0').style.pointerEvents = "none";
+    document.getElementById('lockup_chrome1').style.opacity = "25%";
+    document.getElementById('lockup_chrome1').style.pointerEvents = "none";
+
+  } else if(lockupIndex == 1){
+    document.getElementById('lockup_stanford').style.display = "block";
+    document.getElementById('lockup_chrome0').style.opacity = "100%";
+    document.getElementById('lockup_chrome0').style.pointerEvents = "auto";
+    document.getElementById('lockup_chrome1').style.opacity = "100%";
+    document.getElementById('lockup_chrome1').style.pointerEvents = "auto";
+
+  } else if(lockupIndex == 2){
+    document.getElementById('lockup_hasso').style.display = "block";
+    document.getElementById('lockup_chrome0').style.opacity = "100%";
+    document.getElementById('lockup_chrome0').style.pointerEvents = "auto";
+    document.getElementById('lockup_chrome1').style.opacity = "100%";
+    document.getElementById('lockup_chrome1').style.pointerEvents = "auto";
+
+  }
+
+  loop();
+}
+
+function setLockupChromeToggle(val){
+  lockupChromeToggle = val;
+
+  if(lockupChromeToggle){
+    document.getElementById('stanford_0').style.fill = dotColor[dotColorIndex];
+    document.getElementById('stanford_1').style.fill = dotColor[dotColorIndex];
+    document.getElementById('hasso_0').style.fill = dotColor[dotColorIndex];
+    document.getElementById('hasso_1').style.fill = dotColor[dotColorIndex];
+
+  } else {
+    document.getElementById('stanford_0').style.fill = foreColor;
+    document.getElementById('stanford_1').style.fill = foreColor;
+    document.getElementById('hasso_0').style.fill = foreColor;
+    document.getElementById('hasso_1').style.fill = foreColor;
+
+  }
+
+  loop();
+}
+
+function setDiscoColorIndex(val){
+  discoColorIndex += val;
+
+  if(discoColorIndex < 0){
+    discoColorIndex = discoColorCount - 1;
+  } else if(discoColorIndex >= discoColorCount){
+    discoColorIndex = 0;
+  }
+
+  for(var m = 0; m < 4; m++){
+    document.getElementById('disco'+m).style.backgroundColor = discoColor[discoColorIndex][invertToggleIndex][m];
+  }
+
+  if(discoColorIndex == 2){
+    if(invertToggle){
+      document.getElementById('disco1').style.border = "1px solid white";
+
+    } else {
+      document.getElementById('disco1').style.border = "1px solid black";
+
+    }
+  } else if(discoColorIndex == 4 && invertToggle == false){
+    document.getElementById('disco1').style.border = "1px solid black";
+  } else {
+    document.getElementById('disco1').style.border = "none";
+  }
+
+  document.getElementById('img_inlineD').style.background = "none";
+
+
+  document.getElementById('img_discoD').style.backgroundColor = discoColor[discoColorIndex][invertToggleIndex][0];
+  document.getElementById('img_inlineD').style.backgroundColor = discoColor[discoColorIndex][invertToggleIndex][1];
+  document.getElementById('img_punc').style.backgroundColor = discoColor[discoColorIndex][invertToggleIndex][2];
+  document.getElementById('img_outline').style.backgroundColor = discoColor[discoColorIndex][invertToggleIndex][3];
+
+  if(discoColorIndex == 2){
+    document.getElementById('img_inlineD').style.background = "linear-gradient(to top, black, white)";
+  } else if(discoColorIndex == 4 && invertToggle == false){
+    document.getElementById('img_inlineD').style.background = "linear-gradient(to top, black, white)";
+
+  }
+
+  loop();
+}
+
+function setOutlineIndex(val){
+  outlineIndex += val;
+
+  if(outlineIndex < 0){
+    outlineIndex = outlineCount - 1;
+
+  } else if(outlineIndex >= outlineCount){
+    outlineIndex = 0;
+  }
+
+  if(outlineIndex == 3){
+    document.getElementById('baseDtoggleSet').style.opacity = "100%";
+    document.getElementById('baseDtoggleSet').style.pointerEvents = "auto";   
+    
+  } else {
+    document.getElementById('baseDtoggleSet').style.opacity = "25%";
+    document.getElementById('baseDtoggleSet').style.pointerEvents = "none";
+    setBaseDtoggle(false);
+    document.getElementById('baseDtoggle1').checked = "true";
+
+  }
+
+  var newURL;
+  if(outlineMode == 0){
+    newURL = "resources/images/outline_A" + outlineIndex + ".png";
+  } else {
+    newURL = "resources/images/outline_B" + outlineIndex + ".png";
+
+  }
+  document.getElementById('img_outline').style.webkitMask = `url('${newURL}') no-repeat center`;
+  document.getElementById('img_outline').style.webkitMaskSize = "contain";
+  document.getElementById('img_outline').style.mask = `url('${newURL}') no-repeat center`;
+  document.getElementById('img_outline').style.maskSize = "contain";
+
+  console.log("OUTLINE INDEX IS NOW: " + outlineIndex);
 
   loop();
 }
 
 function setOutlineToggle(val){
-  if(val == 0){
-    outlineToggle = true;
-    document.getElementById('outlineSelector').style.opacity = "100%";
-    document.getElementById('outlineSelector').style.pointerEvents = "auto";
+  outlineToggle = val;
 
-  } else if(val == 1){
-    outlineToggle = false;
-    document.getElementById('outlineSelector').style.opacity = "25%";
-    document.getElementById('outlineSelector').style.pointerEvents = "none";
-  }
-
-  loop();
-}
-
-function setNameOnToggle(val){
-  if(val == 0){
-    nameOnToggle = true;
-    document.getElementById('wordMarkSelector').style.opacity = "100%";
-    document.getElementById('wordMarkSelector').style.pointerEvents = "auto";
-
-  } else if(val == 1){
-    nameOnToggle = false;
-    document.getElementById('wordMarkSelector').style.opacity = "25%";
-    document.getElementById('wordMarkSelector').style.pointerEvents = "none";
-  }
-
-  console.log("nameOnToggle: " + nameOnToggle);
-
-  loop();
-}
-
-function setSaveToggle(val){
-  saveToggle = val;
-
-  if(val == 2 || val == 3){
-    alphaToggle = true;
+  if(outlineToggle){
+    document.getElementById('outline_selector').style.opacity = "100%";
+    document.getElementById('outline_selector').style.pointerEvents = "auto";
   } else {
-    alphaToggle = false;
-  }
-
-  console.log("saveToggle: " + saveToggle + " and alphaToggle is: " + alphaToggle);
-
-  loop();
-}
-
-function setDiscoOverlayToggle(val){
-  if(val == 0){
-    discoOverlay = true;
-  } else if(val == 1){
-    discoOverlay = false;
+    document.getElementById('outline_selector').style.opacity = "25%";
+    document.getElementById('outline_selector').style.pointerEvents = "none";
   }
 
   loop();
 }
 
-function setDiscoOffsetToggle(val){
-  if(val == 0){
-    discoOffset = true;
-
-    var rs0 = random(60);
-    var unit = random(5, 20);
-
-    discoOffsetX[4] = random(-15, 15); discoOffsetY[4] = random(-15, 15); 
-    discoOffsetX[0] = random(-15, 15); discoOffsetY[0] = random(-15, 15); 
-
-    if(rs0 < 10){
-      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
-      discoOffsetX[2] = unit; discoOffsetY[2] = unit; 
-      discoOffsetX[3] = unit; discoOffsetY[3] = unit;
-
-    } else if(rs0 < 20){
-      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
-      discoOffsetX[2] = -unit; discoOffsetY[2] = -unit; 
-      discoOffsetX[3] = -unit; discoOffsetY[3] = -unit; 
-
-    } else if(rs0 < 30){
-      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
-      discoOffsetX[2] = 0; discoOffsetY[2] = -unit; 
-      discoOffsetX[3] = 0; discoOffsetY[3] = -unit; 
-
-    } else if(rs0 < 40){
-      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
-      discoOffsetX[2] = 0; discoOffsetY[2] = unit; 
-      discoOffsetX[3] = 0; discoOffsetY[3] = unit; 
-
-    } else if(rs0 < 50){
-      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
-      discoOffsetX[2] = unit; discoOffsetY[2] = 0; 
-      discoOffsetX[3] = unit; discoOffsetY[3] = 0; 
-
-    }  else if(rs0 < 60){
-      discoOffsetX[1] = 0; discoOffsetY[1] = 0; 
-      discoOffsetX[2] = -unit; discoOffsetY[2] = 0; 
-      discoOffsetX[3] = -unit; discoOffsetY[3] = 0; 
-
-    } 
-
-    // for(var m = 0; m < 5; m++){
-    //   discoOffsetX[m] = random(-20, 20);
-    //   discoOffsetY[m] = random(-20, 20);
-    // }
-  } else if(val == 1){
-    for(var m = 0; m < 5; m++){
-      discoOffsetX[m] = 0;
-      discoOffsetY[m] = 0;
-    }
-
-    discoOffset = false;
-  }
-
-  console.log("OFFSET RUN!");
-
-  loop();
+function setSaveMode(val){
+  saveMode = val;
 }
 
-
-function setDiscoSaveToggle(val){
-  discoSaveToggle = val;
-
-  if(val == 2 || val == 3){
-    alphaToggle = true;
-  } else {
-    alphaToggle = false;
+function runExport(){
+  if(saveMode == 1 || saveMode == 3){
+    alphaOn = true;
   }
 
-  console.log("Disco SaveToggle: " + discoSaveToggle + " and alphaToggle is: " + alphaToggle);
+  resizeForSave();
 
-  loop();
-}
+  if(saveMode == 0 || saveMode == 1){
+    console.log("SAVE SVG!")
+    save('dschool_logo.svg');
 
-function runRandomColorPlace(){
-  var test0 = discoCol[discoColIndex][0];
-  var test1 = discoCol[discoColIndex][1];
-
-  while(test0 == discoCol[discoColIndex][0] && test1 == discoCol[discoColIndex][1]){
-    for (let i = discoCol[discoColIndex].length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [discoCol[discoColIndex][i], discoCol[discoColIndex][j]] = [discoCol[discoColIndex][j], discoCol[discoColIndex][i]]; // Swap elements
-    }
+  } else if(saveMode == 2 || saveMode == 3){
+    console.log("SAVE PNG!")
+    save('dschool_logo.png');
   }
-  console.log("RANDOM COLOR RUN PLACEMENT");
 
+  windowResized();
+
+  alphaOn = false;
   loop();
 }

@@ -5,8 +5,8 @@
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>d.Pattern</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
@@ -26,6 +26,49 @@
   </head>
 
   <body>
+    <div class="overlay" id="overlay">
+      <div class="popup" id="popup">
+        <div>
+          <h1>Welcome to the d.school<br>pattern generator!</h1>
+        </div>
+        <div>
+          <p>
+            Use the <span style="font-family: TheFutureBold">Pattern Generator</span> to create vibrant<br>
+            backgrounds for digital desktops, decorations<br>
+            for events, textures for swag, and more!
+            <br>
+            <br>
+            Looking for our primary logo marks?<br>Download them here:  
+            </p>
+          </p>
+        </div>
+        <div>
+  
+        </div>
+  
+        <div class="button-container">
+          <div class="button-container-sub">
+            <div>
+              <a href="https://dschool.stanford.edu/"  target="_blank" class="rounded-button">Download our Primary Marks</a>
+            </div>
+            <div>
+              <button class="rounded-button2" onclick="hidePopup()">Get Started</button>
+            </div>
+          </div>
+  
+          <div class="button-container-sub">
+            <div>
+              <a href="https://dschool.stanford.edu/"  target="_blank"  class="rounded-button">Download our B&W Primary Marks</a>
+            </div>
+            <div>
+              <a href="https://dschool.stanford.edu/"  target="_blank"  class="rounded-button2">Back to Brand Site</a>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+
     <div class="fullSet">
       <div class="lCol">            <!-- LEFT SIDE  -->
         <div class="lTopRow">        <!-- TOP ROW: HEADLINE, SWITCHES -->
@@ -101,7 +144,7 @@
           <div class="patternSettings">
             <div class="rUnitBig">
               <div class="rUnitBig_selectSet">
-                <p class="rUnitBig_label">Select Your d's</p>
+                <p class="rUnitBig_label">Base Layer</p>
                 <div class="rUnitBig_select_gallery">
                   <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_0.png" id="d0" onclick="setBaseIndex(0)"></div>
                   <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_1.png" id="d1" onclick="setBaseIndex(1)"></div>
@@ -109,6 +152,8 @@
                   <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_3.png" id="d3" onclick="setBaseIndex(3)"></div>
                   <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_4.png" id="d4" onclick="setBaseIndex(4)"></div>
                   <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_5.png" id="d5" onclick="setBaseIndex(5)"></div>
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_6.png" id="d6" onclick="setBaseIndex(6)"></div>
+                  <div class="rUnitBig_select_gallery_unit"><img src="resources/images/base_7.png" id="d7" onclick="setBaseIndex(7)"></div>
                 </div>
               </div>
             </div>
@@ -116,19 +161,20 @@
             <div class="rUnitBig">
 
               <div class="rUnitBig_selectSetHalf">
-                <p class="rUnitBig_label">Inline</p>
+                <p class="rUnitBig_label">Inline Layer</p>
                 <div class="rUnitBig_select_gallery">
                   <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/inline_0.png" id="i0" onclick="setInlineIndex(0)"></div>
                   <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/inline_1.png" id="i1" onclick="setInlineIndex(1)"></div>
                 </div>
               </div>
 
-              <div class="rUnitBig_selectSetHalf" id="discoOutlineMode">
-                <p class="rUnitBig_label">Outline</p>
+              <div class="rUnitBig_selectSetHalf">
+                <p class="rUnitBig_label">Outline Layer</p>
                 <div class="rUnitBig_select_gallery">
                   <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_0.png" id="o0" onclick="setOutlineIndex(0)"></div>
                   <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_1.png" id="o1" onclick="setOutlineIndex(1)"></div>
                   <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_2.png" id="o2" onclick="setOutlineIndex(2)"></div>
+                  <div class="rUnitBig_selectHalf_gallery_unit"><img src="resources/images/outline_3.png" id="o3" onclick="setOutlineIndex(3)"></div>
                 </div>
               </div>
 
@@ -139,7 +185,6 @@
                 <p class="rUnitBig_label">Punctuation</p>
                 <div class="rUnitBig_select_gallery">
                   <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_0.png" id="p0" onclick="setPuncIndex(0)"></div>
-                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_10.png" id="p10" onclick="setPuncIndex(10)"></div>
                   <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_1.png" id="p1" onclick="setPuncIndex(1)"></div>
                   <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_2.png" id="p2" onclick="setPuncIndex(2)"></div>
                   <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_3.png" id="p3" onclick="setPuncIndex(3)"></div>
@@ -149,9 +194,21 @@
                   <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_7.png" id="p7" onclick="setPuncIndex(7)"></div>
                   <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_8.png" id="p8" onclick="setPuncIndex(8)"></div>
                   <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_9.png" id="p9" onclick="setPuncIndex(9)"></div>
+                  <!-- <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_9.png" id="p9" onclick="setPuncIndex(9)"></div> -->
                 </div>
               </div>
             </div>
+
+            <!-- <div class="rUnitBig">
+              <div class="rUnitBig_selectSet">
+                <p class="rUnitBig_label">Select Your d Pieces</p>
+                <div class="rUnitBig_select_gallery">
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_0.png" id="e0" onclick="setPuncIndex(0)"></div>
+                  <div class="rUnitBig_select_gallery_unitPunc"><img src="resources/images/punc_1.png" id="e1" onclick="setPuncIndex(10)"></div>
+
+                </div>
+              </div>
+            </div> -->
 
             <div class="rUnit">
               <div class="rUnit_sliderSet">
@@ -220,67 +277,70 @@
             </div>
   
             <div class="rUnit">
-              <p class="rUnit_label">Color Mode</p>
-
               <div class="rUnit_buttonSet">
 
                 <div class="rUnit_buttons">
-                  <input type="radio" id="radioColMode0" onclick="setColMode(0)" name="radioColModes" checked>
-                    <label for="radioColMode0">Black Tie</label>
-                  <input type="radio" id="radioColMode1" onclick="setColMode(1)" name="radioColModes">
-                    <label for="radioColMode1">Disco Mode</label>
+                  <input type="radio" id="overlayToggle0" onclick="setOverlayToggle(true)" name="overlayToggle">
+                    <label for="overlayToggle0">Overlay</label>
+                  <input type="radio" id="overlayToggle1" onclick="setOverlayToggle(false)" name="overlayToggle" checked>
+                    <label for="overlayToggle1">No Overlay</label>
                 </div>
 
               </div> 
             </div>
 
-            <div class="rUnitBig">
+            <div class="rUnitHuge">
+              <p class="rUnitHuge_label">Color Settings</p>
 
-              <div class="rUnitBig_selectSetHalf">
-                <p class="rUnitBig_label">Background Color</p>
-                <div class="rUnitBig_select_gallery">
-                  <div class="rUnitBig_selectHalf_gallery_unit"> <img src="resources/images/highlight.png" id="bkgd0" class="imgHighlight"> <img src="resources/images/bkgdSwatch_0.png" onclick="setBkgdColor(0)"></div>
-                  <div class="rUnitBig_selectHalf_gallery_unit"> <img src="resources/images/highlight.png" id="bkgd1" class="imgHighlight"> <img src="resources/images/bkgdSwatch_1.png" onclick="setBkgdColor(1)"></div>
-                </div>
-              </div>
+              <div class="rUnitHuge_column">
+                <div class="rUnitHuge_row">
 
-              <div class="rUnitBig_selectSetHalf" id = "defaultColMode">
-                <p class="rUnitBig_label">Black Tie Color Set</p>
-                <div class="rUnitBig_select_gallery">
-                  <div class="rUnitBig_selectHalf_gallery_arrow" onclick="setSwatchIndex(-1)"><img src="resources/images/selector_left.png"></div>
-                  <div class="rUnitBig_selectHalf_gallery_unit2"><img id="swatch0" src="resources/images/color_1.png"></div>
-                  <div class="rUnitBig_selectHalf_gallery_arrow" onclick="setSwatchIndex(1)"><img src="resources/images/selector_right.png"></div>
-                </div>
-                
-              </div>
+                  <div class="rUnitHuge_row0">
+                    <input type="radio" id="colorMode1" onclick="setColMode(1)" name="colorMode">
+                      <label for="colorMode1">Color Sets</label>
+                  </div>
 
-              <div class="rUnitBig_selectSetHalf" id = "discoColMode">
-                <p class="rUnitBig_label">Disco Mode Color Set</p>
-                <div class="rUnitBig_select_gallery">
-                  <div class="rUnitBig_selectHalf_gallery_arrow" onclick="setDiscoColIndex(-1)"><img src="resources/images/selector_left.png"></div>
-                  <div class="rUnitBig_selectHalf_gallery_unit2"><img id="discoSwatch0" src="resources/images/discoCol_0_0.png"></div>
-                  <div class="rUnitBig_selectHalf_gallery_unit2"><img id="discoSwatch1" src="resources/images/discoCol_0_1.png"></div>
-                  <div class="rUnitBig_selectHalf_gallery_unit2"><img id="discoSwatch2" src="resources/images/discoCol_0_2.png"></div>
-                  <div class="rUnitBig_selectHalf_gallery_arrow" onclick="setDiscoColIndex(1)"><img src="resources/images/selector_right.png"></div>
+                  <div class="rUnitHuge_row1" id="discoColorSelector">
+                    <div class="botUnit_selector_arrow" onclick="setDiscoColIndex(-1)"><img src="resources/images/selector_left.png"></div>
+                    <div class="botUnit_selector_center"><div class="selector_dotColor" id="colorSet0"></div></div>
+                    <div class="botUnit_selector_center"><div class="selector_dotColor" id="colorSet1"></div></div>
+                    <div class="botUnit_selector_center"><div class="selector_dotColor" id="colorSet2"></div></div>
+                    <div class="botUnit_selector_arrow" onclick="setDiscoColIndex(1)"><img src="resources/images/selector_right.png"></div>
+                  </div>
+
                 </div>
-                
+
+                <div class="rUnitHuge_row">
+
+                  <div class="rUnitHuge_row0">
+                    <input type="radio" id="colorMode0" onclick="setColMode(0)" name="colorMode" checked>
+                      <label for="colorMode0">Monochrome</label>
+                  </div>
+
+                  <div class="rUnitHuge_row1" id="monochromSelector">
+                    <div class="botUnit_selector_arrow" onclick="setSwatchIndex(-1)"><img src="resources/images/selector_left.png"></div>
+                    <div class="botUnit_selector_center"><div class="selector_dotColor" id="colorSetMono"></div></div>
+                    <div class="botUnit_selector_arrow" onclick="setSwatchIndex(1)"><img src="resources/images/selector_right.png"></div>
+                  </div>
+
+                </div>
+
+                <div class="rUnitHuge_row">
+                  <div class="rUnitHuge_row0">
+                    <button class="buttonLabel" type="button">Background</button>
+                  </div>
+
+                  <div class="rUnitHuge_row1">
+                    <div class="botUnit_selector_arrow" onclick="setBkgdColor(-1)"><img src="resources/images/selector_left.png"></div>
+                    <div class="botUnit_selector_center"><div class="selector_dotColor" id="bkgdColor"></div></div>
+                    <div class="botUnit_selector_arrow" onclick="setBkgdColor(1)"><img src="resources/images/selector_right.png"></div>
+                  </div>
+
+                </div>
               </div>
 
             </div>
-
-            <div class="rUnitSmall" id="discoButton">
-              <div class="rUnit_buttonSet">
-
-                <div class="rUnit_buttons">
-                </div>
-
-                <div class="rUnit_buttons">
-                  <button type="button" onclick="runRandomColorPlace()">Random Order</button>
-                </div>
-
-              </div> 
-            </div>
-
+            
             <div class="rUnit">
               <p class="rUnit_label">Save</p>
 
@@ -301,8 +361,10 @@
             </div>
 
             <div class="rUnit_contentSet">
-              <p class="rUnit_content">Visual Design: Daniel Frumhoff + Kiel Mutschelknaus</p>
-              <p class="rUnit_content">Code + Development: Kiel Mutschelknaus</p>
+              <p class="rUnit_content">
+                Visual Design: Daniel Frumhoff
+                <br>
+                Code + Development: Kiel Mutschelknaus</p>
             </div>
 
           </div>
@@ -315,37 +377,15 @@
 
 
     <script>
-      let swatchIndex = 1;
-      var swatchVisuals = [];
-      var swatchCount = 28;
-
-      for(var m = 0; m < swatchCount; m++){
-        swatchVisuals[m] = 'resources/images/color_' + m + '.png';
+      function hidePopup() {
+        document.getElementById("overlay").style.display = "none";
       }
 
-      var discoColIndex = 0;
-      var discoColVisual = [];
-      var discoColSetCount = 19;
-      for(var m = 0; m < discoColSetCount; m++){
-        discoColVisual[m] = [];
-        for(var n = 0; n < 3; n++){
-          discoColVisual[m][n] = 'resources/images/discoCol_' + m + '_' + n + '.png'
+      document.getElementById('overlay').addEventListener('click', (event) => {
+        if (event.target === document.getElementById('overlay')) {
+          hidePopup();
         }
-      }
-
-      function showDiscoColVisual(index) { 
-        const swatchLelement = document.getElementById('discoSwatch0');
-        const swatchCelement = document.getElementById('discoSwatch1');
-        const swatchRLelement = document.getElementById('discoSwatch2');
-        swatchLelement.src = discoColVisual[discoColIndex][0];
-        swatchCelement.src = discoColVisual[discoColIndex][1];
-        swatchRLelement.src = discoColVisual[discoColIndex][2];
-      }
-
-      function showColorVisual(index) {
-        const swatchElement = document.getElementById('swatch0');
-        swatchElement.src = swatchVisuals[swatchIndex];
-      }
+      });
 
     </script>
   </body>
