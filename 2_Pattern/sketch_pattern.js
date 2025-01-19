@@ -32,7 +32,14 @@ var outlineIndexSet = [];
 var outlineIndexToggles = [];
 var noOutlineToggles = true;
 
+var pdIndex = 0
+var pdCount = 12
+var pdIndexSet = [];
+var pdIndexToggles = [];
+
 var overlayToggle = false;
+
+var pickDmode = false;
 
 var swatchCol = [];
 
@@ -104,6 +111,12 @@ function setup(){
     puncIndexToggles[m] = false;
   }
 
+
+  pdIndexSet[0] = null;
+  for(var m = 0; m < pdCount; m++){
+    pdIndexToggles[m] = false;
+  }
+
   figurePattern();
 }
 
@@ -170,95 +183,70 @@ function drawPattern(){
         scale(0.4);
         scale(markScale);
 
-        ////////////////// DRAW Ds        
-        ////////////////// DRAW BASEs    
-        
-        ////////////////// DRAW PUNC, On top
-        if(overlayToggle == false){
+        noStroke();
+
+        if(pickDmode){        //////////// PICK D MODE
+          if(colMode == 0){
+            fill(swatchCol[swatchIndex]);
+          } else {
+            fill(discoCol[discoColIndex][bkgdIndex][(n)%3]);
+          }
+          drawPickD(n%pdIndexSet.length);
+
+        } else {             //////////// REGULAR D MODE          
+          ////////////////// DRAW PUNC, On top
+          if(overlayToggle == false){
+            if(colMode == 0){
+              fill(swatchCol[swatchIndex]);
+            } else {
+              fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
+            }
+            drawPunc(n%puncIndexSet.length);
+          }
+
           noStroke();
           if(colMode == 0){
             fill(swatchCol[swatchIndex]);
           } else {
-            fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
+            fill(discoCol[discoColIndex][bkgdIndex][(n+2)%3]);
           }
-          drawPunc(n%puncIndexSet.length);
-        }
+          drawOutlineD(0, n%outlineIndexSet.length);
 
-        noStroke();
-        if(colMode == 0){
-          fill(swatchCol[swatchIndex]);
-        } else {
-          fill(discoCol[discoColIndex][bkgdIndex][(n+2)%3]);
-        }
-        drawOutlineD(0, n%outlineIndexSet.length);
-
-        if(colMode == 0){
-          fill(foreColor);
-        } else {
-          fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
-        }
-        drawBase(n%baseIndexSet.length);
-
-        // if(colMode == 1){
-        //   if(noOutlineToggles){
-        //     noStroke();
-        //     fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
-        //     drawBase(n%baseIndexSet.length);
-
-        //   } else {
-        //     console.log("IS THIS LAUNCHING?")
-
-        //     fill(discoCol[discoColIndex][bkgdIndex][(n+2)%3]);
-        //     drawOutlineD(n%outlineIndexSet.length)
-        //     // if(outlineIndexSet[n%outlineIndexSet.length] == 0){
-        //     //   strokeWeight(5 * markScale);
-        //     //   drawBase(n%baseIndexSet.length, true);
-  
-        //     // } else if(outlineIndexSet[n%outlineIndexSet.length] == 1){
-        //     //   strokeWeight(14 * markScale);
-        //     //   drawBase(n%baseIndexSet.length, true);
-  
-        //     // } else if(outlineIndexSet[n%outlineIndexSet.length] == 2){
-        //     //   strokeWeight(14 * markScale);
-        //     //   drawBase(n%baseIndexSet.length, false);
-  
-        //     // }
-        //     fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
-        //     drawBase(n%baseIndexSet.length);
-        //   }
-
-        // } else if(colMode == 0){
-        //   drawBase(n%baseIndexSet.length);
-        // }
-        
-        ////////////////// DRAW INLINEs        
-
-        noStroke();
-        if(inlineOn){
-          if(noBaseToggles){
-            if(colMode == 0){
-              fill(foreColor);
-            } else {
-              fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
-            }
+          ////////////////// DRAW BASEs    
+          if(colMode == 0){
+            fill(foreColor);
           } else {
+            fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
+          }
+          drawBase(n%baseIndexSet.length);
+
+          noStroke();
+          if(inlineOn){
+            if(noBaseToggles){
+              if(colMode == 0){
+                fill(foreColor);
+              } else {
+                fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
+              }
+            } else {
+              if(colMode == 0){
+                fill(bkgdColor);
+              } else {
+                fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
+              }
+            }
+            drawInline();
+          }
+
+          ////////////////// DRAW PUNC, On top
+          if(overlayToggle){
             if(colMode == 0){
-              fill(bkgdColor);
+              fill(swatchCol[swatchIndex]);
             } else {
               fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
             }
+            drawPunc(n%puncIndexSet.length);
           }
-          drawInline();
-        }
-
-        ////////////////// DRAW PUNC, On top
-        if(overlayToggle){
-          if(colMode == 0){
-            fill(swatchCol[swatchIndex]);
-          } else {
-            fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
-          }
-          drawPunc(n%puncIndexSet.length);
         }
 
       pop();
@@ -293,67 +281,74 @@ function drawPatternFlip(){
         scale(markScale);
 
         if(m%2 == 0){
-          // translate(widthFac/2, heightFac/2);
           rotate(PI);
           translate(-widthFac * 0.95, -heightFac * 3.45);
         }
 
-        if(overlayToggle == false){
-          noStroke();
+        noStroke();
+        if(pickDmode){        //////////// PICK D MODE
           if(colMode == 0){
             fill(swatchCol[swatchIndex]);
           } else {
-            fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
+            fill(discoCol[discoColIndex][bkgdIndex][(n)%3]);
           }
-          drawPunc(n%puncIndexSet.length);
-        }
+          drawPickD(n%pdIndexSet.length);
 
-        ////////////////// DRAW Ds        
-        ////////////////// DRAW BASEs   
-
-        noStroke();
-        if(colMode == 0){
-          fill(swatchCol[swatchIndex]);
-        } else {
-          fill(discoCol[discoColIndex][bkgdIndex][(n+2)%3]);
-        }
-        drawOutlineD(0, n%outlineIndexSet.length);
-
-        if(colMode == 0){
-          fill(foreColor);
-        } else {
-          fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
-        }
-        drawBase(n%baseIndexSet.length);
-        ////////////////// DRAW INLINEs        
-
-
-        noStroke();
-        if(inlineOn){
-          if(noBaseToggles){
+        } else {            //////////// REGULAR D MODE    
+          if(overlayToggle == false){
+            noStroke();
             if(colMode == 0){
-              fill(foreColor);
-            } else {
-              fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
-            }
-          } else {
-            if(colMode == 0){
-              fill(bkgdColor);
+              fill(swatchCol[swatchIndex]);
             } else {
               fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
             }
+            drawPunc(n%puncIndexSet.length);
           }
-          drawInline();
-        }
 
-        if(overlayToggle){
           noStroke();
           if(colMode == 0){
             fill(swatchCol[swatchIndex]);
           } else {
-            fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
+            fill(discoCol[discoColIndex][bkgdIndex][(n+2)%3]);
           }
-          drawPunc(n%puncIndexSet.length);
+          drawOutlineD(0, n%outlineIndexSet.length);
+
+          ////////////////// DRAW BASEs   
+          if(colMode == 0){
+            fill(foreColor);
+          } else {
+            fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
+          }
+          drawBase(n%baseIndexSet.length);
+          ////////////////// DRAW INLINEs        
+  
+          noStroke();
+          if(inlineOn){
+            if(noBaseToggles){
+              if(colMode == 0){
+                fill(foreColor);
+              } else {
+                fill(discoCol[discoColIndex][bkgdIndex][(n+0)%3]);
+              }
+            } else {
+              if(colMode == 0){
+                fill(bkgdColor);
+              } else {
+                fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
+              }
+            }
+            drawInline();
+          }
+  
+          if(overlayToggle){
+            noStroke();
+            if(colMode == 0){
+              fill(swatchCol[swatchIndex]);
+            } else {
+              fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
+            }
+            drawPunc(n%puncIndexSet.length);
+          }
         }
 
       pop();
@@ -367,7 +362,8 @@ function windowResized(){
   console.log("CANVAS WIDTH: " + canvasDiv.offsetWidth);
   console.log("CANVAS HEIGHT: " + canvasDiv.offsetHeight);
 
-  resizeCanvas(canvasDiv.offsetWidth, holdHeight, SVG);
+  // resizeCanvas(canvasDiv.offsetWidth, holdHeight, SVG);
+  resizeCanvas(canvasDiv.offsetWidth, canvasDiv.offsetHeight, SVG);
 
   figurePattern();
 

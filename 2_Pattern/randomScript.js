@@ -113,28 +113,7 @@ function resetEverything(){
     inverter = 1;
   }
 
-  baseIndexSet = [];
-  for(var m = 0; m < baseCount; m++){
-    baseIndexToggles[m] = false;
-    document.getElementById("d"+m).style.filter = "invert(" + inverter + ")";
-  }
-
-  outlineIndexSet = [];
-  for(var m = 0; m < outlineCount; m++){
-    outlineIndexToggles[m] = false;
-    document.getElementById("o"+m).style.filter = "invert(" + inverter + ")";
-  }
-
-  inlineOn = false;
-  inlineIndex = null;
-  document.getElementById("i0").style.filter = "invert(" + inverter + ")";
-  document.getElementById("i1").style.filter = "invert(" + inverter + ")";
-
-  puncIndexSet = [];
-  for(var m = 0; m < puncCount; m++){
-    puncIndexToggles[m] = false;
-    document.getElementById("p"+m).style.filter = "invert(" + inverter + ")";
-  }
+  resetOtherDselections();
 
   setHorzSpace(33);
   document.getElementById("horzSpace").value = 33;
@@ -166,6 +145,53 @@ function resetEverything(){
   console.log("PUNC INDEX");
   console.log(puncIndexSet);
 
+}
+
+function resetOtherDselections(){
+  pickDmode = true;
+
+  var inverter = 0;
+  if(modeToggle){
+    inverter = 1;
+  }
+
+  baseIndexSet = [];
+  for(var m = 0; m < baseCount; m++){
+    baseIndexToggles[m] = false;
+    document.getElementById("d"+m).style.filter = "invert(" + inverter + ")";
+  }
+
+  outlineIndexSet = [];
+  for(var m = 0; m < outlineCount; m++){
+    outlineIndexToggles[m] = false;
+    document.getElementById("o"+m).style.filter = "invert(" + inverter + ")";
+  }
+
+  inlineOn = false;
+  inlineIndex = null;
+  document.getElementById("i0").style.filter = "invert(" + inverter + ")";
+  document.getElementById("i1").style.filter = "invert(" + inverter + ")";
+
+  puncIndexSet = [];
+  for(var m = 0; m < puncCount; m++){
+    puncIndexToggles[m] = false;
+    document.getElementById("p"+m).style.filter = "invert(" + inverter + ")";
+  }
+}
+
+function resetPickDselections(){
+  pickDmode = false;
+
+  var inverter = 0;
+  if(modeToggle){
+    inverter = 1;
+  }
+
+  pdIndexSet = [];
+  for(var m = 0; m < pdCount; m++){
+    pdIndexToggles[m] = false;
+    document.getElementById("pd"+m).style.filter = "invert(" + inverter + ")";
+  }
 }
 
 function setPatternPreset(val){

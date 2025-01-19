@@ -248,6 +248,7 @@ function setBaseIndex(val){
     console.log("NO BASE INDEXES");
     noBaseToggles = true;
   } else {
+    resetPickDselections();
     console.log("YES BASE INDEXES");
     noBaseToggles = false;
   }
@@ -282,12 +283,45 @@ function setOutlineIndex(val){
     console.log("NO OUTLINE INDEXES");
     noOutlineToggles = true;
   } else {
+    resetPickDselections();
     console.log("YES OUTLINE INDEXES");
     noOutlineToggles = false;
   }
 
   console.log(outlineIndexSet);
   console.log(outlineIndexToggles);
+
+  loop();
+}
+
+function setPdIndex(val){
+  pdIndexToggles[val] = !pdIndexToggles[val];
+
+  if(pdIndexToggles[val]){
+    document.getElementById("pd"+val).style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
+  } else {
+    if(modeToggle){
+      document.getElementById("pd"+val).style.filter = "invert(1)";
+    } else {
+      document.getElementById("pd"+val).style.filter = "invert(0)";
+    }
+  }
+
+  pdIndexSet = [];
+  for(var m = 0; m < pdCount; m++){
+    if(pdIndexToggles[m]){
+      pdIndexSet[pdIndexSet.length] = m;
+    }
+  }
+
+  if(pdIndexSet.length < 1){
+    console.log("NO PD INDEXES");
+    pickDmode = false;
+  } else {
+    resetOtherDselections();
+    console.log("YES PD INDEXES");
+    pickDmode = true;
+  }
 
   loop();
 }
@@ -316,6 +350,7 @@ function setPuncIndex(val){
     console.log("NO PUNC INDEXES");
     noPuncToggles = true;
   } else {
+    resetPickDselections();
     console.log("YES PUNC INDEXES");
     noPuncToggles = false;
   }
@@ -338,6 +373,7 @@ function setInlineIndex(val){
     inlineOn = false;
     inlineIndex = null;
   } else {
+    resetPickDselections();
     inlineOn = true;
     inlineIndex = val;
     document.getElementById("i"+val).style.filter = "invert(1) sepia(1) hue-rotate(-60deg) saturate(100000%) brightness(1.0)";
