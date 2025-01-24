@@ -650,9 +650,9 @@ input[type=radio]:checked + label {
 
   /* Pop-up container */
   .popup {
-    background: white;
+    background: var(--primary-color);
     border-radius: 15px;
-    border:1px solid black;
+    border:1px solid var(--secondary-color);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     width:640px;
     height:360px;
@@ -698,9 +698,9 @@ input[type=radio]:checked + label {
   
     display: inline-flex;
     padding: 5px 25px 5px 25px;
-    background-color: white;
-    color: black; /* var(--primary-color) text */
-    border: 1px solid black; /* Remove borders */
+    background-color: var(--primary-color);
+    color: var(--secondary-color); /* var(--primary-color) text */
+    border: 1px solid var(--secondary-color); /* Remove borders */
     border-radius: 500px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
 

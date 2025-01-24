@@ -177,6 +177,13 @@ function setDiscoAlignToggle(val){
 function setBaseDtoggle(val){
   baseDtoggle = val;
 
+  // if(outlineIndex != 3){
+  //   console.log("ACTIVATED");
+  //   setOutlineToggle(false);
+  //   document.getElementById('outlineToggle1').checked = "true";
+  // }
+  
+
   if(baseDtoggle){
     document.getElementById('baseD_selector').style.opacity = "100%";
     document.getElementById('baseD_selector').style.pointerEvents = "auto";
@@ -280,8 +287,10 @@ function setMonochromeToggle(val){
   } else {
     document.getElementById('img_baseD').style.backgroundColor = "#000000";
 
-    document.getElementById('inlineToggleSet').style.opacity = "100%";
-    document.getElementById('inlineToggleSet').style.pointerEvents = "auto";    
+    if(overlayToggle == false){
+      document.getElementById('inlineToggleSet').style.opacity = "100%";
+      document.getElementById('inlineToggleSet').style.pointerEvents = "auto";    
+    }
 
     document.getElementById('overlay_right').style.opacity = "100%";
     document.getElementById('overlay_right').style.pointerEvents = "auto";
@@ -463,8 +472,8 @@ function setOutlineIndex(val){
     document.getElementById('baseDtoggleSet').style.pointerEvents = "auto";   
     
   } else {
-    document.getElementById('baseDtoggleSet').style.opacity = "25%";
-    document.getElementById('baseDtoggleSet').style.pointerEvents = "none";
+    // document.getElementById('baseDtoggleSet').style.opacity = "25%";
+    // document.getElementById('baseDtoggleSet').style.pointerEvents = "none";
     setBaseDtoggle(false);
     document.getElementById('baseDtoggle1').checked = "true";
 

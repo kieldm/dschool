@@ -20,6 +20,9 @@ function setRadioMode(val){
     for(var m = 0; m < outlineCount; m++){
       document.getElementById("o"+m).style.filter = "invert(0)";
     }
+    for(var m = 0; m < pdCount; m++){
+      document.getElementById("pd"+m).style.filter = "invert(0)";
+    }
   } else {                    /////////////// WHITE BKGD
     modeToggle = true;
   
@@ -38,6 +41,9 @@ function setRadioMode(val){
     }
     for(var m = 0; m < outlineCount; m++){
       document.getElementById("o"+m).style.filter = "invert(1)";
+    }
+    for(var m = 0; m < pdCount; m++){
+      document.getElementById("pd"+m).style.filter = "invert(1)";
     }
   }
 

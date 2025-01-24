@@ -489,7 +489,9 @@ img {
 #pd9 {  filter: invert(1); }
 #pd10 {  filter: invert(1); }
 #pd11 {  filter: invert(1); }
-
+#pd-pieces img {
+  transform: scale(0.87);
+}
 /* RANGER */
 
 .ranger {
