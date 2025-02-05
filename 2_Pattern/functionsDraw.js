@@ -1231,3 +1231,38 @@ function drawInline(){
     }
   pop();
 }
+
+
+function movePunc(index){
+  if(puncIndexSet[index] == 0){
+    translate(0, 11.344);
+
+  } else if(puncIndexSet[index] == 1){
+    translate(20.8388, 16.486);
+
+  } else if(puncIndexSet[index] == 2){
+    translate(16.5217, 20.8823);
+
+  } else if(puncIndexSet[index] == 3){
+    translate(20.6398, 16.6727);
+
+  } else if(puncIndexSet[index] == 4){
+    translate(20.829, -27.2999);
+
+  } else if(puncIndexSet[index] == 5){
+    translate(20.7086, -32.5999);
+
+  } else if(puncIndexSet[index] == 6){
+    translate(20.7122, -12.8878);
+
+  } else if(puncIndexSet[index] == 7){
+    translate(18.7947, 15.5793);
+
+  } else if(puncIndexSet[index] == 8){
+    translate(20.7476, 16.718);
+
+  } else if(puncIndexSet[index] == 9){
+    translate(20.8993, 16.718);
+
+  }
+}

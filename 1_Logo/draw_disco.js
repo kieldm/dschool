@@ -907,7 +907,7 @@ function drawPuncOverlay(val){
       bezierVertex(348.7,323.8,333.8,348.1,333.8,381.5);
     endShape();
 
-  } else if(val == 8 || val == 9){
+  } else if(val == 8){
     beginShape();
       vertex(331.3,281.2);
       bezierVertex(331.3,304.8,346.8,324.7,369.40000000000003,330.3);
@@ -921,5 +921,55 @@ function drawPuncOverlay(val){
       vertex(369.2,458);
       vertex(369.2,358);
     endShape();
+  } else if(val == 9){
+    beginShape();
+      vertex(331.3,281.2);
+      bezierVertex(331.3,304.8,346.8,324.7,369.40000000000003,330.3);
+      vertex(369.40000000000003,230.3);
+      bezierVertex(346.8,236.2,331.3,257.1,331.3,281.2);
+    endShape();
+    beginShape();
+      vertex(369.3,366);
+      bezierVertex(345.8,369.8,328.5,387.4,328.5,412.4);
+      bezierVertex(328.5,438.09999999999997,344.7,452.79999999999995,366.8,458);
+      vertex(369.2,458);
+      vertex(369.3,458);
+      vertex(369.3,366);
+    endShape();
+
+  }
+}
+
+function movePunc(val){
+  if(val == 0){
+    translate(0, 11.344);
+
+  } else if(val == 1){
+    translate(20.8388, 16.486);
+
+  } else if(val == 2){
+    translate(16.5217, 20.8823);
+
+  } else if(val == 3){
+    translate(20.6398, 16.6727);
+
+  } else if(val == 4){
+    translate(20.829, -27.2999);
+
+  } else if(val == 5){
+    translate(20.7086, -32.5999);
+
+  } else if(val == 6){
+    translate(20.7122, -12.8878);
+
+  } else if(val == 7){
+    translate(18.7947, 15.5793);
+
+  } else if(val == 8){
+    translate(20.7476, 16.718);
+
+  } else if(val == 9){
+    translate(20.8993, 16.718);
+
   }
 }

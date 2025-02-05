@@ -193,7 +193,8 @@ function drawPattern(){
           }
           drawPickD(n%pdIndexSet.length);
 
-        } else {             //////////// REGULAR D MODE          
+        } else {             //////////// REGULAR D MODE
+     
           ////////////////// DRAW PUNC, On top
           if(overlayToggle == false){
             if(colMode == 0){
@@ -201,7 +202,12 @@ function drawPattern(){
             } else {
               fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
             }
-            drawPunc(n%puncIndexSet.length);
+            push();
+              if(noOutlineToggles == false){
+                movePunc(n%puncIndexSet.length);
+              } 
+              drawPunc(n%puncIndexSet.length);
+            pop();
           }
 
           noStroke();
@@ -245,7 +251,12 @@ function drawPattern(){
             } else {
               fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
             }
-            drawPunc(n%puncIndexSet.length);
+            push();
+              if(noOutlineToggles == false){
+                movePunc(n%puncIndexSet.length);
+              } 
+              drawPunc(n%puncIndexSet.length);
+            pop();
           }
         }
 
@@ -302,7 +313,12 @@ function drawPatternFlip(){
             } else {
               fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
             }
-            drawPunc(n%puncIndexSet.length);
+            push();
+              if(noOutlineToggles == false){
+                movePunc(n%puncIndexSet.length);
+              } 
+              drawPunc(n%puncIndexSet.length);
+            pop();
           }
 
           noStroke();
@@ -347,7 +363,12 @@ function drawPatternFlip(){
             } else {
               fill(discoCol[discoColIndex][bkgdIndex][(n+1)%3]);
             }
-            drawPunc(n%puncIndexSet.length);
+            push();
+              if(noOutlineToggles == false){
+                movePunc(n%puncIndexSet.length);
+              }             
+              drawPunc(n%puncIndexSet.length);
+            pop();
           }
         }
 

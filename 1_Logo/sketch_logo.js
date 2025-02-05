@@ -138,7 +138,7 @@ function drawDisco(){     //////////////////////////////////////////////////////
     background(bkgdColor);
   }
 
-  scale(coreScaler);
+  scale(coreScaler); 
 
   if(discoAlignToggle == false){
     if(discoAlignRan == 0){ // TL
@@ -155,11 +155,11 @@ function drawDisco(){     //////////////////////////////////////////////////////
   if(puncToggle && overlayToggle == false){
     push();
       if(outlineToggle){
-        translate(0, 11.344);
+        movePunc(puncIndex);
       }
-      if(outlineMode == 1){
-        translate(12.6109, -9.1826);
-      }
+      // if(outlineMode == 1){
+      //   translate(12.6109, -9.1826);
+      // }
       noStroke();                            /////////////// PUNCTUATION
       fill(discoColor[discoColorIndex][invertToggleIndex][2]);
       drawPunc(puncIndex);
@@ -205,11 +205,11 @@ function drawDisco(){     //////////////////////////////////////////////////////
   if(puncToggle && overlayToggle){
     push();
       if(outlineToggle){
-        translate(0, 11.344);
+        movePunc(puncIndex);
       }
-      if(outlineMode == 1){
-        translate(12.6109, -9.1826);
-      }
+      // if(outlineMode == 1){
+      //   translate(12.6109, -9.1826);
+      // }
       push();
         if(puncToggle && puncIndex == 7){
           translate(89.03493, 0);
