@@ -90,13 +90,13 @@ function runRandomSettings(){
 
   }
 
-  if(random(10) < 5){         /////////////////////////// BKGD COLOR
-    setBkgdColor(0);
+  // if(random(10) < 5){         /////////////////////////// BKGD COLOR
+  //   setBkgdColor(0);
 
-  } else {
-    setBkgdColor(1);
+  // } else {
+  //   setBkgdColor(1);
 
-  }
+  // }
 
   swatchIndex = int(random(swatchCount));
   setSwatchIndex(0);

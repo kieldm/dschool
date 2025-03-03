@@ -82,9 +82,9 @@ function runRandomCombo(){
     setDiscoColorIndex(0);
   }
 
-  if(random(10) < 5){
-    setInvertToggle();
-  }
+  // if(random(10) < 5){
+  //   setInvertToggle();
+  // }
 
   console.log("Random Combo");
 
