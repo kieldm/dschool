@@ -36,6 +36,12 @@ function setInvertToggle(){
     document.getElementById('lockup_hasso').setAttribute('fill', 'black');
   }
 
+  // to fix dot color 1
+  setColors();
+  document.getElementById('dotColor').style.backgroundColor = dotColor[dotColorIndex];
+  document.getElementById('overlay_R').style.fill = dotColor[dotColorIndex];
+  document.getElementById('dotColorOverlay').style.backgroundColor = dotColor[dotColorIndex];
+
   setLockupChromeToggle(lockupChromeToggle);
 
   if(radioVibe == 1){

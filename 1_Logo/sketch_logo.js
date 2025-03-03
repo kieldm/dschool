@@ -265,7 +265,7 @@ function resizeForSave(){
 function setColors(){
   dotColor = [
     "#ee272a",  // d.School Red
-    "#000000",  //
+    foreColor,  //
     "#ababa9",  // dark gray
     "#8c1515",  // cardinal red
     "#ff5e00",  // orange
