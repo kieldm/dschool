@@ -13,7 +13,7 @@ var discoDindex = 0;
 var discoDcount = 11;
 var discoDtoggle = true;
 
-var inlineToggle = true;
+var inlineToggle = false;
 var inlineDindex = 0;
 var inlineDcount = 2;
 
@@ -32,7 +32,7 @@ var outlineToggle = true;
 
 var lockupToggle = true;
 var lockupChromeToggle = true;
-var lockupIndex = 0;
+var lockupIndex = 1;
 var lockupCount = 3;
 
 var discoColorIndex = 0;
@@ -45,7 +45,7 @@ var monochromeToggle = false;
 var saveMode = 0;
 var alphaOn = false;
 
-var overlayToggle = false;
+var overlayToggle = true;
 
 var radioVibe = 0;
 
@@ -60,6 +60,10 @@ function setup(){
   
   setColors();
 
+  //// SETUP NEW DEFAULT VALUES
+  setLockupIndex(0);
+  setInlineToggle(inlineToggle);
+  setOverlayToggle(overlayToggle);
 }
 
 function draw(){

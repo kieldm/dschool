@@ -102,13 +102,13 @@ function setOverlayToggle(val){
 
   if(overlayToggle){
     document.getElementById('inlineToggle1').checked = true;
-    document.getElementById('inlineToggleSet').style.opacity = "25%";
-    document.getElementById('inlineToggleSet').style.pointerEvents = "none";    
+    // document.getElementById('inlineToggleSet').style.opacity = "25%";
+    // document.getElementById('inlineToggleSet').style.pointerEvents = "none";    
 
     setInlineToggle(false);
   } else {
-    document.getElementById('inlineToggleSet').style.opacity = "100%";
-    document.getElementById('inlineToggleSet').style.pointerEvents = "auto";    
+    // document.getElementById('inlineToggleSet').style.opacity = "100%";
+    // document.getElementById('inlineToggleSet').style.pointerEvents = "auto";    
   }
 
   loop();
@@ -207,9 +207,17 @@ function setBaseDtoggle(val){
 function setInlineToggle(val){
   inlineToggle = val;
 
+
   if(inlineToggle){
     document.getElementById('inlineDselector').style.opacity = "100%";
     document.getElementById('inlineDselector').style.pointerEvents = "auto";
+
+    if(overlayToggle){
+      document.getElementById("overlayToggle0").checked = false;
+      document.getElementById("overlayToggle1").checked = true;
+      setOverlayToggle(false);
+    }
+
 
   } else {
     document.getElementById('inlineDselector').style.opacity = "25%";
