@@ -269,9 +269,9 @@ function resizeForSave(){
 function setColors(){
   dotColor = [
     "#ee272a",  // d.School Red
-    foreColor,  //
+    // foreColor,  //
     "#ababa9",  // dark gray
-    "#8c1515",  // cardinal red
+    "#b1040e",  // cardinal red
     "#ff5e00",  // orange
     "#f99200",  //
     "#fbb03b",  //
@@ -301,9 +301,9 @@ function setColors(){
 
   overlapColor = [
     "#b1040e", // "#ee272a",  // d.School Red
-    "#ababa9", // "#000000",  //  ????
+    // "#ababa9", // "#000000",  //  ????
     "#767674", // "#ababa9",  // dark gray
-    "#3d0000", // "#8c1515",  // cardinal red // ????
+    "#8c1515", // "#b1040e",  // cardinal red // ????
     "#b1040e", // "#ff5e00",  // orange
     "#bf4d00", // "#f99200",  //
     "#ff5e00", // "#fbb03b",  //

@@ -1,6 +1,10 @@
 function setInvertToggle(){
   invertToggle = !invertToggle;
 
+  nestInvert();
+}
+
+function nestInvert(){
   const root = document.documentElement;
   const currentPrimary = getComputedStyle(root).getPropertyValue('--primary-color').trim();
   const currentSecondary = getComputedStyle(root).getPropertyValue('--secondary-color').trim();
@@ -17,6 +21,7 @@ function setInvertToggle(){
     document.getElementById('img_inlineD').style.backgroundColor = "#ffffff";
 
     document.getElementById('overlay_L').style.fill = "#ffffff";
+    document.getElementById('overlay_C').style.fill = "#000000";
     document.getElementById('lockup_circle').style.filter = "invert(100)";
     document.getElementById('lockup_stanford').setAttribute('fill', 'white');
     document.getElementById('lockup_hasso').setAttribute('fill', 'white');
@@ -29,10 +34,15 @@ function setInvertToggle(){
     document.getElementById('img_inlineD').style.backgroundColor = "#000000";
 
     document.getElementById('overlay_L').style.fill = "#000000";
+    document.getElementById('overlay_C').style.fill = "#ffffff";
     document.getElementById('lockup_circle').style.filter = "invert(0)";
 
     document.getElementById('lockup_stanford').setAttribute('fill', 'black');
     document.getElementById('lockup_hasso').setAttribute('fill', 'black');
+  }
+
+  if(monochromeToggle){
+    document.getElementById('overlay_L').style.fill = dotColor[dotColorIndex];
   }
 
   // to fix dot color 1
@@ -298,7 +308,8 @@ function setMonochromeToggle(val){
     setOverlayToggle(true);
 
   } else {
-    document.getElementById('img_baseD').style.backgroundColor = "#000000";
+    // document.getElementById('img_baseD').style.backgroundColor = "#000000";
+    document.getElementById('img_baseD').style.backgroundColor = foreColor;
 
     if(overlayToggle == false){
       document.getElementById('inlineToggleSet').style.opacity = "100%";
@@ -309,7 +320,7 @@ function setMonochromeToggle(val){
     document.getElementById('overlay_right').style.pointerEvents = "auto";
   }
 
-  setDotColorIndex(dotColorIndex);
+  setDotColorIndex(0);
 
   loop();
 }
@@ -409,10 +420,17 @@ function setLockupChromeToggle(val){
   lockupChromeToggle = val;
 
   if(lockupChromeToggle){
-    document.getElementById('stanford_0').style.fill = dotColor[dotColorIndex];
-    document.getElementById('stanford_1').style.fill = dotColor[dotColorIndex];
-    document.getElementById('hasso_0').style.fill = dotColor[dotColorIndex];
-    document.getElementById('hasso_1').style.fill = dotColor[dotColorIndex];
+    var thisColor;
+    if(invertToggle || dotColorIndex == 0){             ///////// if black, use Overlap color
+      thisColor = dotColor[dotColorIndex];
+    } else {                      ///////// if white, use regular color
+      thisColor = overlapColor[dotColorIndex];
+    }
+
+    document.getElementById('stanford_0').style.fill = thisColor;
+    document.getElementById('stanford_1').style.fill = thisColor;
+    document.getElementById('hasso_0').style.fill = thisColor;
+    document.getElementById('hasso_1').style.fill = thisColor;
 
   } else {
     document.getElementById('stanford_0').style.fill = foreColor;

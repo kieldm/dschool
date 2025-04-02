@@ -20,28 +20,35 @@
   <div class="overlay" id="overlay">
     <div class="popup" id="popup">
       <div>
-        <h1>Welcome to the d.school<br>logo generator!</h1>
+        <h1>Welcome to the d.school logo generator!</h1>
       </div>
+      
       <div>
         <p>
-          Our <span style="font-family: TheFutureBold">Primary Marks</span> & <span style="font-family: TheFutureBold">Black Tie</span> mode are your go-to for most uses. For celebratory moments (like individual events, posters, & swag) you may also explore <span style="font-family: TheFutureBold">Disco Mode</span>!
-          <br>
-          <br>
-          Looking for our primary logo marks?<br>Download them here:  
-          </p>
+          Just need our primary logo marks?<br>
+          Download them here:
         </p>
       </div>
-      <div>
 
+      <div>
+        <a href="https://drive.google.com/drive/folders/168EsIe1HS53JthPIKaUh5NBbpPvCn8xd?usp=share_link"  target="_blank" class="rounded-button">Download our Primary Marks</a>
       </div>
 
-      <div class="button-container">
+      <div>
+        <p>
+          If you’re using the generator, Black Tie mode is your go–to. For celebratory moments (like individual events, posters, & swag) you may also explore Disco Mode!
+        </p>
+      </div>
+
+      <div>
+        <button class="rounded-button" onclick="hidePopup()">Use the Logo Generator</button>
+      </div>
+
+      <!-- <div class="button-container">
         <div class="button-container-sub">
+
           <div>
-            <a href="https://drive.google.com/drive/folders/168EsIe1HS53JthPIKaUh5NBbpPvCn8xd?usp=share_link"  target="_blank" class="rounded-button">Download our Primary Marks</a>
-          </div>
-          <div>
-            <button class="rounded-button2" onclick="hidePopup()">Get Started</button>
+            <button class="rounded-button2" onclick="hidePopup()">Use the Logo Generator</button>
           </div>
         </div>
 
@@ -54,7 +61,7 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -82,7 +89,7 @@
 
         <div class="topLunit">
           <input type="checkbox" id="invertCheckbox">
-            <label for="invertCheckbox" class="toggle-label" onclick="setInvertToggle()">Invert Background</label>
+            <label for="invertCheckbox" class="toggle-label" class="rounded-button" onclick="setInvertToggle()">Invert Background</label>
         </div>
 
         <div class="topLunit">
@@ -98,6 +105,18 @@
       </div>
 
       <div class="topRight">
+        <div class="topRunit">
+          <div class="topR_basics">
+            <div class="topRbasicsBlurb">
+              <p>Only looking for the <span style="font-family: TheFutureBold">Primary Logo</span>, download it here:</p>
+            </div>
+
+            <div class="topRbasicsButton">
+              <a href="https://drive.google.com/drive/folders/168EsIe1HS53JthPIKaUh5NBbpPvCn8xd" target="_blank" class="rounded-button">Download</a>
+            </div>
+          </div>
+        </div>
+
         <div class="topRunit">
 
           <div class="topR_overlay" id="blackTie_overlap">
@@ -177,18 +196,6 @@
             </div>
           </div>
 
-        </div>
-
-        <div class="topRunit">
-          <div class="topR_basics">
-            <div class="topRbasicsBlurb">
-              <p>Only looking for the <span style="font-family: TheFutureBold">Primary Logo</span>, download it here:</p>
-            </div>
-
-            <div class="topRbasicsButton">
-              <a href="https://dschool.stanford.edu/"  target="_blank" class="rounded-button">Download</a>
-            </div>
-          </div>
         </div>
 
         <div class="topRunit">
@@ -472,6 +479,8 @@
             <div><input type="radio" id="lockupToggle1" onclick="setLockupToggle(false)" name="lockupToggle">
               <label for="lockupToggle1">Off</label></div>
   
+            <span style="display: inline-block; width: 20px;"></span>
+
             <div id="lockup_chrome0"><input type="radio" id="lockupChromeToggle0" onclick="setLockupChromeToggle(true)" name="lockupChromeToggle" checked>
               <label for="lockupChromeToggle0">Color</label></div>
             <div id="lockup_chrome1"><input type="radio" id="lockupChromeToggle1" onclick="setLockupChromeToggle(false)" name="lockupChromeToggle">

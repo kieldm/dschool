@@ -48,6 +48,13 @@ function runRandomCombo(){
 
     }
 
+    if(invertToggle && monochromeToggle == false){
+      console.log("DID THIS WORK?")
+      document.getElementById('img_baseD').style.backgroundColor = "#ffffff";
+    }
+
+    // nestInvert();
+
   } else if(radioVibe == 1){                  /////////////////////////////////// DISCO
     if(random(10) < 4){
       document.getElementById('outlineToggle1').checked = true;
