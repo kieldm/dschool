@@ -18,7 +18,6 @@ function setInvertToggle(){
 
     document.getElementById('overlay_L').style.fill = "#ffffff";
     document.getElementById('lockup_circle').style.filter = "invert(100)";
-    
     document.getElementById('lockup_stanford').setAttribute('fill', 'white');
     document.getElementById('lockup_hasso').setAttribute('fill', 'white');
 
