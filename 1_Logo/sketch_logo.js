@@ -35,7 +35,7 @@ var lockupChromeToggle = true;
 var lockupIndex = 1;
 var lockupCount = 3;
 
-var discoColorIndex = 0;
+var discoColorIndex = 2;
 var discoColorCount = 11;
 
 var discoAlignToggle = true;
@@ -300,7 +300,7 @@ function setColors(){
   ]
 
   overlapColor = [
-    "#b1040e", // "#ee272a",  // d.School Red
+    "#8c1515", // "#ee272a",  // d.School Red
     // "#ababa9", // "#000000",  //  ????
     "#767674", // "#ababa9",  // dark gray
     "#8c1515", // "#b1040e",  // cardinal red // ????

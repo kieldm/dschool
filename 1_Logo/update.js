@@ -90,6 +90,9 @@ function setRadioVibe(val){
   } else {
     setDiscoColorIndex(0);
 
+    setInlineToggle(true);
+    document.getElementById('inlineToggle0').checked = "true";
+
     document.getElementById('baseDtoggleSet').style.display = "flex";
     document.getElementById('botRow_bot').style.display = "flex";
     document.getElementById('disco_overlap').style.display = "flex";
@@ -479,9 +482,20 @@ function setDiscoColorIndex(val){
   document.getElementById('img_outline').style.backgroundColor = discoColor[discoColorIndex][invertToggleIndex][3];
 
   if(discoColorIndex == 2){
-    document.getElementById('img_inlineD').style.background = "linear-gradient(to top, black, white)";
-  } else if(discoColorIndex == 4 && invertToggle == false){
-    document.getElementById('img_inlineD').style.background = "linear-gradient(to top, black, white)";
+    // document.getElementById('img_inlineD').style.background = "linear-gradient(to top, black, white)";
+    if(invertToggle){
+      document.getElementById('img_inlineD').style.background = "white";
+    } else {
+      document.getElementById('img_inlineD').style.background = "black";
+    }
+
+  } else if(discoColorIndex == 4){
+    // document.getElementById('img_inlineD').style.background = "linear-gradient(to top, black, white)";
+    if(invertToggle){
+      document.getElementById('img_inlineD').style.background = "white";
+    } else {
+      document.getElementById('img_inlineD').style.background = "black";
+    }
 
   }
 
