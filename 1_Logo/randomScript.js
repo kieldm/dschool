@@ -56,7 +56,20 @@ function runRandomCombo(){
     // nestInvert();
 
   } else if(radioVibe == 1){                  /////////////////////////////////// DISCO
-    if(random(10) < 4){
+    inlineDindex = int(random(inlineDcount));
+    setInlineDindex(0);
+    
+    if(random(10) < 3){
+      document.getElementById('inlineToggle1').checked = true;
+      setInlineToggle(false);
+    } else {
+      document.getElementById('inlineToggle0').checked = true;
+      setInlineToggle(true);
+    }
+
+    var rs0 = random(10);
+    if(rs0 < 4){
+      console.log("RAN 1");
       document.getElementById('outlineToggle1').checked = true;
       setOutlineToggle(false);
 
@@ -64,9 +77,11 @@ function runRandomCombo(){
       setBaseDtoggle(true);
 
       discoDindex = int(random(discoDcount));
+      while(discoDindex == 2 || discoDindex == 7){ discoDindex = int(random(discoDcount)); } // NEVER FULL FILL
       setBaseDindex(0);
 
-    } else if(random(10) < 8){
+    } else if(rs0 < 8){
+      console.log("RAN 2");
       document.getElementById('outlineToggle0').checked = true;
       setOutlineToggle(true);
 
@@ -74,15 +89,31 @@ function runRandomCombo(){
       setBaseDtoggle(false);
 
       outlineIndex = int(random(outlineCount));
+      while(outlineIndex == 3){ outlineIndex = int(random(outlineCount)); } // NEVER FULL FILL
       setOutlineIndex(0);
+      
     } else {
+      console.log("RAN 3");
+      document.getElementById('baseDtoggle0').checked = true;
+      setBaseDtoggle(true);
+
       outlineIndex = 4;
 
       discoDindex = int(random(5));
+      while(discoDindex == 2 || discoDindex == 7){ discoDindex = int(random(discoDcount)); } // NEVER FULL FILL
       setBaseDindex(0);
     }
 
+    if(outlineToggle == false && baseDtoggle == false){ // FAIL SAFE SO D IS PRESENT
+      console.log("FAIL SAFE ACTIVATED")
+      document.getElementById('baseDtoggle0').checked = true;
+      setBaseDtoggle(true);
+    }
+
+    document.getElementById('puncToggle0').checked = true;
+    setPuncToggle(true)
     puncIndex = int(random(puncCount));
+    while(puncIndex == 6 || puncIndex == 1){ puncIndex = int(random(puncCount));}; // NEVER CURSOR LINE
     setPuncIndex(0);
 
     discoColorIndex = int(random(discoColorCount));

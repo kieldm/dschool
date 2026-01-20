@@ -26,6 +26,15 @@ function nestInvert(){
     document.getElementById('lockup_stanford').setAttribute('fill', 'white');
     document.getElementById('lockup_hasso').setAttribute('fill', 'white');
 
+    // Swap arrow images to white versions
+    document.querySelectorAll('.botUnit_selector_arrow img').forEach(img => {
+      img.src = img.src.replace('selector_leftB.png', 'selector_leftW.png').replace('selector_rightB.png', 'selector_rightW.png');
+    });
+
+    // Swap CSS background-image arrows to white versions
+    document.getElementById('botUnit_leftArrow').style.backgroundImage = "url('resources/images/selector_leftW.png')";
+    document.getElementById('botUnit_rightArrow').style.backgroundImage = "url('resources/images/selector_rightW.png')";
+
   } else {
     bkgdColor = color('#ffffff');
     foreColor = color('#000000');
@@ -39,6 +48,15 @@ function nestInvert(){
 
     document.getElementById('lockup_stanford').setAttribute('fill', 'black');
     document.getElementById('lockup_hasso').setAttribute('fill', 'black');
+
+    // Swap arrow images back to black versions
+    document.querySelectorAll('.botUnit_selector_arrow img').forEach(img => {
+      img.src = img.src.replace('selector_leftW.png', 'selector_leftB.png').replace('selector_rightW.png', 'selector_rightB.png');
+    });
+
+    // Swap CSS background-image arrows back to black versions
+    document.getElementById('botUnit_leftArrow').style.backgroundImage = "url('resources/images/selector_leftB.png')";
+    document.getElementById('botUnit_rightArrow').style.backgroundImage = "url('resources/images/selector_rightB.png')";
   }
 
   if(monochromeToggle){
@@ -111,6 +129,12 @@ function setRadioVibe(val){
 
 function setOverlayToggle(val){
   overlayToggle = val;
+
+  // if puncToggle && disco and "big dot" and overlay, turn off
+  if(puncToggle && radioVibe == 1 && overlayToggle && puncIndex == 0){ 
+    document.getElementById('puncToggle1').checked = true;
+    setPuncToggle(false);
+  }
 
   if(overlayToggle){
     document.getElementById('inlineToggle1').checked = true;
@@ -200,7 +224,18 @@ function setBaseDtoggle(val){
   //   setOutlineToggle(false);
   //   document.getElementById('outlineToggle1').checked = "true";
   // }
-  
+
+  // IF DISCO, MONOCHROME SET, OUTLINE ON, turn off Base
+  if(radioVibe == 1 && outlineToggle && discoColorIndex <= 1){
+    document.getElementById('outline_selector').style.opacity = "25%";
+    document.getElementById('outline_selector').style.pointerEvents = "none";
+    
+    document.getElementById('outlineToggle0').checked = false;
+    document.getElementById('outlineToggle1').checked = true;
+    outlineToggle = false;
+    document.getElementById('outline_selector').style.opacity = "25%";
+    document.getElementById('outline_selector').style.pointerEvents = "none";
+  }
 
   if(baseDtoggle){
     document.getElementById('baseD_selector').style.opacity = "100%";
@@ -219,14 +254,15 @@ function setBaseDtoggle(val){
 function setInlineToggle(val){
   inlineToggle = val;
 
-
   if(inlineToggle){
     document.getElementById('inlineDselector').style.opacity = "100%";
     document.getElementById('inlineDselector').style.pointerEvents = "auto";
 
     if(overlayToggle){
       document.getElementById("overlayToggle0").checked = false;
+      document.getElementById("overlayToggleDisco0").checked = false;
       document.getElementById("overlayToggle1").checked = true;
+      document.getElementById("overlayToggleDisco1").checked = true;
       setOverlayToggle(false);
     }
 
@@ -314,10 +350,10 @@ function setMonochromeToggle(val){
     // document.getElementById('img_baseD').style.backgroundColor = "#000000";
     document.getElementById('img_baseD').style.backgroundColor = foreColor;
 
-    if(overlayToggle == false){
+    // if(overlayToggle == false){
       document.getElementById('inlineToggleSet').style.opacity = "100%";
       document.getElementById('inlineToggleSet').style.pointerEvents = "auto";    
-    }
+    // }
 
     document.getElementById('overlay_right').style.opacity = "100%";
     document.getElementById('overlay_right').style.pointerEvents = "auto";
@@ -337,6 +373,11 @@ function setPuncIndex(val){
     puncIndex = 0;
   }
 
+  if(puncToggle && puncIndex == 0 && radioVibe == 1 && overlayToggle){ 
+    document.getElementById('overlayToggleDisco1').checked = true;
+    setOverlayToggle(false);
+  }
+
   var newURL = "resources/images/punc_" + puncIndex + ".png";
   document.getElementById('img_punc').style.webkitMask = `url('${newURL}') no-repeat center`;
   document.getElementById('img_punc').style.webkitMaskSize = "contain";
@@ -350,6 +391,12 @@ function setPuncIndex(val){
 
 function setPuncToggle(val){
   puncToggle = val;
+
+  // if puncToggle && disco and "big dot" and overlay, turn off
+  if(puncToggle && radioVibe == 1 && overlayToggle && puncIndex == 0){ 
+    document.getElementById('overlayToggleDisco1').checked = true;
+    setOverlayToggle(false);
+  }
 
   if(puncToggle){
     document.getElementById('punc_selector').style.opacity = "100%";
@@ -431,13 +478,13 @@ function setLockupChromeToggle(val){
     }
 
     document.getElementById('stanford_0').style.fill = thisColor;
-    document.getElementById('stanford_1').style.fill = thisColor;
+    // document.getElementById('stanford_1').style.fill = thisColor;
     document.getElementById('hasso_0').style.fill = thisColor;
     document.getElementById('hasso_1').style.fill = thisColor;
 
   } else {
     document.getElementById('stanford_0').style.fill = foreColor;
-    document.getElementById('stanford_1').style.fill = foreColor;
+    // document.getElementById('stanford_1').style.fill = foreColor;
     document.getElementById('hasso_0').style.fill = foreColor;
     document.getElementById('hasso_1').style.fill = foreColor;
 
@@ -455,6 +502,18 @@ function setDiscoColorIndex(val){
     discoColorIndex = 0;
   }
 
+  // IF MONOCHROME SET and baseD and outline are on, turn off outline
+  if(discoColorIndex <= 1 && baseDtoggle && outlineToggle){
+    document.getElementById('outline_selector').style.opacity = "25%";
+    document.getElementById('outline_selector').style.pointerEvents = "none";
+    
+    document.getElementById('outlineToggle0').checked = false;
+    document.getElementById('outlineToggle1').checked = true;
+    outlineToggle = false;
+    document.getElementById('outline_selector').style.opacity = "25%";
+    document.getElementById('outline_selector').style.pointerEvents = "none";
+  }
+  
   for(var m = 0; m < 4; m++){
     document.getElementById('disco'+m).style.backgroundColor = discoColor[discoColorIndex][invertToggleIndex][m];
   }
@@ -512,17 +571,17 @@ function setOutlineIndex(val){
     outlineIndex = 0;
   }
 
-  if(outlineIndex == 3){
-    document.getElementById('baseDtoggleSet').style.opacity = "100%";
-    document.getElementById('baseDtoggleSet').style.pointerEvents = "auto";   
+  // if(outlineIndex == 3){
+  //   document.getElementById('baseDtoggleSet').style.opacity = "100%";
+  //   document.getElementById('baseDtoggleSet').style.pointerEvents = "auto";   
     
-  } else {
-    // document.getElementById('baseDtoggleSet').style.opacity = "25%";
-    // document.getElementById('baseDtoggleSet').style.pointerEvents = "none";
-    setBaseDtoggle(false);
-    document.getElementById('baseDtoggle1').checked = "true";
+  // } else {
+  //   // document.getElementById('baseDtoggleSet').style.opacity = "25%";
+  //   // document.getElementById('baseDtoggleSet').style.pointerEvents = "none";
+  //   setBaseDtoggle(false);
+  //   document.getElementById('baseDtoggle1').checked = "true";
 
-  }
+  // }
 
   var newURL;
   if(outlineMode == 0){
@@ -544,6 +603,18 @@ function setOutlineIndex(val){
 function setOutlineToggle(val){
   outlineToggle = val;
 
+  // IF DISCO, MONOCHROME SET, BASE ON, turn off Base
+  if(radioVibe == 1 && baseDtoggle && discoColorIndex <= 1){
+    document.getElementById('baseD_selector').style.opacity = "25%";
+    document.getElementById('baseD_selector').style.pointerEvents = "none";
+
+    document.getElementById('baseDtoggle0').checked = false;
+    document.getElementById('baseDtoggle1').checked = true;
+    baseDtoggle = false
+    document.getElementById('baseD_selector').style.opacity = "25%";
+    document.getElementById('baseD_selector').style.pointerEvents = "none";
+  }
+
   if(outlineToggle){
     document.getElementById('outline_selector').style.opacity = "100%";
     document.getElementById('outline_selector').style.pointerEvents = "auto";
@@ -562,21 +633,25 @@ function setSaveMode(val){
 function runExport(){
   if(saveMode == 1 || saveMode == 3){
     alphaOn = true;
+  } else {
+    alphaOn = false;
   }
 
   resizeForSave();
 
   if(saveMode == 0 || saveMode == 1){
-    console.log("SAVE SVG!")
+    console.log("SAVE SVG!");
+    console.log("AND ALPHA MODE IS: " + alphaOn)
     save('dschool_logo.svg');
 
   } else if(saveMode == 2 || saveMode == 3){
-    console.log("SAVE PNG!")
+    console.log("SAVE PNG!");
+    console.log("AND ALPHA MODE IS: " + alphaOn);
     save('dschool_logo.png');
   }
 
   windowResized();
 
-  alphaOn = false;
+  alphaOn = true;
   loop();
 }

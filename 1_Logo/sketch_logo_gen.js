@@ -51,10 +51,10 @@ var radioVibe = 0;
 
 function setup(){
   var container = document.getElementById("logoGen");
-  // Create canvas with proper square dimensions
   let canvas = createCanvas(container.offsetHeight, container.offsetHeight, SVG);
   canvas.parent("logoGen");
-  
+  windowResized();
+
   bkgdColor = color('#ffffff');
   foreColor = color('#000000');
   
@@ -64,9 +64,6 @@ function setup(){
   setLockupIndex(0);
   setInlineToggle(inlineToggle);
   setOverlayToggle(overlayToggle);
-  
-  // Call windowResized after a short delay to ensure layout is complete
-  setTimeout(windowResized, 100);
 }
 
 function draw(){
@@ -231,7 +228,7 @@ function drawDisco(){     //////////////////////////////////////////////////////
         baseDtoggle ) {
         if(discoDindex == 0 || discoDindex == 1 || discoDindex == 2){
           if(discoColor[discoColorIndex][invertToggleIndex][2] == "#ee272a"){
-            fill("#b1040e");
+            fill("#8c1515");
             drawPuncOverlay(puncIndex);
           } else if(discoColor[discoColorIndex][invertToggleIndex][2] == "#ffffff" && discoColor[discoColorIndex][invertToggleIndex][0] == "#ffffff"){
             fill(0);
@@ -248,7 +245,6 @@ function drawDisco(){     //////////////////////////////////////////////////////
 
 function windowResized(){
   let container = document.getElementById("logoGen");
-  // Use offsetHeight to maintain square aspect ratio based on container height
   var coreS = container.offsetHeight;
   resizeCanvas(coreS, coreS, SVG);
 
@@ -275,7 +271,7 @@ function setColors(){
     "#ee272a",  // d.School Red
     // foreColor,  //
     "#ababa9",  // dark gray
-    "#b1040e",  // cardinal red
+    "#8c1515",  // cardinal red
     "#ff5e00",  // orange
     "#f99200",  //
     "#fbb03b",  //
@@ -307,15 +303,15 @@ function setColors(){
     "#8c1515", // "#ee272a",  // d.School Red
     // "#ababa9", // "#000000",  //  ????
     "#767674", // "#ababa9",  // dark gray
-    "#8c1515", // "#b1040e",  // cardinal red // ????
-    "#b1040e", // "#ff5e00",  // orange
+    "#ee272a", // "#b1040e",  // cardinal red // ????
+    "#8c1515", // "#ff5e00",  // orange
     "#bf4d00", // "#f99200",  //
     "#ff5e00", // "#fbb03b",  //
     "#f99200", // "#ffd600",  //
     "#8c6239", // "#d8a300",  // gold
     "#db6b85", // "#ffa89e",  // light pink
     "#d8007d", // "#ff85c2",  //
-    "#b1040e", // "#ff3399",  //
+    "#8c1515", // "#ff3399",  //
     "#8500b9", // "#c14cff",  //
     "#8500b9", // "#d700ff",  //
     "#a100bf", // "#e766ff",  //
