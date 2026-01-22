@@ -67,6 +67,7 @@ function nestInvert(){
   setColors();
   document.getElementById('dotColor').style.backgroundColor = dotColor[dotColorIndex];
   document.getElementById('overlay_R').style.fill = dotColor[dotColorIndex];
+  document.getElementById('overlay_C').style.fill = overlapColor[dotColorIndex];
   document.getElementById('dotColorOverlay').style.backgroundColor = dotColor[dotColorIndex];
 
   setLockupChromeToggle(lockupChromeToggle);

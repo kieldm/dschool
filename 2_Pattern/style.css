@@ -1,11 +1,13 @@
 :root {
-  --primary-color: #000000;
-  --secondary-color:#ffffff;
+  --primary-color: #e6e6e6;
+  /* --primary-color: #ffffff; */
+  --secondary-color:#2d2d2d;
 }
 
 .swap-colors {
-  --primary-color: #ffffff;
-  --secondary-color:#000000;
+  /* --primary-color: #000000; */
+  --primary-color: #2d2d2d;
+  --secondary-color:#e6e6e6;
 }
 
 body{
