@@ -126,10 +126,15 @@ function drawBlackTie(){     ///////////////////////////////////////////////////
   }
   drawBaseD(baseDindex);
 
-  if(monochromeToggle){           /////////////// OVERLAP INFO
-    fill(bkgdColor);
-    drawOverlaySlice();
-  } else if(overlayToggle){
+  // if(monochromeToggle){           /////////////// OVERLAP INFO
+  //   fill(bkgdColor);
+  //   drawOverlaySlice();
+  // } else if(overlayToggle){
+  //   fill(overlapColor[dotColorIndex]);
+  //   drawOverlaySlice();
+  // }
+  
+  if(overlayToggle && monochromeToggle == false){
     fill(overlapColor[dotColorIndex]);
     drawOverlaySlice();
   }
