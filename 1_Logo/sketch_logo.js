@@ -1,5 +1,7 @@
 var invertToggle = false;
 var bkgdColor, foreColor;
+var fauxBkgdColor, fauxForeColor;
+
 var discoColor = [];
 var coreScaler = 1;
 
@@ -57,7 +59,9 @@ function setup(){
   
   bkgdColor = color('#ffffff');
   foreColor = color('#000000');
-  
+  fauxBkgdColor = color('#e6e6e6');
+  fauxForeColor = color('#2d2d2d');
+
   setColors();
 
   //// SETUP NEW DEFAULT VALUES

@@ -16,12 +16,15 @@ function nestInvert(){
   if(invertToggle){
     bkgdColor = color('#000000');
     foreColor = color('#ffffff');
+    fauxBkgdColor = color('#2d2d2d');
+    fauxForeColor = color('#e6e6e6');
+
     invertToggleIndex = 1;
     document.getElementById('img_baseD').style.backgroundColor = "#ffffff";
     document.getElementById('img_inlineD').style.backgroundColor = "#ffffff";
 
     document.getElementById('overlay_L').style.fill = "#ffffff";
-    document.getElementById('overlay_C').style.fill = "#000000";
+    document.getElementById('overlay_C').style.fill = fauxBkgdColor;
     document.getElementById('lockup_circle').style.filter = "invert(100)";
     document.getElementById('lockup_stanford').setAttribute('fill', 'white');
     document.getElementById('lockup_hasso').setAttribute('fill', 'white');
@@ -38,12 +41,15 @@ function nestInvert(){
   } else {
     bkgdColor = color('#ffffff');
     foreColor = color('#000000');
+    fauxBkgdColor = color('#e6e6e6');
+    fauxForeColor = color('#2d2d2d');
+
     invertToggleIndex = 0;
     document.getElementById('img_baseD').style.backgroundColor = "#000000";
     document.getElementById('img_inlineD').style.backgroundColor = "#000000";
 
     document.getElementById('overlay_L').style.fill = "#000000";
-    document.getElementById('overlay_C').style.fill = "#ffffff";
+    document.getElementById('overlay_C').style.fill = fauxBkgdColor;
     document.getElementById('lockup_circle').style.filter = "invert(0)";
 
     document.getElementById('lockup_stanford').setAttribute('fill', 'black');
@@ -61,13 +67,15 @@ function nestInvert(){
 
   if(monochromeToggle){
     document.getElementById('overlay_L').style.fill = dotColor[dotColorIndex];
+    document.getElementById('overlay_C').style.fill = fauxBkgdColor;
+  } else {
+    document.getElementById('overlay_C').style.fill = overlapColor[dotColorIndex]; // MOVED TO MONOCHROM TOGGLE
   }
 
   // to fix dot color 1
   setColors();
   document.getElementById('dotColor').style.backgroundColor = dotColor[dotColorIndex];
   document.getElementById('overlay_R').style.fill = dotColor[dotColorIndex];
-  document.getElementById('overlay_C').style.fill = overlapColor[dotColorIndex];
   document.getElementById('dotColorOverlay').style.backgroundColor = dotColor[dotColorIndex];
 
   setLockupChromeToggle(lockupChromeToggle);
@@ -316,7 +324,7 @@ function setDotColorIndex(val){
     document.getElementById('img_baseD').style.backgroundColor = dotColor[dotColorIndex];
 
     document.getElementById('overlay_L').style.fill = dotColor[dotColorIndex];
-    document.getElementById('overlay_C').style.fill = bkgdColor;
+    document.getElementById('overlay_C').style.fill = fauxBkgdColor;
     document.getElementById('overlay_R').style.fill = dotColor[dotColorIndex];
   } else {
     document.getElementById('overlay_L').style.fill = foreColor;
