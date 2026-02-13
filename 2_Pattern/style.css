@@ -724,27 +724,33 @@ h3 {
 
   /* Pop-up container */
   .popup {
-    background: white;
+    background: var(--primary-color);
     border-radius: 15px;
-    border:1px solid black;
+    border:1px solid var(--secondary-color);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width:640px;
-    height:410px;
+    width:450px;
+    height:350px;
     /* width: 40%;
     min-width:300px;
     max-width:700px;
     height: 50%;
     min-height:450px;
     max-height:600px; */
-    padding: 40px;
+    padding: 30px;
+  }
+  
+  .popup h1 {
+    padding-left: 0px;
+    font-size: 20pt;
+    line-height: 20pt;
   }
   
   .popup p {
-    font-size:24px;
+    font-size: 14px;
   }
 
   .popup div{
-    margin-bottom:25px;
+    margin-bottom:15px;
   }
 
   .popup div div{
@@ -765,21 +771,20 @@ h3 {
     height:auto;
   }
 
-  .rounded-button2 {
-    font-family: "TheFutureReg"; /* Adjust font */
-    font-size: clamp(0.3125rem, -0.7031rem + 2.0313vw, 1.125rem);
-    text-align: center;
-  
-    display: inline-flex;
-    padding: 5px 25px 5px 25px;
-    background-color: white;
-    color: black; /* var(--primary-color) text */
-    border: 1px solid black; /* Remove borders */
-    border-radius: 500px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
 
-    width:auto;
-  }
+.rounded-button2 {
+  font-family: "TheFutureReg"; /* Adjust font */
+  font-size: clamp(0.3125rem, -0.7031rem + 2.0313vw, 1.125rem);
+  text-align: center;
+
+  display: inline-block;
+  padding: 5px 25px 5px 25px;
+  color: var(--primary-color);
+  background-color: var(--secondary-color); /* var(--primary-color) text */
+  border: none; /* Remove borders */
+  border-radius: 500px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
 
   .button-container-sub .rounded-button2, .rounded-button {
     /* font-size: clamp(0.3125rem, -0.1563rem + 2.5vw, 0.9375rem); */
